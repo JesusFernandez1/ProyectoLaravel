@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\loginController;
+use App\Http\Controllers\tareasController;
+
 /*
 |--------------------------------------------------------------------------
 | web Routes
@@ -16,13 +18,24 @@ use App\Http\Controllers\loginController;
 Route::controller(loginController::class)->group(function(){
     Route::get('/', 'inicio');
     Route::get('usuarios', 'login');
-    Route::get('usuarios/verUsuarios', 'verUsuarios');
-    Route::get('usuarios/verUnicoUsuario/{id}', 'verUnicoUsuario');
-    Route::get('usuarios/crearUsuario', 'crearUsuario');
-    Route::get('usuarios/comprobarBorrarUsuario/{id}', 'comprobarBorrarUsuario');
-    Route::get('usuarios/borrarUsuario/{$id}', 'borrarUsuario');
+    Route::get('usuarios/usuarios_mostrar', 'verUsuarios');
+    Route::get('usuarios/usuarios_crear', 'verCrearUsuario');
+    Route::get('usuarios/usuarios_modificar/{id}', 'verModificarUsuario');
+    Route::get('usuarios/usuarios_eliminar/{id}', 'verEliminarUsuario');
 });
 
-
+Route::controller(tareasController::class)->group(function(){
+    Route::get('/', 'inicio');
+    Route::get('tareas', 'login');
+    Route::get('tareas/tareas_mostrar', 'verTareas');
+    Route::get('tareas/tareas_crear', 'verTareasCrear');
+    Route::get('tareas/tareas_modificar', 'verTareasModificar');
+    Route::get('tareas/tareas_eliminar/{id}', 'verTareasEliminar');
+    Route::get('tareas/tareas_completar', 'verCompletar');
+    Route::get('tareas/tareas_mostrar_completa', 'verTareasCompletas');
+    Route::get('tareas/tareas_eliminadas', 'verTareasEliminadas');
+    Route::get('tareas/tareas_pendientes', 'verTareasPendientes');
+    Route::get('tareas/borrarUsuario/{$id}', 'borrarUsuario');
+});
 
 
