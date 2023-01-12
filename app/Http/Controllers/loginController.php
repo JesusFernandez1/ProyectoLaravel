@@ -60,6 +60,8 @@ class loginController extends Controller {
         if ("comprobar") {
             //borrarUsuario($id);
             return view('usuarios.usuarios_mostrar');
+        } else {
+            return view('usuarios.usuarios_eliminar');
         }
 
     }
