@@ -25,7 +25,6 @@ Route::controller(loginController::class)->group(function(){
 });
 
 Route::controller(tareasController::class)->group(function(){
-    Route::get('/', 'inicio');
     Route::get('tareas/tareas_mostrar', 'verTareas');
     Route::get('tareas/tareas_crear', 'verTareasCrear');
     Route::get('tareas/tareas_modificar', 'verTareasModificar');

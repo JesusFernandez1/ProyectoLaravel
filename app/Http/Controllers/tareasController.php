@@ -35,21 +35,43 @@ class tareasController extends Controller {
         return view('tareas.tareas_pendientes');
     }
 
-    public function verCompletar($id) {
+    public function verCompletarTarea($id) {
         return view('tareas.tareas_completar, ["id => $id]');
     }
 
+    public function crearTarea($id) {
+
+        if ("condicion") {
+            return view('tareas.tareas_crear');
+        } else {
+            return view('tareas.tareas_mostrar');
+        }
+    }
+
     public function modificarTarea($id) {
-        return view('tareas.tareas_mostrar');
+
+        if ("condicion") {
+            return view('tareas.tareas_modificar');
+        } else {
+            return view('tareas.tareas_mostrar');
+        }
+    }
+
+    public function completarTarea($id) {
+        if ("condicion") {
+            return view('tareas.tareas_completar');
+        } else {
+            return view('tareas.tareas_mostrar');
+        }
     }
 
     public function comprobarBorrarTarea($id) {
         
         if ("comprobar") {
+            return view('tareas.tareas_eliminar, ["id => $id]');
+        } else {
             //borrarTarea($id);
             return view('tareas.tareas_mostrar');
-        } else {
-            return view('tareas.tareas_eliminar, ["id => $id]');
         }
 
     }
