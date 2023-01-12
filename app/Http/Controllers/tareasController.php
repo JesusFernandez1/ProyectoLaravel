@@ -10,6 +10,13 @@ class tareasController extends Controller {
         return view('tareas.tareas_mostrar');
     }
 
+    public function logout() {
+        session_start();
+        session_unset();
+        session_destroy();
+        return view('usuarios.login');
+    }
+
     public function verTareasCrear() {
         //crea el Tarea
 
