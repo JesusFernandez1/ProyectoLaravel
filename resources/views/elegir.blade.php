@@ -20,9 +20,9 @@
         background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1))
     }
 </style>
-<!-- vista donde hacemos login -->
+<!-- vista donde elegimos la seccion a la que queremos dirigirnos -->
 <body>
-    <form action="index.php?controller=login&action=inicio" method="POST">
+    <form action="" method="POST">
         <section class="vh-100 gradient-custom">
             <div class="container py-5 h-100">
                 <div class="row d-flex justify-content-center align-items-center h-100">
@@ -30,18 +30,13 @@
                         <div class="card bg-dark text-white" style="border-radius: 1rem;">
                             <div class="card-body p-5 text-center">
                                 <div class="mb-md-5 mt-md-4 pb-5">
-                                    <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
-                                    <p class="text-white-50 mb-5">Please enter your login and password!</p>
+                                    <h3 class="fw-bold mb-2 text-uppercase">Eliga una seccion</h3><br><br>
                                     <div class="form-outline form-white mb-4">
-                                        <input type="text" id="typeEmailX" class="form-control form-control-lg" name="nombre"/>
-                                        <label class="form-label" for="typeEmailX">Name</label>
+                                    <a href="index.php?controller=login&action=login" class="btn btn-primary btn-lg" role="button">Seccion de usuarios</a>
                                     </div>
                                     <div class="form-outline form-white mb-4">
-                                        <input type="password" id="typePasswordX" class="form-control form-control-lg" name="contraseña"/>
-                                        <label class="form-label" for="typePasswordX">Password</label>
+                                    <a href="index.php?controller=tareas&action=ver" class="btn btn-primary btn-lg" role="button">Seccion de tareas</a> <!-- al pulsar aqui ira a index, poniendo el controlador base como tareas y ejecutar el metodo ver -->
                                     </div>
-                                    <p class="small mb-5 pb-lg-2"><a class="text-white-50" href="#!">Forgot password?</a></p>
-                                    <input type="submit" class="btn btn-primary" value="Login">
                                 </div>
                             </div>
                         </div>
