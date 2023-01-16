@@ -30,7 +30,6 @@
             <th scope="col">Finalizacion</th>
             <th scope="col">Anotacion inicial</th>
             <th scope="col">Anotacion inicial</th>
-            <th scope="col">Borrada</th>
          </tr>
       </thead>
       <tbody>
@@ -53,8 +52,6 @@
             <td>{{$tarea['fecha_final']}}</td>
             <td>{{$tarea['anotacion_inicio']}}</td>
             <td>{{$tarea['anotacion_final']}}</td>
-            <td>{{$tarea['borrada']}}</td>
-
             
             <td><a href="index.php?controller=tareas&action=ModificarUnaTarea&id={{$tarea['tarea_id']}}" class="btn btn-outline-primary" role="button">Modificar</a> <a href="index.php?controller=tareas&action=delete&id={{$tarea['tarea_id']}}" class="btn btn-outline-danger" role="button">Eliminar</a>
             <a href="index.php?controller=tareas&action=completar&id={{$tarea['tarea_id']}}" class="btn btn-outline-success" role="button">Completar</a></td>

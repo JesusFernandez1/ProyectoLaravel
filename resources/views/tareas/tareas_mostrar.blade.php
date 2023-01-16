@@ -22,7 +22,6 @@
             <th scope="col">Creacion</th>
             <th scope="col">Telefono</th>
             <th scope="col">Estado</th>
-            <th scope="col">Borrada</th>
          </tr>
       </thead>
       <tbody>
@@ -37,17 +36,14 @@
             <td>{{$tarea['fecha_creacion']}}</td>
             <td>{{$tarea['telefono']}}</td>
             <td>{{$tarea['estado_tarea']}}</td>
-            <td>{{$tarea['borrada']}}</td>
-            <td> <a href="index.php?controller=tareas&action=Recuperar&id={{$tarea['tarea_id']}}" class="btn btn-outline-success" role="button">Recuperar</a>
+            <td><a href="index.php?controller=tareas&action=ModificarUnaTarea&id={{$tarea['tarea_id']}}" class="btn btn-outline-primary" role="button">Modificar</a> <a href="index.php?controller=tareas&action=verEliminar&id={{$tarea['tarea_id']}}" class="btn btn-outline-danger" role="button">Eliminar</a>
+               <a href="index.php?controller=tareas&action=completar&id={{$tarea['tarea_id']}}" class="btn btn-outline-success" role="button">Completar</a>
             </td>
          </tr>
          @endforeach
       </tbody>
    </table>
    <style>
-    tr{
-        color: red
-    }
       nav {
          position: absolute;
          left: -20;
@@ -55,10 +51,10 @@
    </style>
    <nav aria-label="Page navigation example">
       <ul class="pagination">
-         <li class="page-item"><a class="page-link" href="index.php?controller=tareas&action=mostrarBorradasPaginadas&pagina={{$pagina-1}}">Anterior</a></li>
-         @for ($i = 1; $i <= $paginas; $i++) <li class="page-item"><a class="page-link" href="index.php?controller=tareas&action=mostrarBorradasPaginadas&pagina={{$i}}">{{$i}}</a></li>
+         <li class="page-item"><a class="page-link" href="index.php?controller=tareas&action=verPaginacion&pagina={{$pagina-1}}">Anterior</a></li>
+         @for ($i = 1; $i <= $paginas; $i++) <li class="page-item"><a class="page-link" href="index.php?controller=tareas&action=verPaginacion&pagina={{$i}}">{{$i}}</a></li>
             @endfor
-            <li class="page-item"><a class="page-link" href="index.php?controller=tareas&action=mostrarBorradasPaginadas&pagina={{$pagina+1}}">Siguiente</a></li>
+            <li class="page-item"><a class="page-link" href="index.php?controller=tareas&action=verPaginacion&pagina={{$pagina+1}}">Siguiente</a></li>
       </ul>
    </nav>
    @endsection
