@@ -22,7 +22,7 @@
     </div>
     <div class="col-md-3">
       <label for="inputCity" class="form-label">Contraseña</label>
-      <input type="text" class="form-control" name="contraseña">{!!$error->ErrorFormateado("contraseña")!!}
+      <input type="text" class="form-control" name="telefono">{!!$error->ErrorFormateado("telefono")!!}
     </div>
     <div class="col-md-3">
       <label for="inputCity" class="form-label">Correo</label>
