@@ -14,22 +14,26 @@
    <table class="table">
       <thead class="thead-dark">
          <tr>
-            <th scope="col">ID</th>
+            <th scope="col">DNI</th>
             <th scope="col">Nombre</th>
-            <th scope="col">Apellido</th>
             <th scope="col">Correo</th>
+            <th scope="col">Telefono</th>
+            <th scope="col">Direccion</th>
+            <th scope="col">Fecha de alta</th>
             <th scope="col">Tipo</th>
          </tr>
       </thead>
       <tbody>
          @foreach ($usuarios as $usuario)
          <tr>
-            <td>{{$usuario['usuario_id']}}</td>
+            <td>{{$usuario['DNI']}}</td>
             <td>{{$usuario['nombre']}}</td>
-            <td>{{$usuario['apellido']}}</td>
             <td>{{$usuario['correo']}}</td>
+            <td>{{$usuario['telefono']}}</td>
+            <td>{{$usuario['direccion']}}</td>
+            <td>{{$usuario['fecha_alta']}}</td>
             <td>{{$usuario['tipo']}}</td>
-            <td><a href="index.php?controller=login&action=verOneUsuario&id={{$usuario['usuario_id']}}" class="btn btn-outline-primary" role="button">Modificar</a> <a href="index.php?controller=login&action=verBorrarUsuario&id={{$usuario['usuario_id']}}" class="btn btn-outline-danger" role="button">Eliminar</a></td>
+            <td><a href="index.php?controller=login&action=verOneUsuario&id={{$usuario['id']}}" class="btn btn-outline-primary" role="button">Modificar</a> <a href="index.php?controller=login&action=verBorrarUsuario&id={{$usuario['id']}}" class="btn btn-outline-danger" role="button">Eliminar</a></td>
          </tr>
          @endforeach
       </tbody>

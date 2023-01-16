@@ -13,20 +13,28 @@
 @section('mostrarUsuarios')
   <form action="" class="row g-3" method="POST">
     <div class="col-md-3">
-      <label for="inputPassword4" class="form-label">Nombre</label>
-      <input type="text" class="form-control" name="nombre">{!!$error->ErrorFormateado("nombre")!!}
-    </div>
-    <div class="col-3">
-      <label for="inputAddress" class="form-label">Apellido</label>
-      <input type="text" class="form-control" placeholder="1234 Main St" name="apellido">{!!$error->ErrorFormateado("apellido")!!}
+      <label for="inputPassword4" class="form-label">DNI</label>
+      <input type="text" class="form-control" name="DNI">{!!$error->ErrorFormateado("DNI")!!}
     </div>
     <div class="col-md-3">
-      <label for="inputCity" class="form-label">Contraseña</label>
-      <input type="text" class="form-control" name="telefono">{!!$error->ErrorFormateado("telefono")!!}
+      <label for="inputPassword4" class="form-label">Nombre</label>
+      <input type="text" class="form-control" name="nombre">{!!$error->ErrorFormateado("nombre")!!}
     </div>
     <div class="col-md-3">
       <label for="inputCity" class="form-label">Correo</label>
       <input type="text" class="form-control" name="correo">{!!$error->ErrorFormateado("correo")!!}
+    </div>
+    <div class="col-3">
+      <label for="inputAddress" class="form-label">Telefono</label>
+      <input type="text" class="form-control" placeholder="1234 Main St" name="telefono">{!!$error->ErrorFormateado("telefono")!!}
+    </div>
+    <div class="col-md-3">
+      <label for="inputCity" class="form-label">Direccion</label>
+      <input type="text" class="form-control" name="direccion">{!!$error->ErrorFormateado("direccion")!!}
+    </div>
+    <div class="col-md-3">
+      <label for="inputCity" class="form-label">Fecha de alta</label>
+      <input type="text" class="form-control" name="fecha_alta">{!!$error->ErrorFormateado("fecha_alta")!!}
     </div>
     <div class="col-md-3">
       <label for="inputState" class="form-label">Tipo</label>
