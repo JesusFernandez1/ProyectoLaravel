@@ -14,10 +14,6 @@
   <form action="" class="row g-3" method="POST">
   @foreach ($tareas as $tarea)
     <div class="col-md-3">
-      <label for="inputEmail4" class="form-label">NIF/CIF</label>
-      <input readonly type="text" class="form-control" name="identificacion" value="{{$tarea['DNI']}}">
-    </div>
-    <div class="col-md-3">
       <label for="inputPassword4" class="form-label">Nombre</label>
       <input readonly type="text" class="form-control" name="nombre" value="{{$tarea['nombre']}}">
     </div>
@@ -47,7 +43,7 @@
     </div>
     <div class="col-md-2">
       <label for="inputCity" class="form-label">Codigo Postal</label>
-      <input readonly type="text" class="form-control" name="codigo" value="{{$tarea['codigo_postal']}}">
+      <input readonly type="text" class="form-control" name="codigo_postal" value="{{$tarea['codigo_postal']}}">
     </div>
     <div class="col-md-2">
       <label for="inputState" class="form-label">Provincia</label>
@@ -68,12 +64,6 @@
       <label for="inputZip" class="form-label">Fecha de creacion</label>
       <input readonly type="date" class="form-control" id="inputZip" name="inicio" value="{{$tarea['fecha_creacion']}}">
     </div>
-    <div class="col-md-2">
-      <label for="inputState" class="form-label">Operarios</label>
-      <select disabled id="inputState" class="form-select" name="operario">
-        <option>{{$tarea['operario_id']}}</option>
-      </select>
-    </div>
     <div class="col-md-1">
       <label for="inputCity" class="form-label">Fecha de finalizacion</label>
       <input type="date" class="form-control" id="inputCity" name="final" value="{{$tarea['fecha_final']}}">{!!$error->ErrorFormateado("fecha_final")!!}
@@ -85,6 +75,18 @@
     <div class="col-md-4">
       <label for="inputCity" class="form-label">Anotacion final</label>
       <textarea type="text" class="form-control" id="inputCity" name="posterior">{{$tarea['anotacion_final']}}</textarea>
+    </div>
+    <div class="col-md-2">
+      <label for="inputState" class="form-label">Cliente</label>
+      <select disabled id="inputState" class="form-select" name="cliente">
+        <option>{{$tarea['cliente_id']}}</option>
+      </select>
+    </div>
+    <div class="col-md-2">
+      <label for="inputState" class="form-label">Empleado</label>
+      <select disabled id="inputState" class="form-select" name="empleado">
+        <option>{{$tarea['empleado_id']}}</option>
+      </select>
     </div>
     <div class="col-12">
       <input type="submit" class="btn btn-primary" value="Insert">

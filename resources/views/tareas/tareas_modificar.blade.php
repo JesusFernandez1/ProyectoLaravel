@@ -14,10 +14,6 @@
   <form action="" class="row g-3" method="POST">
   @foreach ($tareas as $tarea)
     <div class="col-md-3">
-      <label for="inputEmail4" class="form-label">NIF/CIF</label>
-      <input type="text" class="form-control" name="identificacion" value="{{$tarea['DNI']}}">{!!$error->ErrorFormateado("identificacion")!!}
-    </div>
-    <div class="col-md-3">
       <label for="inputPassword4" class="form-label">Nombre</label>
       <input type="text" class="form-control" name="nombre" value="{{$tarea['nombre']}}">{!!$error->ErrorFormateado("nombre")!!}
     </div>
@@ -74,18 +70,6 @@
       <label for="inputZip" class="form-label">Fecha de creacion</label>
       <input readonly type="date" class="form-control" id="inputZip" name="inicio" value="{{$tarea['fecha_creacion']}}">{!!$error->ErrorFormateado("inicio")!!}
     </div>
-    <div class="col-md-2">
-      <label for="inputState" class="form-label">Operarios</label>
-      <select id="inputState" class="form-select" name="operario">
-        <option selected>{{$tarea['operario_id']}}</option>
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
-        <option>4</option>
-        <option>5</option>
-      </select>
-      {!!$error->ErrorFormateado("operario")!!}
-    </div>
     <div class="col-md-1">
       <label for="inputCity" class="form-label">Fecha de finalizacion</label>
       <input type="date" class="form-control" id="inputCity" name="final" value="{{$tarea['fecha_final']}}">{!!$error->ErrorFormateado("final")!!}
@@ -97,6 +81,26 @@
     <div class="col-md-4">
       <label for="inputCity" class="form-label">Anotacion final</label>
       <textarea type="text" class="form-control" id="inputCity" name="posterior">{{$tarea['anotacion_final']}}</textarea>
+    </div>
+    <div class="col-md-2">
+      <label for="inputState" class="form-label">Cliente</label>
+      <select id="inputState" class="form-select" name="cliente">
+        <option selected>{{$tarea['cliente_id']}}</option>
+        @foreach ($clientes as $cliente)
+        <option>{{$cliente["nombre"]}}</option>
+        @endforeach
+      </select>
+      {!!$error->ErrorFormateado("cliente")!!}
+    </div>
+    <div class="col-md-2">
+      <label for="inputState" class="form-label">Empleado</label>
+      <select id="inputState" class="form-select" name="empleado">
+        <option selected>{{$tarea['empleado_id']}}</option>
+        @foreach ($empleados as $empleado)
+        <option>{{$empleado["nombre"]}}</option>
+        @endforeach
+      </select>
+      {!!$error->ErrorFormateado("empleado")!!}
     </div>
     <div class="col-12">
       <input type="submit" class="btn btn-primary" value="Insert">

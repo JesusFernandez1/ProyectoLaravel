@@ -42,7 +42,7 @@
     </div>
     <div class="col-md-2">
       <label for="inputCity" class="form-label">Codigo Postal</label>
-      <input type="text" class="form-control" name="codigo_postal">{!!$error->ErrorFormateado("codigo_postal")!!}
+      <input type="text" class="form-control" name="codigo">{!!$error->ErrorFormateado("codigo_postal")!!}
     </div>
     <div class="col-md-2">
       <label for="inputState" class="form-label">Provincia</label>

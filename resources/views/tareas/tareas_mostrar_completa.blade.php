@@ -14,7 +14,6 @@
       <thead class="thead-dark">
          <tr>
             <th scope="col">ID</th>
-            <th scope="col">DNI</th>
             <th scope="col">Nombre</th>
             <th scope="col">Apellido</th>
             <th scope="col">Telefono</th>
@@ -30,6 +29,8 @@
             <th scope="col">Finalizacion</th>
             <th scope="col">Anotacion inicial</th>
             <th scope="col">Anotacion inicial</th>
+            <th scope="col">Cliente</th>
+            <th scope="col">Empleado</th>
          </tr>
       </thead>
       <tbody>
@@ -52,9 +53,11 @@
             <td>{{$tarea['fecha_final']}}</td>
             <td>{{$tarea['anotacion_inicio']}}</td>
             <td>{{$tarea['anotacion_final']}}</td>
+            <td>{{$tarea['cliente_id']}}</td>
+            <td>{{$tarea['empleado_id']}}</td>
             
-            <td><a href="index.php?controller=tareas&action=ModificarUnaTarea&id={{$tarea['tarea_id']}}" class="btn btn-outline-primary" role="button">Modificar</a> <a href="index.php?controller=tareas&action=delete&id={{$tarea['tarea_id']}}" class="btn btn-outline-danger" role="button">Eliminar</a>
-            <a href="index.php?controller=tareas&action=completar&id={{$tarea['tarea_id']}}" class="btn btn-outline-success" role="button">Completar</a></td>
+            <td><a href="index.php?controller=tareas&action=ModificarUnaTarea&id={{$tarea['id']}}" class="btn btn-outline-primary" role="button">Modificar</a> <a href="index.php?controller=tareas&action=delete&id={{$tarea['id']}}" class="btn btn-outline-danger" role="button">Eliminar</a>
+            <a href="index.php?controller=tareas&action=completar&id={{$tarea['id']}}" class="btn btn-outline-success" role="button">Completar</a></td>
          </tr>
          @endforeach
       </tbody>

@@ -13,7 +13,6 @@
    <table class="table">
       <thead class="thead-dark">
          <tr>
-            <th scope="col">DNI</th>
             <th scope="col">Nombre</th>
             <th scope="col">Apellido</th>
             <th scope="col">Poblacion</th>
@@ -27,7 +26,6 @@
       <tbody>
          @foreach ($tareas as $tarea)
          <tr>
-            <td>{{$tarea['DNI']}}</td>
             <td>{{$tarea['nombre']}}</td>
             <td>{{$tarea['apellido']}}</td>
             <td>{{$tarea['poblacion']}}</td>
@@ -36,8 +34,8 @@
             <td>{{$tarea['fecha_creacion']}}</td>
             <td>{{$tarea['telefono']}}</td>
             <td>{{$tarea['estado_tarea']}}</td>
-            <td><a href="index.php?controller=tareas&action=ModificarUnaTarea&id={{$tarea['tarea_id']}}" class="btn btn-outline-primary" role="button">Modificar</a> <a href="index.php?controller=tareas&action=verEliminar&id={{$tarea['tarea_id']}}" class="btn btn-outline-danger" role="button">Eliminar</a>
-               <a href="index.php?controller=tareas&action=completar&id={{$tarea['tarea_id']}}" class="btn btn-outline-success" role="button">Completar</a>
+            <td><a href="index.php?controller=tareas&action=ModificarUnaTarea&id={{$tarea['id']}}" class="btn btn-outline-primary" role="button">Modificar</a> <a href="index.php?controller=tareas&action=verEliminar&id={{$tarea['id']}}" class="btn btn-outline-danger" role="button">Eliminar</a>
+               <a href="index.php?controller=tareas&action=completar&id={{$tarea['id']}}" class="btn btn-outline-success" role="button">Completar</a>
             </td>
          </tr>
          @endforeach
