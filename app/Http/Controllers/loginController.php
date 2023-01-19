@@ -10,7 +10,7 @@ class loginController extends Controller {
 
     public function verUsuarios() {
         $usuarios = (new User)->getUsers();
-        return view('usuarios.usuarios_mostrar', ['usuarios'=> $usuarios]);
+        return view('usuarios.usuarios_mostrar', ['usuarios'=> $usuarios]); //compact('usuarios)
     }
 
     public function verCrearUsuario() {
