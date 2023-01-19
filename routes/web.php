@@ -16,9 +16,7 @@ use App\Http\Controllers\tareasController;
 */
 
 Route::controller(loginController::class)->group(function(){
-    Route::get('/', 'inicio');
-    Route::get('usuarios', 'login');
-    Route::get('usuarios/usuarios_mostrar', 'verUsuarios');
+    Route::get('/', 'verUsuarios');
     Route::get('usuarios/usuarios_crear', 'verCrearUsuario');
     Route::get('usuarios/usuarios_modificar/{id}', 'verModificarUsuario');
     Route::get('usuarios/usuarios_eliminar/{id}', 'verEliminarUsuario');

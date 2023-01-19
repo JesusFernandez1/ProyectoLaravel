@@ -4,32 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Session\Middleware\StartSession;
+use App\Models\User;
 
 class loginController extends Controller {
 
-    public function inicio() {
-        return view('usuarios.login');
-    }
-
-    public function login() {
-
-        if ("condicion") {
-            return view('usuarios.usuarios_mostrar');
-        } else {
-            return view('usuarios.login');
-        }
-        
-    }
-
-    public function logout() {
-        session_start();
-        session_unset();
-        session_destroy();
-        return view('usuarios.login');
-    }
-
     public function verUsuarios() {
-        return view('usuarios.usuarios_mostrar');
+        $usuarios = (new User)->getUsers();
+        return view('usuarios.usuarios_mostrar', compact('usuarios'));
     }
 
     public function verCrearUsuario() {
