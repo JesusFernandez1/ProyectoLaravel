@@ -24,19 +24,19 @@ class userController extends Controller {
         return view('usuarios.usuarios_mostrar');
     }
 
-    public function verModificarUsuario($id) {
-        return view('usuarios.usuarios_modificar, ["id => $id]');
+    public function verModificarUsuario() {
+        return view('usuarios.usuarios_modificar');
     }
 
-    public function modificarUsuario($id) {
+    public function modificarUsuario() {
         return view('usuarios.usuarios_mostrar');
     }
 
-    public function verEliminarUsuario($id) {
+    public function verEliminarUsuario() {
         return view('usuarios.usuarios_eliminar, ["id => $id]');
     }
 
-    public function comprobarBorrarUsuario($id) {
+    public function comprobarBorrarUsuario() {
         
         if ("comprobar") {
             //borrarUsuario($id);
@@ -47,7 +47,7 @@ class userController extends Controller {
 
     }
 
-    function borrarUsuario($id) {
+    function borrarUsuario() {
         
     }
 

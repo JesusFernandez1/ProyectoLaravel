@@ -14,40 +14,38 @@
   <form action="" class="row g-3" method="POST">
     <div class="col-md-3">
       <label for="inputPassword4" class="form-label">DNI</label>
-      <input type="text" class="form-control" name="DNI">{!!$error->ErrorFormateado("DNI")!!}
+      <input type="text" class="form-control" name="DNI">
     </div>
     <div class="col-md-3">
       <label for="inputPassword4" class="form-label">Nombre</label>
-      <input type="text" class="form-control" name="nombre">{!!$error->ErrorFormateado("nombre")!!}
+      <input type="text" class="form-control" name="nombre">
     </div>
     <div class="col-md-3">
       <label for="inputCity" class="form-label">Correo</label>
-      <input type="text" class="form-control" name="correo">{!!$error->ErrorFormateado("correo")!!}
+      <input type="text" class="form-control" name="correo">
     </div>
     <div class="col-md-3">
       <label for="inputCity" class="form-label">Pass</label>
-      <input type="text" class="form-control" name="pass">{!!$error->ErrorFormateado("pass")!!}
+      <input type="text" class="form-control" name="pass">
     </div>
     <div class="col-3">
       <label for="inputAddress" class="form-label">Telefono</label>
-      <input type="text" class="form-control" placeholder="1234 Main St" name="telefono">{!!$error->ErrorFormateado("telefono")!!}
+      <input type="text" class="form-control" placeholder="1234 Main St" name="telefono">
     </div>
     <div class="col-md-3">
       <label for="inputCity" class="form-label">Direccion</label>
-      <input type="text" class="form-control" name="direccion">{!!$error->ErrorFormateado("direccion")!!}
-    </div>
-    <div class="col-md-3">
+      <input type="text" class="form-control" name="direccion">
+    <div class="col-md-6">
       <label for="inputCity" class="form-label">Fecha de alta</label>
-      <input type="text" class="form-control" name="fecha_alta">{!!$error->ErrorFormateado("fecha_alta")!!}
+      <input type="text" class="form-control" name="fecha_alta">
     </div>
-    <div class="col-md-3">
+    <div class="col-md-6">
       <label for="inputState" class="form-label">Tipo</label>
       <select id="inputState" class="form-select" name="tipo">
         <option disabled selected></option>
         <option>Admin</option>
         <option>Operario</option>
       </select>
-      {!!$error->ErrorFormateado("tipo")!!}
     </div>
       <div class="col-12">
       <input type="submit" class="btn btn-primary" value="Insert">
