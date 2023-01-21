@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\loginController;
+use App\Http\Controllers\userController;
 use App\Http\Controllers\tareasController;
 
 /*
@@ -15,7 +15,7 @@ use App\Http\Controllers\tareasController;
 |
 */
 
-Route::controller(loginController::class)->group(function(){
+Route::controller(userController::class)->group(function(){
     Route::get('/', 'verUsuarios');
     Route::get('usuarios/usuarios_crear', 'verCrearUsuario');
     Route::get('usuarios/usuarios_modificar/{id}', 'verModificarUsuario');

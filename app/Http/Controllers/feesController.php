@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class cuotasController extends Controller
+class feesController extends Controller
 {
     public function verCrearcliente() {
         return view('clientes.clientes_crear');

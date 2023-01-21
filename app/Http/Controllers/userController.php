@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Session\Middleware\StartSession;
 use App\Models\User;
 
-class loginController extends Controller {
+class userController extends Controller {
 
     public function verUsuarios() {
         $usuarios = User::all();

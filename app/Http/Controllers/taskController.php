@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class tareasController extends Controller {
+class taskController extends Controller {
 
     public function verTareas() {
         return view('tareas.tareas_mostrar');
