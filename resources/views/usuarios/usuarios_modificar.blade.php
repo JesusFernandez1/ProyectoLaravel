@@ -19,11 +19,11 @@
   </div>
     <div class="col-md-3">
       <label for="inputPassword4" class="form-label">Nombre</label>
-      <input type="text" class="form-control" name="nombre" value="{{$usuario->nombre}}">
+      <input type="text" class="form-control" name="nombre" value="{{$usuario->name}}">
     </div>
     <div class="col-md-3">
       <label for="inputCity" class="form-label">Correo</label>
-      <input type="text" class="form-control" name="correo" value="{{$usuario->correo}}">
+      <input type="text" class="form-control" name="correo" value="{{$usuario->email}}">
     </div>
     <div class="col-3">
       <label for="inputAddress" class="form-label">Telefono</label>

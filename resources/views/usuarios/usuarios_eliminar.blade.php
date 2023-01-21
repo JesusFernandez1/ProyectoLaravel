@@ -27,13 +27,13 @@
       <tbody>
          @foreach ($usuarios as $usuario)
          <tr>
-            <td>{{$usuario['DNI']}}</td>
-            <td>{{$usuario['nombre']}}</td>
-            <td>{{$usuario['correo']}}</td>
-            <td>{{$usuario['telefono']}}</td>
-            <td>{{$usuario['direccion']}}</td>
-            <td>{{$usuario['fecha_alta']}}</td>
-            <td>{{$usuario['tipo']}}</td>
+            <td>{{$usuario->DNI}}</td>
+            <td>{{$usuario->name}}</td>
+            <td>{{$usuario->email}}</td>
+            <td>{{$usuario->telefono}}</td>
+            <td>{{$usuario->direccion}}</td>
+            <td>{{$usuario->fecha_alta}}</td>
+            <td>{{$usuario->tipo}}</td>
             <td><a href="index.php?controller=login&action=borrarUsuario&id={{$usuario['id']}}" class="btn btn-outline-success" role="button">Si</a> <a href="index.php?controller=login&action=login" class="btn btn-outline-danger" role="button">No</a>
          </tr>
          @endforeach

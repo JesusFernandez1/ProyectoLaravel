@@ -25,7 +25,8 @@ class userController extends Controller {
     }
 
     public function verModificarUsuario() {
-        return view('usuarios.usuarios_modificar');
+        $usuarios = User::where('id', 1)->get();
+        return view('usuarios.usuarios_modificar', compact('usuarios'));
     }
 
     public function modificarUsuario() {
@@ -48,10 +49,6 @@ class userController extends Controller {
     }
 
     function borrarUsuario() {
-        
-    }
-
-    public function filtradoCredenciales() {
         
     }
 }
