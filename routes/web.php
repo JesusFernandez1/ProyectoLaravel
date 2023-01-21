@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\userController;
-use App\Http\Controllers\tareasController;
+use App\Http\Controllers\taskController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,7 +22,7 @@ Route::controller(userController::class)->group(function(){
     Route::get('usuarios/usuarios_eliminar/{id}', 'verEliminarUsuario');
 });
 
-Route::controller(tareasController::class)->group(function(){
+Route::controller(taskController::class)->group(function(){
     Route::get('tareas/tareas_mostrar', 'verTareas');
     Route::get('tareas/tareas_crear', 'verTareasCrear');
     Route::get('tareas/tareas_modificar', 'verTareasModificar');

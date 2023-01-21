@@ -11,38 +11,38 @@
 @extends('base')
 
 @section('mostrarExtension')
-  <form action="" class="row g-3" method="POST">
+  <form action="{{ route('tareas.crearTarea') }}" class="row g-3" method="POST">
     <div class="col-md-3">
       <label for="inputPassword4" class="form-label">Nombre</label>
-      <input type="text" class="form-control" name="nombre">{!!$error->ErrorFormateado("nombre")!!}
+      <input type="text" class="form-control" name="nombre">
     </div>
     <div class="col-3">
       <label for="inputAddress" class="form-label">Apellido</label>
-      <input type="text" class="form-control" placeholder="1234 Main St" name="apellido">{!!$error->ErrorFormateado("apellido")!!}
+      <input type="text" class="form-control" placeholder="1234 Main St" name="apellido">
     </div>
     <div class="col-2">
       <label for="inputAddress2" class="form-label">Telefono</label>
-      <input type="text" class="form-control" placeholder="Apartment, studio, or floor" name="telefono">{!!$error->ErrorFormateado("telefono")!!}
+      <input type="text" class="form-control" placeholder="Apartment, studio, or floor" name="telefono">
     </div>
     <div class="col-3">
       <label for="inputAddress2" class="form-label">Descripcion</label>
-      <input type="text" class="form-control" placeholder="Apartment, studio, or floor" name="descripcion">{!!$error->ErrorFormateado("descripcion")!!}
+      <input type="text" class="form-control" placeholder="Apartment, studio, or floor" name="descripcion">
     </div>
     <div class="col-md-3">
       <label for="inputCity" class="form-label">Correo</label>
-      <input type="text" class="form-control" name="correo">{!!$error->ErrorFormateado("correo")!!}
+      <input type="text" class="form-control" name="correo">
     </div>
     <div class="col-md-3">
       <label for="inputCity" class="form-label">Direccion</label>
-      <input type="text" class="form-control" name="direccion">{!!$error->ErrorFormateado("direccion")!!}
+      <input type="text" class="form-control" name="direccion">
     </div>
     <div class="col-md-2">
       <label for="inputCity" class="form-label">Poblacion</label>
-      <input type="text" class="form-control" name="poblacion">{!!$error->ErrorFormateado("poblacion")!!}
+      <input type="text" class="form-control" name="poblacion">
     </div>
     <div class="col-md-2">
       <label for="inputCity" class="form-label">Codigo Postal</label>
-      <input type="text" class="form-control" name="codigo">{!!$error->ErrorFormateado("codigo_postal")!!}
+      <input type="text" class="form-control" name="codigo">
     </div>
     <div class="col-md-2">
       <label for="inputState" class="form-label">Provincia</label>
@@ -52,7 +52,6 @@
         <option>{{$provincia["nombre"]}}</option>
         @endforeach
       </select>
-      {!!$error->ErrorFormateado("provincia")!!}
     </div>
     <div class="col-md-3">
       <label for="inputState" class="form-label">Estado</label>
@@ -63,15 +62,14 @@
         <option>C</option>
         <option>B</option>
       </select>
-      {!!$error->ErrorFormateado("estado")!!}
     </div>
     <div class="col-md-1">
       <label for="inputZip" class="form-label">Fecha de creacion</label>
-      <input type="date" class="form-control" id="inputZip" name="inicio" value="<?php echo date("Y-m-d") ?>">{!!$error->ErrorFormateado("inicio")!!}
+      <input type="date" class="form-control" id="inputZip" name="inicio" value="<?php echo date("Y-m-d") ?>">
     </div>
     <div class="col-md-1">
       <label for="inputCity" class="form-label">Fecha de finalizacion</label>
-      <input type="date" class="form-control" id="inputCity" name="final">{!!$error->ErrorFormateado("final")!!}
+      <input type="date" class="form-control" id="inputCity" name="final">
     </div>
     <div class="col-md-4">
       <label for="inputCity" class="form-label">Anotacion inicio</label>
@@ -89,7 +87,6 @@
         <option>{{$cliente["nombre"]}}</option>
         @endforeach
       </select>
-      {!!$error->ErrorFormateado("cliente")!!}
     </div>
     <div class="col-md-2">
       <label for="inputState" class="form-label">Empleado</label>
@@ -99,7 +96,6 @@
         <option>{{$empleado["nombre"]}}</option>
         @endforeach
       </select>
-      {!!$error->ErrorFormateado("empleado")!!}
     </div>
     <div class="col-12">
       <input type="submit" class="btn btn-primary" value="Insert">

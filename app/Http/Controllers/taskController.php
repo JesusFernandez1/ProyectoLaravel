@@ -39,7 +39,7 @@ class taskController extends Controller {
         return view('tareas.tareas_completar, ["id => $id]');
     }
 
-    public function crearTarea($id) {
+    public function crearTarea() {
 
         if ("condicion") {
             return view('tareas.tareas_crear');

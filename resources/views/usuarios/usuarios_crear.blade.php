@@ -11,13 +11,13 @@
 @extends('base')
 
 @section('mostrarExtension')
-  <form action="" class="row g-3" method="POST">
+  <form action=" {{ route('tareas.crearUsuario') }}" class="row g-3" method="POST">
     <div class="col-md-3">
-      <label for="inputPassword4" class="form-label">DNI</label>
+      <label for="inputCity" class="form-label">DNI</label>
       <input type="text" class="form-control" name="DNI">
     </div>
     <div class="col-md-3">
-      <label for="inputPassword4" class="form-label">Nombre</label>
+      <label for="inputCity" class="form-label">Nombre</label>
       <input type="text" class="form-control" name="nombre">
     </div>
     <div class="col-md-3">
