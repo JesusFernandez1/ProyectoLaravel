@@ -6,9 +6,9 @@
 </head>
 
 <body>
-   @extends('base_usuarios')
+   @extends('base')
 
-   @section('mostrarUsuarios')
+   @section('mostrarExtension')
 
    <h1>¿Estas seguro de eliminar el cuota?</h1>
 

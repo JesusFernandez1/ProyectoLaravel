@@ -7,9 +7,9 @@
 
 <body>
 
-   @extends('base_usuarios')
+   @extends('base')
 
-   @section('mostrarUsuarios')
+   @section('mostrarExtension')
 
    <table class="table">
       <thead class="thead-dark">

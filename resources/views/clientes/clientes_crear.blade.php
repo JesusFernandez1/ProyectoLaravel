@@ -8,9 +8,9 @@
   <title>Document</title>
 </head>
 <body>
-@extends('base_usuarios')
+@extends('base')
 
-@section('mostrarUsuarios')
+@section('mostrarExtension')
   <form action="" class="row g-3" method="POST">
     <div class="col-md-3">
       <label for="inputPassword4" class="form-label">DNI</label>
