@@ -24,7 +24,7 @@
           <li><a href="index.php?controller=tareas&action=verCompleta" class="nav-link px-2 text-white">Ver tareas completas</a></li>
           <li><a href="index.php?controller=tareas&action=verPendiente" class="nav-link px-2 text-white">Ver tareas pendientes</a></li>
           <li><a href="index.php?controller=tareas&action=mostrarBorradas" class="nav-link px-2 text-white">Ver tareas borradas</a></li>
-          <li><a href="index.php?controller=tareas&action=crear" class="nav-link px-2 text-white">Añadir</a></li>
+          <li><a href="index.php?controller=tareas&action=crear" class="nav-link px-2 text-white">Añadir tarea</a></li>
           <li><a href="index.php?controller=login&action=verUsuarios" class="nav-link px-2 text-white">Ver cliente</a></li>
           <li><a href="index.php?controller=login&action=crear" class="nav-link px-2 text-white">Añadir cliente</a></li>
           <li><a href="index.php?controller=login&action=verUsuarios" class="nav-link px-2 text-white">Ver empleados</a></li>
