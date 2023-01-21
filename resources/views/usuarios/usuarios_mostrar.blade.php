@@ -27,8 +27,8 @@
          @foreach ($usuarios as $usuario)
          <tr>
             <td>{{$usuario->DNI}}</td>
-            <td>{{$usuario->nombre}}</td>
-            <td>{{$usuario->correo}}</td>
+            <td>{{$usuario->name}}</td>
+            <td>{{$usuario->email}}</td>
             <td>{{$usuario->telefono}}</td>
             <td>{{$usuario->direccion}}</td>
             <td>{{$usuario->fecha_alta}}</td>

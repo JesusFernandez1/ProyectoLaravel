@@ -24,6 +24,10 @@
       <label for="inputCity" class="form-label">Correo</label>
       <input type="text" class="form-control" name="correo">{!!$error->ErrorFormateado("correo")!!}
     </div>
+    <div class="col-md-3">
+      <label for="inputCity" class="form-label">Pass</label>
+      <input type="text" class="form-control" name="pass">{!!$error->ErrorFormateado("pass")!!}
+    </div>
     <div class="col-3">
       <label for="inputAddress" class="form-label">Telefono</label>
       <input type="text" class="form-control" placeholder="1234 Main St" name="telefono">{!!$error->ErrorFormateado("telefono")!!}

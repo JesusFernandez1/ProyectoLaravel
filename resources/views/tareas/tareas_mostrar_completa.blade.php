@@ -25,7 +25,6 @@
             <th scope="col">Provincia</th>
             <th scope="col">Estado</th>
             <th scope="col">Creacion</th>
-            <th scope="col">Operario</th>
             <th scope="col">Finalizacion</th>
             <th scope="col">Anotacion inicial</th>
             <th scope="col">Anotacion inicial</th>
@@ -36,8 +35,7 @@
       <tbody>
          @foreach ($tareas as $tarea)
          <tr>
-            <td>{{$tarea['tarea_id']}}</td>
-            <td>{{$tarea['DNI']}}</td>
+            <td>{{$tarea['id']}}</td>
             <td>{{$tarea['nombre']}}</td>
             <td>{{$tarea['apellido']}}</td>
             <td>{{$tarea['telefono']}}</td>
@@ -49,7 +47,6 @@
             <td>{{$tarea['provincia']}}</td>
             <td>{{$tarea['estado_tarea']}}</td>
             <td>{{$tarea['fecha_creacion']}}</td>
-            <td>{{$tarea['operario_id']}}</td>
             <td>{{$tarea['fecha_final']}}</td>
             <td>{{$tarea['anotacion_inicio']}}</td>
             <td>{{$tarea['anotacion_final']}}</td>
