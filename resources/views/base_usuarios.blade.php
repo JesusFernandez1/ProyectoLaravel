@@ -25,8 +25,6 @@
         </ul>
 
         <form class="col-1 col-lg-auto mb-3 mb-lg-0 me-lg-3">
-        <p>Bienvenido/a: <?php session_start(); echo $_SESSION["usuario"] ?></p>
-        <p>Hora log: <?php echo date('H:i:s') ?></p>
         </form>
         <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
         <a href="index.php?controller=login&action=logout" class="btn btn-primary" role="button">Logout</a>
