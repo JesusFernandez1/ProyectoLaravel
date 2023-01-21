@@ -16,8 +16,6 @@
             <use xlink:href="#bootstrap" />
           </svg>
         </a>
-        
-
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
           <li><a href="index.php?controller=login&action=verSeccion" class="nav-link px-2 text-white">Secciones</a></li>
           <li><a href="index.php?controller=login&action=verUsuarios" class="nav-link px-2 text-white">Ver usuarios</a></li>
