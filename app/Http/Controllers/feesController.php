@@ -4,43 +4,43 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class feesController extends Controller
-{
-    public function verCrearcliente() {
-        return view('clientes.clientes_crear');
+class feesController extends Controller {
+    
+    public function verCrearcuota() {
+        return view('cuotas.cuotas_crear');
     }
 
-    public function crearcliente() {
+    public function crearcuota() {
 
-        //crea el cliente
+        //crea el cuota
 
-        return view('clientes.clientes_mostrar');
+        return view('cuotas.cuotas_mostrar');
     }
 
-    public function verModificarcliente($id) {
-        return view('clientes.clientes_modificar, ["id => $id]');
+    public function verModificarcuota($id) {
+        return view('cuotas.cuotas_modificar, ["id => $id]');
     }
 
-    public function modificarcliente($id) {
-        return view('clientes.clientes_mostrar');
+    public function modificarcuota($id) {
+        return view('cuotas.cuotas_mostrar');
     }
 
-    public function verEliminarcliente($id) {
-        return view('clientes.clientes_eliminar, ["id => $id]');
+    public function verEliminarcuota($id) {
+        return view('cuotas.cuotas_eliminar, ["id => $id]');
     }
 
-    public function comprobarBorrarcliente($id) {
+    public function comprobarBorrarcuota($id) {
         
         if ("comprobar") {
-            //borrarcliente($id);
-            return view('clientes.clientes_mostrar');
+            //borrarcuota($id);
+            return view('cuotas.cuotas_mostrar');
         } else {
-            return view('clientes.clientes_eliminar');
+            return view('cuotas.cuotas_eliminar');
         }
 
     }
 
-    function borrarcliente($id) {
+    function borrarcuota($id) {
         
     }
 
