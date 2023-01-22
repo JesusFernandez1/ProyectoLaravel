@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\userController;
 use App\Http\Controllers\taskController;
+use App\Http\Controllers\customerController;
+use App\Http\Controllers\feeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,6 +43,20 @@ Route::controller(taskController::class)->group(function(){
     Route::get('usuarios/usuarios_crear', 'crearUsuario')->name('usuarios.crearUsuario');
     Route::get('usuarios/usuarios_modificar/{id}', 'modificarUsuario')->name('usuarios.modificarUsuario');
     Route::get('usuarios/usuarios_eliminar/{id}', 'eliminarUsuario')->name('usuarios.eliminarUsuario');
+});
+
+Route::controller(customerController::class)->group(function(){
+    Route::get('clientes/clientes_mostrar', 'verClientes')->name('usuarios.verClientes');
+    Route::get('clientes/clientes_crear', 'crearCliente')->name('usuarios.crearCliente');
+    Route::get('clientes/clientes_modificar/{id}', 'modificarCliente')->name('usuarios.modificarCliente');
+    Route::get('clientes/clientes_eliminar/{id}', 'eliminarCliente')->name('usuarios.eliminarCliente');
+});
+
+Route::controller(feeController::class)->group(function(){
+    Route::get('cuotas/cuotas_mostrar', 'vercuotas')->name('usuarios.verCuotas');
+    Route::get('cuotas/cuotas_crear', 'crearCuota')->name('usuarios.crearCuota');
+    Route::get('cuotas/cuotas_corregir/{id}', 'corregirCuota')->name('usuarios.corregirCuota');
+    Route::get('cuotas/cuotas_eliminar/{id}', 'eliminarCuota')->name('usuarios.eliminarCuota');
 });
 
 Route::controller(taskController::class)->group(function(){
