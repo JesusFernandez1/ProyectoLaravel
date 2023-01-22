@@ -37,7 +37,7 @@ class userController extends Controller {
 
     public function modificarUsuario($id) {
         $usuarios = User::all();
-        $usuario = User::where('id', 1)->get();
+        $usuario = User::find($id);
         if ($_POST) {
 
             return view('usuarios.usuarios_mostrar', compact('usuarios'));

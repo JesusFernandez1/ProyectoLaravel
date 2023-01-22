@@ -36,7 +36,7 @@ class taskController extends Controller {
     public function modificarTarea($id) {
 
         $tareas = task::all();
-        $tarea = task::where('id', 1)->get();
+        $tarea = task::find($id);
         if ($_POST) {
             return view('tareas.tareas_mostrar', compact('tareas'));
         } else {
@@ -47,8 +47,8 @@ class taskController extends Controller {
      public function borrarTarea($id) {
         
         $tareas = task::all();
-        $tarea = task::where('id', 1)->get();
-        if ($_POST) {
+        $tarea = task::find($id);
+        if ("comprueba todo correcto") {
             //borra la tarea
             return view('tareas.tareas_mostrar', compact('tareas'));
         } else {
@@ -58,7 +58,7 @@ class taskController extends Controller {
 
     public function completarTarea($id) {
         $tareas = task::all();
-        $tarea = task::where('id', 1)->get();
+        $tarea = task::find($id);
         if ($_POST) {
             //completa la tarea
             return view('tareas.tareas_mostrar', compact('tareas'));
