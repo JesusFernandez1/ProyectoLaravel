@@ -29,15 +29,14 @@
       <tbody>
          @foreach ($tareas as $tarea)
          <tr>
-            <td>{{$tarea['DNI']}}</td>
-            <td>{{$tarea['nombre']}}</td>
-            <td>{{$tarea['apellido']}}</td>
-            <td>{{$tarea['poblacion']}}</td>
-            <td>{{$tarea['codigo_postal']}}</td>
-            <td>{{$tarea['provincia']}}</td>
-            <td>{{$tarea['fecha_creacion']}}</td>
-            <td>{{$tarea['telefono']}}</td>
-            <td>{{$tarea['estado_tarea']}}</td>
+            <td>{{$tarea->nombre}}</td>
+            <td>{{$tarea->apellido}}</td>
+            <td>{{$tarea->poblacion}}</td>
+            <td>{{$tarea->codigo_postal}}</td>
+            <td>{{$tarea->provincia}}</td>
+            <td>{{$tarea->creacion}}</td>
+            <td>{{$tarea->telefono}}</td>
+            <td>{{$tarea->estado_tarea}}</td>
             <td><a href="index.php?controller=tareas&action=delete&id={{$tarea['tarea_id']}}" class="btn btn-outline-success" role="button">Si</a> <a href="index.php?controller=tareas&action=ver" class="btn btn-outline-danger" role="button">No</a>
          </tr>
          @endforeach

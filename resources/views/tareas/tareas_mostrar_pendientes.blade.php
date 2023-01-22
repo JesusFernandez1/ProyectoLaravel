@@ -26,14 +26,14 @@
       <tbody>
          @foreach ($tareas as $tarea)
          <tr>
-            <td>{{$tarea['nombre']}}</td>
-            <td>{{$tarea['apellido']}}</td>
-            <td>{{$tarea['poblacion']}}</td>
-            <td>{{$tarea['codigo_postal']}}</td>
-            <td>{{$tarea['provincia']}}</td>
-            <td>{{$tarea['fecha_creacion']}}</td>
-            <td>{{$tarea['telefono']}}</td>
-            <td>{{$tarea['estado_tarea']}}</td>
+            <td>{{$tarea->nombre}}</td>
+            <td>{{$tarea->apellido}}</td>
+            <td>{{$tarea->poblacion}}</td>
+            <td>{{$tarea->codigo_postal}}</td>
+            <td>{{$tarea->provincia}}</td>
+            <td>{{$tarea->creacion}}</td>
+            <td>{{$tarea->telefono}}</td>
+            <td>{{$tarea->estado_tarea}}</td>
             <td><a href="index.php?controller=tareas&action=ModificarUnaTarea&id={{$tarea['id']}}" class="btn btn-outline-primary" role="button">Modificar</a> <a href="index.php?controller=tareas&action=verEliminar&id={{$tarea['id']}}" class="btn btn-outline-danger" role="button">Eliminar</a>
                <a href="index.php?controller=tareas&action=completar&id={{$tarea['id']}}" class="btn btn-outline-success" role="button">Completar</a>
             </td>
@@ -41,20 +41,6 @@
          @endforeach
       </tbody>
    </table>
-   <style>
-      nav {
-         position: absolute;
-         left: -20;
-      }
-   </style>
-   <nav aria-label="Page navigation example">
-      <ul class="pagination">
-         <li class="page-item"><a class="page-link" href="index.php?controller=tareas&action=verPendientePaginacion&pagina={{$pagina-1}}">Anterior</a></li>
-         @for ($i = 1; $i <= $paginas; $i++) <li class="page-item"><a class="page-link" href="index.php?controller=tareas&action=verPendientePaginacion&pagina={{$i}}">{{$i}}</a></li>
-            @endfor
-            <li class="page-item"><a class="page-link" href="index.php?controller=tareas&action=verPendientePaginacion&pagina={{$pagina+1}}">Siguiente</a></li>
-      </ul>
-   </nav>
    @endsection
 </body>
 

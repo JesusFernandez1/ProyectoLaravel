@@ -35,23 +35,23 @@
       <tbody>
          @foreach ($tareas as $tarea)
          <tr>
-            <td>{{$tarea['id']}}</td>
-            <td>{{$tarea['nombre']}}</td>
-            <td>{{$tarea['apellido']}}</td>
-            <td>{{$tarea['telefono']}}</td>
-            <td>{{$tarea['descripcion']}}</td>
-            <td>{{$tarea['correo']}}</td>
-            <td>{{$tarea['direccion']}}</td>
-            <td>{{$tarea['poblacion']}}</td>
-            <td>{{$tarea['codigo_postal']}}</td>
-            <td>{{$tarea['provincia']}}</td>
-            <td>{{$tarea['estado_tarea']}}</td>
-            <td>{{$tarea['fecha_creacion']}}</td>
-            <td>{{$tarea['fecha_final']}}</td>
-            <td>{{$tarea['anotacion_inicio']}}</td>
-            <td>{{$tarea['anotacion_final']}}</td>
-            <td>{{$tarea['cliente_id']}}</td>
-            <td>{{$tarea['empleado_id']}}</td>
+            <td>{{$tarea->id}}</td>
+            <td>{{$tarea->nombre}}</td>
+            <td>{{$tarea->apellido}}</td>
+            <td>{{$tarea->telefono}}</td>
+            <td>{{$tarea->descripcion}}</td>
+            <td>{{$tarea->correo}}</td>
+            <td>{{$tarea->direccion}}</td>
+            <td>{{$tarea->poblacion}}</td>
+            <td>{{$tarea->codigo_postal}}</td>
+            <td>{{$tarea->provincia}}</td>
+            <td>{{$tarea->estado_tarea}}</td>
+            <td>{{$tarea->fecha_creacion}}</td>
+            <td>{{$tarea->fecha_final}}</td>
+            <td>{{$tarea->anotacion_inicio}}</td>
+            <td>{{$tarea->anotacion_final}}</td>
+            <td>{{$tarea->customers_id}}</td>
+            <td>{{$tarea->users_id}}</td>
             
             <td><a href="index.php?controller=tareas&action=ModificarUnaTarea&id={{$tarea['id']}}" class="btn btn-outline-primary" role="button">Modificar</a> <a href="index.php?controller=tareas&action=delete&id={{$tarea['id']}}" class="btn btn-outline-danger" role="button">Eliminar</a>
             <a href="index.php?controller=tareas&action=completar&id={{$tarea['id']}}" class="btn btn-outline-success" role="button">Completar</a></td>

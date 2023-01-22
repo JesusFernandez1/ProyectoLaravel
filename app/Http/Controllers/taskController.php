@@ -33,17 +33,20 @@ class taskController extends Controller {
         }
     }
 
-    public function modificarTarea($id) {
+    public function modificarTarea(Request $request, $id) {
 
         $tareas = task::all();
         $tarea = task::find($id);
         if ($_POST) {
             if ("condition") {
+                $tarea->nombre = $request->nombre;
+                $tarea->apellido = $request->apellido;
+                $tarea->correo = $request->correo; //todos los datos
+                $tarea->save();
                 return view('tareas.tareas_mostrar', compact('tareas'));
             } else {
                 return view('tareas.tareas_modificar', compact('tarea'));
             }
-            
         } else {
             return view('tareas.tareas_modificar', compact('tarea'));
         }
@@ -57,17 +60,20 @@ class taskController extends Controller {
     }
 
     public function confirmarEliminarTarea($id) {
+        $tarea = task::find($id);
+        $tarea->delete();
+        $tarea->save();
         $tareas = task::all();
-        //borrar tarea
         return view('tareas.tareas_mostrar', compact('tareas'));
          
     }
 
-    public function completarTarea($id) {
+    public function completarTarea(Request $request, $id) {
         $tareas = task::all();
         $tarea = task::find($id);
         if ($_POST) {
-            //completa la tarea
+            $tarea->estado_tarea = $request->estado_tarea;
+            $tarea->save();
             return view('tareas.tareas_mostrar', compact('tareas'));
         } else {
             return view('tareas.tareas_modificar', compact('tarea'));
