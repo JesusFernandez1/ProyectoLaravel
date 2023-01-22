@@ -58,8 +58,9 @@ class feesController extends Controller {
     }
 
     public function confirmarEliminarCuota($id) {
-        $Cuotas = fees::all();
-        //borrar Cuota
+        $cuota = fees::find($id)->delete();
+        $cuota->save();
+        $cuotas = fees::all();
         return view('cuotas.cuotas_mostrar', compact('cuotas'));
          
     }

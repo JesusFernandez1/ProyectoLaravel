@@ -59,7 +59,7 @@ class userController extends Controller {
 
     public function confirmarEliminarUsuario($id) {
         $usuarios = User::all();
-        //borrar usuario
+        $usuario = User::find($id)->delete();
         return view('usuarios.usuarios_mostrar', compact('usuarios'));
          
     }

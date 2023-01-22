@@ -60,8 +60,7 @@ class taskController extends Controller {
     }
 
     public function confirmarEliminarTarea($id) {
-        $tarea = task::find($id);
-        $tarea->delete();
+        $tarea = task::find($id)->delete();
         $tarea->save();
         $tareas = task::all();
         return view('tareas.tareas_mostrar', compact('tareas'));
