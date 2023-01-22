@@ -33,12 +33,16 @@ class feesController extends Controller {
         }
     }
 
-    public function corregirCuota($id) {
+    public function corregirCuota(Request $request, $id) {
 
         $cuota = fees::find($id);
         if ($_POST) {
             if ("condition") {
-                //modificacion
+                $cuota = new fees();
+                $cuota->concepto = $request->concepto;
+                $cuota->fecha_emision = $request->fecha_emision;
+                $cuota->importe = $request->importe;
+                $cuota->save();
                 $cuotas = fees::all();
                 return view('cuotas.cuotas_mostrar', compact('cuotas'));
             } else {
