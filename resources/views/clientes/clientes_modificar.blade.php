@@ -15,31 +15,30 @@
   @foreach ($clientes as $cliente)
   <div class="col-md-3">
     <label for="inputPassword4" class="form-label">DNI</label>
-    <input type="text" class="form-control" name="DNI" value="{{$cliente['DNI']}}">{!!$error->ErrorFormateado("DNI")!!}
-  </div>
+    <input type="text" class="form-control" name="DNI" value="{{$cliente->DNI}}">
     <div class="col-md-3">
       <label for="inputPassword4" class="form-label">Nombre</label>
-      <input type="text" class="form-control" name="nombre" value="{{$cliente['nombre']}}">{!!$error->ErrorFormateado("nombre")!!}
+      <input type="text" class="form-control" name="nombre" value="{{$cliente->nombre}}">
     </div>
     <div class="col-3">
       <label for="inputAddress" class="form-label">Telefono</label>
-      <input type="text" class="form-control" placeholder="1234 Main St" name="telefono" value="{{$cliente['telefono']}}">{!!$error->ErrorFormateado("telefono")!!}
+      <input type="text" class="form-control" placeholder="1234 Main St" name="telefono" value="{{$cliente->telefono}}">
     </div>
     <div class="col-md-3">
       <label for="inputCity" class="form-label">Correo</label>
-      <input type="text" class="form-control" name="correo" value="{{$cliente['correo']}}">{!!$error->ErrorFormateado("correo")!!}
+      <input type="text" class="form-control" name="correo" value="{{$cliente->correo}}">
     </div>
     <div class="col-2">
       <label for="inputAddress2" class="form-label">Cuenta</label>
-      <input type="text" class="form-control" placeholder="Apartment, studio, or floor" name="cuenta" value="{{$cliente['cuenta']}}">{!!$error->ErrorFormateado("cuenta")!!}
+      <input type="text" class="form-control" placeholder="Apartment, studio, or floor" name="cuenta" value="{{$cliente->cuenta}}">
     </div>
     <div class="col-md-1">
       <label for="inputZip" class="form-label">Pais</label>
-      <input readonly type="date" class="form-control" id="inputZip" name="pais" value="{{$cliente['pais']}}">{!!$error->ErrorFormateado("pais")!!}
+      <input readonly type="date" class="form-control" id="inputZip" name="pais" value="{{$cliente->pais}}">
     </div>
     <div class="col-md-1">
       <label for="inputZip" class="form-label">Importe</label>
-      <input readonly type="date" class="form-control" id="inputZip" name="importe_mensual" value="{{$cliente['importe_mensual']}}">{!!$error->ErrorFormateado("importe_mensual")!!}
+      <input readonly type="date" class="form-control" id="inputZip" name="importe_mensual" value="{{$cliente->importe_mensual}}">
     </div>
     <div class="col-12">
       <input type="submit" class="btn btn-primary" value="Insert">

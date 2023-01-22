@@ -24,7 +24,9 @@
           <li><a href="{{ route('tareas.verTareasCompletas') }}" class="nav-link px-2 text-white">Ver tareas completas</a></li>
           <li><a href="{{ route('tareas.verTareasPendientes') }}" class="nav-link px-2 text-white">Ver tareas pendientes</a></li>
           <li><a href="{{ route('tareas.crearTarea') }}" class="nav-link px-2 text-white">Añadir tarea</a></li>
+          <li><a href="{{ route('clientes.verClientes') }}" class="nav-link px-2 text-white">Ver clientes</a></li>
           <li><a href="{{ route('usuarios.verUsuarios') }}" class="nav-link px-2 text-white">Ver empleados</a></li>
+          <li><a href="{{ route('clientes.crearCliente') }}" class="nav-link px-2 text-white">Añadir cliente</a></li>
           <li><a href="{{ route('usuarios.crearUsuario') }}" class="nav-link px-2 text-white">Añadir empleado</a></li>
         </ul>
           
