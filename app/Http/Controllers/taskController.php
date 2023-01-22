@@ -29,7 +29,7 @@ class taskController extends Controller {
                 return view('tareas.tareas_modificar');
             }
         } else {
-            return view('tareas.tareas_mostrar', compact('tareas'));
+            return view('tareas.tareas_crear');
         }
     }
 
@@ -86,7 +86,7 @@ class taskController extends Controller {
     }
 
     public function verTareasPendientes() {
-        $tarea = task::where('estado_tarea', 'P')->get();
-        return view('tareas.tareas_mostrar_pendientes', compact('tarea'));
+        $tareas = task::where('estado_tarea', 'P')->get();
+        return view('tareas.tareas_mostrar_pendientes', compact('tareas'));
     }
 }

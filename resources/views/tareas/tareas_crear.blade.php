@@ -11,7 +11,7 @@
 @extends('base')
 
 @section('mostrarExtension')
-  <form action="{{ route('tareas/tareas_crear.crearTarea') }}" class="row g-3" method="POST">
+  <form action="{{ route('tareas.crearTarea') }}" class="row g-3" method="POST">
     <div class="col-md-3">
       <label for="inputPassword4" class="form-label">Nombre</label>
       <input type="text" class="form-control" name="nombre">
@@ -49,7 +49,7 @@
       <select id="inputState" class="form-select" name="provincia">
         <option disabled selected hidden>Provincia</option>
         @foreach ($provincias as $provincia)
-        <option>{{$provincia["nombre"]}}</option>
+        <option>{{$provincia->nombre}}</option>
         @endforeach
       </select>
     </div>
@@ -84,7 +84,7 @@
       <select id="inputState" class="form-select" name="cliente">
         <option disabled selected hidden>Cliente</option>
         @foreach ($clientes as $cliente)
-        <option>{{$cliente["nombre"]}}</option>
+        <option>{{$cliente->nombre}}</option>
         @endforeach
       </select>
     </div>
@@ -93,7 +93,7 @@
       <select id="inputState" class="form-select" name="empleado">
         <option disabled selected hidden>Empleado</option>
         @foreach ($empleados as $empleado)
-        <option>{{$empleado["nombre"]}}</option>
+        <option>{{$empleado->nombre}}</option>
         @endforeach
       </select>
     </div>

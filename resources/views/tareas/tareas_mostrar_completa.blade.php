@@ -53,26 +53,12 @@
             <td>{{$tarea->customers_id}}</td>
             <td>{{$tarea->users_id}}</td>
             
-            <td><a href="index.php?controller=tareas&action=ModificarUnaTarea&id={{$tarea['id']}}" class="btn btn-outline-primary" role="button">Modificar</a> <a href="index.php?controller=tareas&action=delete&id={{$tarea['id']}}" class="btn btn-outline-danger" role="button">Eliminar</a>
+            <td><a href="{{ route('tareas.verTareas($tarea->id)') }}" class="btn btn-outline-primary" role="button">Modificar</a> <a href="index.php?controller=tareas&action=delete&id={{$tarea['id']}}" class="btn btn-outline-danger" role="button">Eliminar</a>
             <a href="index.php?controller=tareas&action=completar&id={{$tarea['id']}}" class="btn btn-outline-success" role="button">Completar</a></td>
          </tr>
          @endforeach
       </tbody>
    </table>
-   <style>
-      nav {
-         position: absolute;
-         left: -20;
-      }
-   </style>
-   <nav aria-label="Page navigation example">
-      <ul class="pagination">
-         <li class="page-item"><a class="page-link" href="index.php?controller=tareas&action=verCompletaPaginacion&pagina={{$pagina-1}}">Anterior</a></li>
-         @for ($i = 1; $i <= $paginas; $i++) <li class="page-item"><a class="page-link" href="index.php?controller=tareas&action=verCompletaPaginacion&pagina={{$i}}">{{$i}}</a></li>
-            @endfor
-            <li class="page-item"><a class="page-link" href="index.php?controller=tareas&action=verCompletaPaginacion&pagina={{$pagina+1}}">Siguiente</a></li>
-      </ul>
-   </nav>
    @endsection
 </body>
 </html>
