@@ -16,13 +16,11 @@ class customerController extends Controller
         $clientes = customer::all();
         if ($_POST) {
 
-            $numero = 0;
-
-            if ($numero>1) {
+            if ("condicion") {
                 $cliente = new customer();
-                $cliente->name = $request->name;
-                $cliente->email = $request->email;
-                $cliente->pass = $request->pass;
+                $cliente->nombre = $request->nombre;
+                $cliente->apellido = $request->apellido;
+                $cliente->correo = $request->correo;
                 $cliente->save();
 
                 return view('clientes.clientes_mostrar', compact('clientes'));
@@ -30,31 +28,38 @@ class customerController extends Controller
                 return view('clientes.clientes_crear');
             }
 
-            
         } else {
             return view('clientes.clientes_crear');
         }
     }
 
     public function modificarCliente($id) {
-        $clientes = customer::all();
         $cliente = customer::find($id);
         if ($_POST) {
 
-            return view('clientes.clientes_mostrar', compact('clientes'));
+            if ("condition") {
+                $clientes = customer::all();
+                return view('clientes.clientes_mostrar', compact('clientes'));
+            } else {
+                return view('clientes.clientes_modificar', compact('cliente'));
+            }
+            
         } else {
             return view('clientes.clientes_modificar', compact('cliente'));
         }
     }
 
     public function eliminarCliente($id) {
-        $clientes = customer::all();
         $cliente = customer::find($id);
-        if ($_POST) {
+        
+        return view('clientes.clientes_eliminar', compact('cliente'));
+         
+    }
 
-            return view('clientes.clientes_mostrar', compact('clientes'));
-        } else {
-            return view('clientes.clientes_modificar', compact('cliente'));
-        }
+    public function confirmarEliminarCliente($id) {
+        $clientes = customer::all();
+        //borrar cliente
+        return view('clientes.clientes_mostrar', compact('clientes'));
+         
     }
 }
