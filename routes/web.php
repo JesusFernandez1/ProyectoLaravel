@@ -17,21 +17,19 @@ use App\Http\Controllers\taskController;
 
 Route::controller(userController::class)->group(function(){
     Route::get('/', 'verUsuarios');
-    Route::get('usuarios/usuarios_crear', 'verCrearUsuario');
-    Route::get('usuarios/usuarios_modificar/{id}', 'verModificarUsuario');
-    Route::get('usuarios/usuarios_eliminar/{id}', 'verEliminarUsuario');
+    Route::get('usuarios/usuarios_crear', 'crearUsuario');
+    Route::get('usuarios/usuarios_modificar/{id}', 'modificarUsuario');
+    Route::get('usuarios/usuarios_eliminar/{id}', 'eliminarUsuario');
 });
 
 Route::controller(taskController::class)->group(function(){
     Route::get('tareas/tareas_mostrar', 'verTareas');
-    Route::get('tareas/tareas_crear', 'verTareasCrear');
-    Route::get('tareas/tareas_modificar', 'verTareasModificar');
-    Route::get('tareas/tareas_eliminar/{id}', 'verTareasEliminar');
-    Route::get('tareas/tareas_completar', 'verCompletar');
+    Route::get('tareas/tareas_crear', 'crearTarea');
+    Route::get('tareas/tareas_modificar/{id}', 'modificarTarea');
+    Route::get('tareas/tareas_eliminar/{id}', 'borrarTarea');
+    Route::get('tareas/tareas_completar', 'completarTarea');
     Route::get('tareas/tareas_mostrar_completa', 'verTareasCompletas');
-    Route::get('tareas/tareas_eliminadas', 'verTareasEliminadas');
     Route::get('tareas/tareas_pendientes', 'verTareasPendientes');
-    Route::get('tareas/borrarUsuario/{$id}', 'borrarUsuario');
 });
 
 

@@ -3,80 +3,77 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\task;
 
 class taskController extends Controller {
 
     public function verTareas() {
-        return view('tareas.tareas_mostrar');
+        $tareas = task::all();
+        return view('tareas.tareas_mostrar', compact('tareas'));
     }
 
-    public function logout() {
-        session_start();
-        session_unset();
-        session_destroy();
-        return view('usuarios.login');
-    }
+    public function crearTarea(Request $request) {
 
-    public function verTareasCrear() {
-        //crea el Tarea
+        $tareas = task::all();
+        if ($_POST) {
 
-        return view('tareas.tareas_crear');
-    }
+            if ("condition") {
+                $tarea = new task();
+                $tarea->nombre = $request->nombre;
+                $tarea->apellido = $request->apellido;
+                $tarea->correo = $request->correo;
+                $tarea->save();
 
-    public function verTareasModificar($id) {
-        return view('tareas.tareas_modificar, ["id => $id]');
-    }
-
-    public function verTareasEliminar($id) {
-        return view('tareas.tareas_eliminar, ["id => $id]');
-    }
-
-    public function verTareasPendientes($id) {
-        return view('tareas.tareas_pendientes');
-    }
-
-    public function verCompletarTarea($id) {
-        return view('tareas.tareas_completar, ["id => $id]');
-    }
-
-    public function crearTarea() {
-
-        if ("condicion") {
-            return view('tareas.tareas_crear');
+                return view('tareas.tareas_mostrar');
+            } else {
+                return view('tareas.tareas_modificar');
+            }
         } else {
-            return view('tareas.tareas_mostrar');
+            return view('tareas.tareas_mostrar', compact('tareas'));
         }
     }
 
     public function modificarTarea($id) {
 
-        if ("condicion") {
-            return view('tareas.tareas_modificar');
+        $tareas = task::all();
+        $tarea = task::where('id', 1)->get();
+        if ($_POST) {
+            return view('tareas.tareas_mostrar', compact('tareas'));
         } else {
-            return view('tareas.tareas_mostrar');
+            return view('tareas.tareas_modificar', compact('tarea'));
+        }
+    }
+
+     public function borrarTarea($id) {
+        
+        $tareas = task::all();
+        $tarea = task::where('id', 1)->get();
+        if ($_POST) {
+            //borra la tarea
+            return view('tareas.tareas_mostrar', compact('tareas'));
+        } else {
+            return view('tareas.tareas_modificar', compact('tarea'));
         }
     }
 
     public function completarTarea($id) {
-        if ("condicion") {
-            return view('tareas.tareas_completar');
+        $tareas = task::all();
+        $tarea = task::where('id', 1)->get();
+        if ($_POST) {
+            //completa la tarea
+            return view('tareas.tareas_mostrar', compact('tareas'));
         } else {
-            return view('tareas.tareas_mostrar');
+            return view('tareas.tareas_modificar', compact('tarea'));
         }
     }
 
-    public function comprobarBorrarTarea($id) {
-        
-        if ("comprobar") {
-            return view('tareas.tareas_eliminar, ["id => $id]');
-        } else {
-            //borrarTarea($id);
-            return view('tareas.tareas_mostrar');
-        }
-
+    public function verTareasCompletas() {
+        $tareas = task::all();
+        return view('tareas.tareas_mostrar_completa', compact('tareas'));
     }
 
-    function borrarTarea($id) {
-        
+    public function verTareasPendientes() {
+        $tarea = task::where('estado_tarea', 'P')->get();
+        return view('tareas.tareas_mostrar_pendientes', compact('tarea'));
     }
 }

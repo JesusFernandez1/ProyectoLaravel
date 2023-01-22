@@ -11,18 +11,21 @@
 @extends('base')
 
 @section('mostrarExtension')
-  <form action=" {{ route('tareas.crearUsuario') }}" class="row g-3" method="POST">
+  <form action=" {{ route('usuarios/usuarios_crear.crearUsuario') }}" class="row g-3" method="POST">
+
+    @csrf
+
     <div class="col-md-3">
       <label for="inputCity" class="form-label">DNI</label>
       <input type="text" class="form-control" name="DNI">
     </div>
     <div class="col-md-3">
       <label for="inputCity" class="form-label">Nombre</label>
-      <input type="text" class="form-control" name="nombre">
+      <input type="text" class="form-control" name="name">
     </div>
     <div class="col-md-3">
       <label for="inputCity" class="form-label">Correo</label>
-      <input type="text" class="form-control" name="correo">
+      <input type="text" class="form-control" name="email">
     </div>
     <div class="col-md-3">
       <label for="inputCity" class="form-label">Pass</label>

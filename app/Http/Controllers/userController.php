@@ -13,42 +13,40 @@ class userController extends Controller {
         return view('usuarios.usuarios_mostrar', compact('usuarios'));
     }
 
-    public function verCrearUsuario() {
-        return view('usuarios.usuarios_crear');
-    }
+    public function crearUsuario(Request $request) {
+        $usuarios = User::all();
+        if ($_POST) {
 
-    public function crearUsuario() {
+            if ("condition") {
+                $usuario = new User();
+                $usuario->name = $request->name;
+                $usuario->email = $request->email;
+                $usuario->pass = $request->pass;
+                $usuario->save();
 
-        //crea el usuario
+                return view('usuarios.usuarios_mostrar');
+            } else {
+                return view('usuarios.usuarios_modificar');
+            }
 
-        return view('usuarios.usuarios_mostrar');
-    }
-
-    public function verModificarUsuario() {
-        $usuarios = User::where('id', 1)->get();
-        return view('usuarios.usuarios_modificar', compact('usuarios'));
-    }
-
-    public function modificarUsuario() {
-        return view('usuarios.usuarios_mostrar');
-    }
-
-    public function verEliminarUsuario() {
-        return view('usuarios.usuarios_eliminar, ["id => $id]');
-    }
-
-    public function comprobarBorrarUsuario() {
-        
-        if ("comprobar") {
-            //borrarUsuario($id);
-            return view('usuarios.usuarios_mostrar');
+            
         } else {
-            return view('usuarios.usuarios_eliminar');
+            return view('usuarios.usuarios_mostrar', compact('usuarios'));
         }
-
     }
 
-    function borrarUsuario() {
-        
+    public function modificarUsuario($id) {
+        $usuarios = User::all();
+        $usuario = User::where('id', 1)->get();
+        if ($_POST) {
+
+            return view('usuarios.usuarios_mostrar', compact('usuarios'));
+        } else {
+            return view('usuarios.usuarios_modificar', compact('usuario'));
+        }
+    }
+
+    public function eliminarUsuario() {
+        return view('usuarios.usuarios_eliminar, ["id => $id]');
     }
 }

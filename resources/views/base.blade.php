@@ -20,15 +20,15 @@
         </a>
 
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-          <li><a href="index.php?controller=tareas&action=ver" class="nav-link px-2 text-white">Ver tareas</a></li>
-          <li><a href="index.php?controller=tareas&action=verCompleta" class="nav-link px-2 text-white">Ver tareas completas</a></li>
-          <li><a href="index.php?controller=tareas&action=verPendiente" class="nav-link px-2 text-white">Ver tareas pendientes</a></li>
-          <li><a href="index.php?controller=tareas&action=mostrarBorradas" class="nav-link px-2 text-white">Ver tareas borradas</a></li>
-          <li><a href="index.php?controller=tareas&action=crear" class="nav-link px-2 text-white">Añadir tarea</a></li>
-          <li><a href="index.php?controller=login&action=verUsuarios" class="nav-link px-2 text-white">Ver cliente</a></li>
-          <li><a href="index.php?controller=login&action=crear" class="nav-link px-2 text-white">Añadir cliente</a></li>
-          <li><a href="index.php?controller=login&action=verUsuarios" class="nav-link px-2 text-white">Ver empleados</a></li>
-          <li><a href="index.php?controller=login&action=crear" class="nav-link px-2 text-white">Añadir empleado</a></li>
+          <li><a href="{{ route('tareas/tareas_mostrar.verTarea') }}" class="nav-link px-2 text-white">Ver tareas</a></li>
+          <li><a href="{{ route('tareas/tareas_mostrar_completa.verTareasCompletas') }}" class="nav-link px-2 text-white">Ver tareas completas</a></li>
+          <li><a href="{{ route('tareas/tareas_pendientes.verTareasPendientes') }}" class="nav-link px-2 text-white">Ver tareas pendientes</a></li>
+          <li><a href="{{ route('tareas/tareas_eliminadas.verTareasEliminadas') }}" class="nav-link px-2 text-white">Ver tareas borradas</a></li>
+          <li><a href="{{ route('tareas/tareas_crear.crearUsuario') }}" class="nav-link px-2 text-white">Añadir tarea</a></li>
+          <li><a href="{{ route('usuarios/usuarios_crear.crearUsuario') }}" class="nav-link px-2 text-white">Ver cliente</a></li>
+          <li><a href="{{ route('usuarios/usuarios_crear.crearUsuario') }}" class="nav-link px-2 text-white">Añadir cliente</a></li>
+          <li><a href="{{ route('/.verUsuarios') }}" class="nav-link px-2 text-white">Ver empleados</a></li>
+          <li><a href="{{ route('usuarios/usuarios_crear.crearUsuario') }}" class="nav-link px-2 text-white">Añadir empleado</a></li>
         </ul>
 
         <form class="col-3 col-lg-auto mb-3 mb-lg-0 me-lg-3">
