@@ -17,9 +17,7 @@ class userController extends Controller {
         $usuarios = User::all();
         if ($_POST) {
 
-            $numero = 0;
-
-            if ($numero>1) {
+            if ("condicion") {
                 $usuario = new User();
                 $usuario->name = $request->name;
                 $usuario->email = $request->email;
@@ -31,24 +29,38 @@ class userController extends Controller {
                 return view('usuarios.usuarios_crear');
             }
 
-            
         } else {
             return view('usuarios.usuarios_crear');
         }
     }
 
     public function modificarUsuario($id) {
-        $usuarios = User::all();
         $usuario = User::find($id);
         if ($_POST) {
 
-            return view('usuarios.usuarios_mostrar', compact('usuarios'));
+            if ("condition") {
+                $usuarios = User::all();
+                return view('usuarios.usuarios_mostrar', compact('usuarios'));
+            } else {
+                return view('usuarios.usuarios_modificar', compact('usuario'));
+            }
+            
         } else {
             return view('usuarios.usuarios_modificar', compact('usuario'));
         }
     }
 
-    public function eliminarUsuario() {
-        return view('usuarios.usuarios_eliminar, ["id => $id]');
+    public function eliminarUsuario($id) {
+        $usuario = User::find($id);
+        
+        return view('usuarios.usuarios_eliminar', compact('usuario'));
+         
+    }
+
+    public function confirmarEliminarUsuario($id) {
+        $usuarios = User::all();
+        //borrar usuario
+        return view('usuarios.usuarios_mostrar', compact('usuarios'));
+         
     }
 }

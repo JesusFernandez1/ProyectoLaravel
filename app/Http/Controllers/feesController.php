@@ -3,48 +3,51 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class feesController extends Controller {
     
-    public function verCrearcuota() {
-        return view('cuotas.cuotas_crear');
+    public function verUsuarios() {
+        $usuarios = User::all();
+        return view('usuarios.usuarios_mostrar', compact('usuarios'));
     }
 
-    public function crearcuota() {
+    public function crearUsuario(Request $request) {
+        $usuarios = User::all();
+        if ($_POST) {
 
-        //crea el cuota
+            $numero = 0;
 
-        return view('cuotas.cuotas_mostrar');
-    }
+            if ($numero>1) {
+                $usuario = new User();
+                $usuario->name = $request->name;
+                $usuario->email = $request->email;
+                $usuario->pass = $request->pass;
+                $usuario->save();
 
-    public function verModificarcuota($id) {
-        return view('cuotas.cuotas_modificar, ["id => $id]');
-    }
+                return view('usuarios.usuarios_mostrar', compact('usuarios'));
+            } else {
+                return view('usuarios.usuarios_crear');
+            }
 
-    public function modificarcuota($id) {
-        return view('cuotas.cuotas_mostrar');
-    }
-
-    public function verEliminarcuota($id) {
-        return view('cuotas.cuotas_eliminar, ["id => $id]');
-    }
-
-    public function comprobarBorrarcuota($id) {
-        
-        if ("comprobar") {
-            //borrarcuota($id);
-            return view('cuotas.cuotas_mostrar');
+            
         } else {
-            return view('cuotas.cuotas_eliminar');
+            return view('usuarios.usuarios_crear');
         }
-
     }
 
-    function borrarcuota($id) {
-        
+    public function modificarUsuario($id) {
+        $usuarios = User::all();
+        $usuario = User::find($id);
+        if ($_POST) {
+
+            return view('usuarios.usuarios_mostrar', compact('usuarios'));
+        } else {
+            return view('usuarios.usuarios_modificar', compact('usuario'));
+        }
     }
 
-    public function filtradoCredenciales() {
-        
+    public function eliminarUsuario() {
+        return view('usuarios.usuarios_eliminar, ["id => $id]');
     }
 }
