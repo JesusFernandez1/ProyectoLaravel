@@ -11,7 +11,7 @@
 @extends('base')
 
 @section('mostrarExtension')
-  <form action=" {{ route('usuarios/usuarios_crear.crearUsuario') }}" class="row g-3" method="POST">
+  <form action=" {{ route('usuarios.crearUsuario') }}" class="row g-3" method="POST">
 
     @csrf
 

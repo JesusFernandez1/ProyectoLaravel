@@ -14,7 +14,7 @@ use App\Http\Controllers\taskController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+/**
 Route::controller(userController::class)->group(function(){
     Route::get('/', 'verUsuarios');
     Route::get('usuarios/usuarios_crear', 'crearUsuario');
@@ -34,22 +34,22 @@ Route::controller(taskController::class)->group(function(){
     Route::get('tareas/tareas_mostrar_completa', 'verTareasCompletas');
     Route::get('tareas/tareas_pendientes', 'verTareasPendientes');
 });
+ */
 
-/**
  Route::controller(userController::class)->group(function(){
-    Route::get('/', 'verUsuarios')->name('usuarios.index');
-    Route::get('usuarios/usuarios_crear', 'crearUsuario')->name('usuarios.crear');
-    Route::get('usuarios/usuarios_modificar/{id}', 'modificarUsuario')->name('usuarios.modificar');
-    Route::get('usuarios/usuarios_eliminar/{id}', 'eliminarUsuario')->name('usuarios.eliminar');
+    Route::get('/', 'verUsuarios')->name('usuarios.verUsuarios');
+    Route::get('usuarios/usuarios_crear', 'crearUsuario')->name('usuarios.crearUsuario');
+    Route::get('usuarios/usuarios_modificar/{id}', 'modificarUsuario')->name('usuarios.modificarUsuario');
+    Route::get('usuarios/usuarios_eliminar/{id}', 'eliminarUsuario')->name('usuarios.eliminarUsuario');
 });
 
 Route::controller(taskController::class)->group(function(){
-    Route::get('tareas/tareas_mostrar', 'verTareas')->name('tareas.index');
-    Route::get('tareas/tareas_crear', 'crearTarea')->name('tareas.crear');
-    Route::get('tareas/tareas_modificar/{id}', 'modificarTarea')->name('tareas.modificar');
-    Route::get('tareas/tareas_eliminar/{id}', 'borrarTarea')->name('tareas.eliminar');
-    Route::get('tareas/tareas_completar', 'completarTarea')->name('tareas.completar');
-    Route::get('tareas/tareas_mostrar_completa', 'verTareasCompletas')->name('tareas.completa');
-    Route::get('tareas/tareas_pendientes', 'verTareasPendientes')->name('tareas.pendiente');
+    Route::get('tareas/tareas_mostrar', 'verTareas')->name('tareas.verTareas');
+    Route::get('tareas/tareas_crear', 'crearTarea')->name('tareas.crearTarea');
+    Route::get('tareas/tareas_modificar/{id}', 'modificarTarea')->name('tareas.modificarTarea');
+    Route::get('tareas/tareas_eliminar/{id}', 'borrarTarea')->name('tareas.borrarTarea');
+    Route::get('tareas/tareas_completar', 'completarTarea')->name('tareas.completarTarea');
+    Route::get('tareas/tareas_mostrar_completa', 'verTareasCompletas')->name('tareas.verTareasCompletas');
+    Route::get('tareas/tareas_pendientes', 'verTareasPendientes')->name('tareas.verTareasPendientes');
 });
- */
+

@@ -17,21 +17,23 @@ class userController extends Controller {
         $usuarios = User::all();
         if ($_POST) {
 
-            if ("condition") {
+            $numero = 0;
+
+            if ($numero>1) {
                 $usuario = new User();
                 $usuario->name = $request->name;
                 $usuario->email = $request->email;
                 $usuario->pass = $request->pass;
                 $usuario->save();
 
-                return view('usuarios.usuarios_mostrar');
+                return view('usuarios.usuarios_mostrar', compact('usuarios'));
             } else {
-                return view('usuarios.usuarios_modificar');
+                return view('usuarios.usuarios_crear');
             }
 
             
         } else {
-            return view('usuarios.usuarios_mostrar', compact('usuarios'));
+            return view('usuarios.usuarios_crear');
         }
     }
 
