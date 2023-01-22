@@ -38,7 +38,12 @@ class taskController extends Controller {
         $tareas = task::all();
         $tarea = task::find($id);
         if ($_POST) {
-            return view('tareas.tareas_mostrar', compact('tareas'));
+            if ("condition") {
+                return view('tareas.tareas_mostrar', compact('tareas'));
+            } else {
+                return view('tareas.tareas_modificar', compact('tarea'));
+            }
+            
         } else {
             return view('tareas.tareas_modificar', compact('tarea'));
         }
@@ -46,14 +51,16 @@ class taskController extends Controller {
 
      public function borrarTarea($id) {
         
-        $tareas = task::all();
         $tarea = task::find($id);
-        if ("comprueba todo correcto") {
-            //borra la tarea
-            return view('tareas.tareas_mostrar', compact('tareas'));
-        } else {
-            return view('tareas.tareas_modificar', compact('tarea'));
-        }
+        
+        return view('tareas.tareas_eliminar', compact('tarea'));
+    }
+
+    public function confirmarEliminarTarea($id) {
+        $tareas = task::all();
+        //borrar tarea
+        return view('tareas.tareas_mostrar', compact('tareas'));
+         
     }
 
     public function completarTarea($id) {

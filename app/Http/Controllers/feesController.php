@@ -3,51 +3,64 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\User;
+use App\Models\fees;
 
 class feesController extends Controller {
     
-    public function verUsuarios() {
-        $usuarios = User::all();
-        return view('usuarios.usuarios_mostrar', compact('usuarios'));
+    public function verCuotas() {
+        $cuotas = fees::all();
+        return view('cuotas.cuotas_mostrar', compact('cuotas'));
     }
 
-    public function crearUsuario(Request $request) {
-        $usuarios = User::all();
+    public function crearCuota(Request $request) {
+
+        $cuotas = fees::all();
         if ($_POST) {
 
-            $numero = 0;
+            if ("condicion") {
+                $cuota = new fees();
+                $cuota->concepto = $request->concepto;
+                $cuota->fecha_emision = $request->fecha_emision;
+                $cuota->importe = $request->importe;
+                $cuota->save();
 
-            if ($numero>1) {
-                $usuario = new User();
-                $usuario->name = $request->name;
-                $usuario->email = $request->email;
-                $usuario->pass = $request->pass;
-                $usuario->save();
-
-                return view('usuarios.usuarios_mostrar', compact('usuarios'));
+                return view('cuotas.cuotas_mostrar', compact('cuotas'));
             } else {
-                return view('usuarios.usuarios_crear');
+                return view('cuotas.cuotas_crear');
             }
+        } else {
+            return view('cuotas.cuotas_crear');
+        }
+    }
 
+    public function corregirCuota($id) {
+
+        $cuota = fees::find($id);
+        if ($_POST) {
+            if ("condition") {
+                //modificacion
+                $cuotas = fees::all();
+                return view('cuotas.cuotas_mostrar', compact('cuotas'));
+            } else {
+                return view('cuotas.cuotas_corregir', compact('cuota'));
+            }
             
         } else {
-            return view('usuarios.usuarios_crear');
+            return view('cuotas.cuotas_corregir', compact('cuota'));
         }
     }
 
-    public function modificarUsuario($id) {
-        $usuarios = User::all();
-        $usuario = User::find($id);
-        if ($_POST) {
-
-            return view('usuarios.usuarios_mostrar', compact('usuarios'));
-        } else {
-            return view('usuarios.usuarios_modificar', compact('usuario'));
-        }
+    public function eliminarCuota($id) {
+        $cuota = fees::find($id);
+        
+        return view('cuotas.cuotas_eliminar', compact('cuota'));
+         
     }
 
-    public function eliminarUsuario() {
-        return view('usuarios.usuarios_eliminar, ["id => $id]');
+    public function confirmarEliminarCuota($id) {
+        $Cuotas = fees::all();
+        //borrar Cuota
+        return view('cuotas.cuotas_mostrar', compact('cuotas'));
+         
     }
 }
