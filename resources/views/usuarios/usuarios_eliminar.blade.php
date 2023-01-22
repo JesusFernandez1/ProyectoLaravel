@@ -34,7 +34,7 @@
             <td>{{$usuario->direccion}}</td>
             <td>{{$usuario->fecha_alta}}</td>
             <td>{{$usuario->tipo}}</td>
-            <td><a href="index.php?controller=login&action=borrarUsuario&id={{$usuario['id']}}" class="btn btn-outline-success" role="button">Si</a> <a href="index.php?controller=login&action=login" class="btn btn-outline-danger" role="button">No</a>
+            <td><a href="usuarios.modificarUsuario/{{$usuario->id}}" class="btn btn-outline-success" role="button">Si</a> <a href="usuarios.verUsuarios" class="btn btn-outline-danger" role="button">No</a>
          </tr>
          @endforeach
       </tbody>
