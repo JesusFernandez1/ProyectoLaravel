@@ -33,7 +33,7 @@
             <td>{{$usuario->direccion}}</td>
             <td>{{$usuario->fecha_alta}}</td>
             <td>{{$usuario->tipo}}</td>
-            <td><a href="{{ route('usuarios.edit',$usuarios) }}" class="btn btn-outline-primary" role="button">Modificar</a> <a href="{{ route('usuarios.eliminarUsuario',$usuarios)" class="btn btn-outline-danger" role="button">Eliminar</a></td>
+            <td><a href="{{ route('usuarios.edit',$usuario) }}" class="btn btn-outline-primary" role="button">Modificar</a> <a href="{{ route('usuarios.eliminarUsuario',$usuario) }}" class="btn btn-outline-danger" role="button">Eliminar</a></td>
          </tr>
          @endforeach
       </tbody>

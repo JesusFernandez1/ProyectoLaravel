@@ -22,6 +22,7 @@ Route::resource('clientes', customerController::class);
 Route::resource('cuotas', feeController::class);
 
  Route::controller(userController::class)->group(function(){
+    Route::get('/', 'index');
     Route::get('usuarios/usuarios_eliminar/{id}', 'eliminarUsuario')->name('usuarios.eliminarUsuario');
 });
 

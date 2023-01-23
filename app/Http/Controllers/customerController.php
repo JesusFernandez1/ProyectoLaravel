@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\customer;
 
-class customerrController extends Controller
+class customerController extends Controller
 {
     /**
      * Display a listing of the resource.

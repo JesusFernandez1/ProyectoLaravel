@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\fees;
 
-class feessController extends Controller
+class feesController extends Controller
 {
     /**
      * Display a listing of the resource.
