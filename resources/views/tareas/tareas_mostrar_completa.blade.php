@@ -53,8 +53,8 @@
             <td>{{$tarea->customers_id}}</td>
             <td>{{$tarea->users_id}}</td>
             
-            <td><a href="{{ route('tareas.edit',$tareas) }}" class="btn btn-outline-primary" role="button">Modificar</a> <a href="{{ route('tareas.borrarTarea',$tareas) }}" class="btn btn-outline-danger" role="button">Eliminar</a>
-            <a href="{{ route('tareas.completarTarea',$tareas) }}" class="btn btn-outline-success" role="button">Completar</a></td>
+            <td><a href="{{ route('tareas.edit',$tarea) }}" class="btn btn-outline-primary" role="button">Modificar</a> <a href="{{ route('tareas.borrarTarea',$tarea) }}" class="btn btn-outline-danger" role="button">Eliminar</a>
+            <a href="{{ route('tareas.completarTarea',$tarea) }}" class="btn btn-outline-success" role="button">Completar</a></td>
          </tr>
          @endforeach
       </tbody>

@@ -84,7 +84,7 @@
       <select id="inputState" class="form-select" name="cliente">
         <option disabled selected hidden>Cliente</option>
         @foreach ($clientes as $cliente)
-        <option>{{$cliente->nombre}}</option>
+        <option>{{$cliente->name}}</option>
         @endforeach
       </select>
     </div>
