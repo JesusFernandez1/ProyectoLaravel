@@ -5,19 +5,37 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\fees;
 
-class feesController extends Controller {
-    
-    public function verCuotas() {
+class feessController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
         $cuotas = fees::all();
         return view('cuotas.cuotas_mostrar', compact('cuotas'));
     }
 
-    public function crearCuota(Request $request) {
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        return view('cuotas.cuotas_crear');
+    }
 
-        $cuotas = fees::all();
-        if ($_POST) {
-
-            if ("condicion") {
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
                 $cuota = new fees();
                 $cuota->concepto = $request->concepto;
                 $cuota->fecha_emision = $request->fecha_emision;
@@ -25,33 +43,58 @@ class feesController extends Controller {
                 $cuota->save();
 
                 return view('cuotas.cuotas_mostrar', compact('cuotas'));
-            } else {
-                return view('cuotas.cuotas_crear');
-            }
-        } else {
-            return view('cuotas.cuotas_crear');
-        }
     }
 
-    public function corregirCuota(Request $request, $id) {
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
+    }
 
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
         $cuota = fees::find($id);
-        if ($_POST) {
-            if ("condition") {
-                $cuota = new fees();
+        return view('cuotas.cuotas_corregir', compact('cuota'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        $cuota = fees::find($id);
                 $cuota->concepto = $request->concepto;
                 $cuota->fecha_emision = $request->fecha_emision;
                 $cuota->importe = $request->importe;
                 $cuota->save();
                 $cuotas = fees::all();
                 return view('cuotas.cuotas_mostrar', compact('cuotas'));
-            } else {
-                return view('cuotas.cuotas_corregir', compact('cuota'));
-            }
-            
-        } else {
-            return view('cuotas.cuotas_corregir', compact('cuota'));
-        }
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        //
     }
 
     public function eliminarCuota($id) {

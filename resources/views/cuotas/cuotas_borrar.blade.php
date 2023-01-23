@@ -27,14 +27,14 @@
       <tbody>
          @foreach ($cuotas as $cuota)
          <tr>
-            <td>{{$cuota['concepto']}}</td>
-            <td>{{$cuota['fecha_emision']}}</td>
-            <td>{{$cuota['importe']}}</td>
-            <td>{{$cuota['pagada']}}</td>
-            <td>{{$cuota['fecha_pago']}}</td>
-            <td>{{$cuota['nota']}}</td>
-            <td>{{$cuota['tasks_id']}}</td>
-            <td><a href="index.php?controller=login&action=borrarcuota&id={{$cuota['id']}}" class="btn btn-outline-success" role="button">Si</a> <a href="index.php?controller=login&action=login" class="btn btn-outline-danger" role="button">No</a>
+            <td>{{$cuota->concepto}}</td>
+            <td>{{$cuota->fecha_emision}}</td>
+            <td>{{$cuota->importe}}</td>
+            <td>{{$cuota->pagada}}</td>
+            <td>{{$cuota->fecha_pago}}</td>
+            <td>{{$cuota->nota}}</td>
+            <td>{{$cuota->tasks_id}}</td>
+            <td><a href="{{ route('cuotas.confirmarBorrarCuota',$cuota)}}" class="btn btn-outline-success" role="button">Si</a> <a href="{{ route('cuotas.index')}}" class="btn btn-outline-danger" role="button">No</a>
          </tr>
          @endforeach
       </tbody>

@@ -5,48 +5,93 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\customer;
 
-class customerController extends Controller
+class customerrController extends Controller
 {
-    public function verClientes() {
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
         $clientes = customer::all();
         return view('clientes.clientes_mostrar', compact('clientes'));
     }
 
-    public function crearCliente(Request $request) {
-        $clientes = customer::all();
-        if ($_POST) {
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        return view('clientes.clientes_crear');
+    }
 
-            if ("condicion") {
-                $cliente = new customer();
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $cliente = new customer();
                 $cliente->nombre = $request->nombre;
                 $cliente->apellido = $request->apellido;
                 $cliente->correo = $request->correo;
                 $cliente->save();
-
-                return view('clientes.clientes_mostrar', compact('clientes'));
-            } else {
-                return view('clientes.clientes_crear');
-            }
-
-        } else {
-            return view('clientes.clientes_crear');
-        }
-    }
-
-    public function modificarCliente($id) {
-        $cliente = customer::find($id);
-        if ($_POST) {
-
-            if ("condition") {
                 $clientes = customer::all();
                 return view('clientes.clientes_mostrar', compact('clientes'));
-            } else {
-                return view('clientes.clientes_modificar', compact('cliente'));
-            }
-            
-        } else {
-            return view('clientes.clientes_modificar', compact('cliente'));
-        }
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $cliente = customer::find($id);
+        return view('clientes.clientes_modificar', compact('cliente'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        $cliente = customer::find($id);
+        //haces cosas
+        $clientes = customer::all();
+        return view('clientes.clientes_mostrar', compact('clientes'));
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        //
     }
 
     public function eliminarCliente($id) {

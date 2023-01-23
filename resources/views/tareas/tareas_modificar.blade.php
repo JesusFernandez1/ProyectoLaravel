@@ -11,7 +11,8 @@
 @extends('base')
 
 @section('mostrarExtension')
-  <form action="{{ route('tareas.modificarTarea') }}" class="row g-3" method="POST">
+  <form action="{{ route('tareas.update',$tarea) }}" class="row g-3" method="POST">
+    @method('put')
   @foreach ($tareas as $tarea)
     <div class="col-md-3">
       <label for="inputPassword4" class="form-label">Nombre</label>

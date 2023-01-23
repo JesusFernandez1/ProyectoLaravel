@@ -27,14 +27,14 @@
       <tbody>
          @foreach ($cuotas as $cuota)
          <tr>
-            <td>{{$cuota['concepto']}}</td>
-            <td>{{$cuota['fecha_emision']}}</td>
-            <td>{{$cuota['importe']}}</td>
-            <td>{{$cuota['pagada']}}</td>
-            <td>{{$cuota['fecha_pago']}}</td>
-            <td>{{$cuota['nota']}}</td>
-            <td>{{$cuota['tasks_id']}}</td>
-            <td><a href="index.php?controller=login&action=verOneUsuario&id={{$cuota['id']}}" class="btn btn-outline-primary" role="button">Modificar</a> <a href="index.php?controller=login&action=verBorrarUsuario&id={{$cuota['id']}}" class="btn btn-outline-danger" role="button">Eliminar</a></td>
+            <td>{{$cuota->concepto}}</td>
+            <td>{{$cuota->fecha_emision}}</td>
+            <td>{{$cuota->importe}}</td>
+            <td>{{$cuota->pagada}}</td>
+            <td>{{$cuota->fecha_pago}}</td>
+            <td>{{$cuota->nota}}</td>
+            <td>{{$cuota->tasks_id}}</td>
+            <td><a href="{{ route('cuotas.edit',$cuota)}}" class="btn btn-outline-primary" role="button">Modificar</a> <a href="{{ route('cuotas.eliminarCuota',$cuota)}}" class="btn btn-outline-danger" role="button">Eliminar</a></td>
          </tr>
          @endforeach
       </tbody>

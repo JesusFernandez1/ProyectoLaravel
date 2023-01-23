@@ -34,7 +34,7 @@
             <td>{{$usuario->direccion}}</td>
             <td>{{$usuario->fecha_alta}}</td>
             <td>{{$usuario->tipo}}</td>
-            <td><a href="usuarios.modificarUsuario/{{$usuario->id}}" class="btn btn-outline-success" role="button">Si</a> <a href="usuarios.verUsuarios" class="btn btn-outline-danger" role="button">No</a>
+            <td><a href=" {{route('usuarios.confirmarEliminarUsuario',$usuario) }}" class="btn btn-outline-success" role="button">Si</a> <a href="{{ route('usuarios.index') }}" class="btn btn-outline-danger" role="button">No</a>
          </tr>
          @endforeach
       </tbody>

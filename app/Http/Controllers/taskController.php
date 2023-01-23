@@ -5,40 +5,84 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\task;
 
-class taskController extends Controller {
-
-    public function verTareas() {
+class taskkController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
         $tareas = task::all();
         return view('tareas.tareas_mostrar', compact('tareas'));
     }
 
-    public function crearTarea(Request $request) {
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        return view('tareas.tareas_crear');
+    }
 
-        $tareas = task::all();
-        if ($_POST) {
-
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
             if ("condition") {
                 $tarea = new task();
                 $tarea->nombre = $request->nombre;
                 $tarea->apellido = $request->apellido;
                 $tarea->correo = $request->correo;
                 $tarea->save();
-
-                return view('tareas.tareas_mostrar');
+                $tareas = task::all();
+                return view('tareas.tareas_mostrar', compact('tareas'));
             } else {
-                return view('tareas.tareas_modificar');
+                return view('tareas.tareas_crear');
             }
-        } else {
-            return view('tareas.tareas_crear');
-        }
     }
 
-    public function modificarTarea(Request $request, $id) {
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
+    }
 
-        $tareas = task::all();
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
         $tarea = task::find($id);
-        if ($_POST) {
-            if ("condition") {
+        return view('tareas.tareas_modificar', compact('tarea'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        $tarea = task::find($id);
+        if ("condition") {
                 $tarea->nombre = $request->nombre;
                 $tarea->apellido = $request->apellido;
                 $tarea->correo = $request->correo; //todos los datos
@@ -47,12 +91,20 @@ class taskController extends Controller {
             } else {
                 return view('tareas.tareas_modificar', compact('tarea'));
             }
-        } else {
-            return view('tareas.tareas_modificar', compact('tarea'));
-        }
     }
 
-     public function borrarTarea($id) {
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        //
+    }
+
+    public function borrarTarea($id) {
         
         $tarea = task::find($id);
         

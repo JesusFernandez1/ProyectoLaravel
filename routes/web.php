@@ -16,32 +16,24 @@ use App\Http\Controllers\feeController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::resource('usuarios', userController::class);
+Route::resource('tareas', taskController::class);
+Route::resource('clientes', customerController::class);
+Route::resource('cuotas', feeController::class);
 
  Route::controller(userController::class)->group(function(){
-    Route::get('/', 'verUsuarios')->name('usuarios.verUsuarios');
-    Route::get('usuarios/usuarios_crear', 'crearUsuario')->name('usuarios.crearUsuario');
-    Route::get('usuarios/usuarios_modificar/{id}', 'modificarUsuario')->name('usuarios.modificarUsuario');
     Route::get('usuarios/usuarios_eliminar/{id}', 'eliminarUsuario')->name('usuarios.eliminarUsuario');
 });
 
 Route::controller(customerController::class)->group(function(){
-    Route::get('clientes/clientes_mostrar', 'verClientes')->name('clientes.verClientes');
-    Route::get('clientes/clientes_crear', 'crearCliente')->name('clientes.crearCliente');
-    Route::get('clientes/clientes_modificar/{id}', 'modificarCliente')->name('clientes.modificarCliente');
     Route::get('clientes/clientes_eliminar/{id}', 'eliminarCliente')->name('clientes.eliminarCliente');
 });
 
 Route::controller(feeController::class)->group(function(){
-    Route::get('cuotas/cuotas_mostrar', 'vercuotas')->name('cuotas.verCuotas');
-    Route::get('cuotas/cuotas_crear', 'crearCuota')->name('cuotas.crearCuota');
-    Route::get('cuotas/cuotas_corregir/{id}', 'corregirCuota')->name('cuotas.corregirCuota');
     Route::get('cuotas/cuotas_eliminar/{id}', 'eliminarCuota')->name('cuotas.eliminarCuota');
 });
 
 Route::controller(taskController::class)->group(function(){
-    Route::get('tareas/tareas_mostrar', 'verTareas')->name('tareas.verTareas');
-    Route::get('tareas/tareas_crear', 'crearTarea')->name('tareas.crearTarea');
-    Route::get('tareas/tareas_modificar/{id}', 'modificarTarea')->name('tareas.modificarTarea');
     Route::get('tareas/tareas_eliminar/{id}', 'borrarTarea')->name('tareas.borrarTarea');
     Route::get('tareas/tareas_completar', 'completarTarea')->name('tareas.completarTarea');
     Route::get('tareas/tareas_mostrar_completa', 'verTareasCompletas')->name('tareas.verTareasCompletas');

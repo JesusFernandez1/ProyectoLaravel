@@ -20,14 +20,14 @@
         </a>
 
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-          <li><a href="{{ route('tareas.verTareas') }}" class="nav-link px-2 text-white">Ver tareas</a></li>
+          <li><a href="{{ route('tareas.index') }}" class="nav-link px-2 text-white">Ver tareas</a></li>
           <li><a href="{{ route('tareas.verTareasCompletas') }}" class="nav-link px-2 text-white">Ver tareas completas</a></li>
           <li><a href="{{ route('tareas.verTareasPendientes') }}" class="nav-link px-2 text-white">Ver tareas pendientes</a></li>
-          <li><a href="{{ route('tareas.crearTarea') }}" class="nav-link px-2 text-white">Añadir tarea</a></li>
-          <li><a href="{{ route('clientes.verClientes') }}" class="nav-link px-2 text-white">Ver clientes</a></li>
-          <li><a href="{{ route('usuarios.verUsuarios') }}" class="nav-link px-2 text-white">Ver empleados</a></li>
-          <li><a href="{{ route('clientes.crearCliente') }}" class="nav-link px-2 text-white">Añadir cliente</a></li>
-          <li><a href="{{ route('usuarios.crearUsuario') }}" class="nav-link px-2 text-white">Añadir empleado</a></li>
+          <li><a href="{{ route('tareas.create') }}" class="nav-link px-2 text-white">Añadir tarea</a></li>
+          <li><a href="{{ route('clientes.index') }}" class="nav-link px-2 text-white">Ver clientes</a></li>
+          <li><a href="{{ route('usuarios.index') }}" class="nav-link px-2 text-white">Ver empleados</a></li>
+          <li><a href="{{ route('clientes.create') }}" class="nav-link px-2 text-white">Añadir cliente</a></li>
+          <li><a href="{{ route('usuarios.create') }}" class="nav-link px-2 text-white">Añadir empleado</a></li>
         </ul>
           
         <form class="col-3 col-lg-auto mb-3 mb-lg-0 me-lg-3">

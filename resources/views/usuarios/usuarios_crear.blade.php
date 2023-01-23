@@ -11,9 +11,7 @@
 @extends('base')
 
 @section('mostrarExtension')
-  <form action=" {{ route('usuarios.crearUsuario') }}" class="row g-3" method="POST">
-
-    @csrf
+  <form action=" {{ route('usuarios.store') }}" class="row g-3" method="POST">
 
     <div class="col-md-3">
       <label for="inputCity" class="form-label">DNI</label>

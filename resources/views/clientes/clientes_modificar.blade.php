@@ -12,6 +12,7 @@
 
 @section('mostrarExtension')
   <form action="" class="row g-3" method="POST">
+    @method('put')
   @foreach ($clientes as $cliente)
   <div class="col-md-3">
     <label for="inputPassword4" class="form-label">DNI</label>

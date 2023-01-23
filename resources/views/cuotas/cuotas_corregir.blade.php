@@ -12,39 +12,39 @@
 
 @section('mostrarExtension')
   <form action="" class="row g-3" method="POST">
+    @method('put')
     @foreach ($cuotas as $cuota)
     <div class="col-md-3">
       <label for="inputPassword4" class="form-label">Concepto</label>
-      <input type="text" class="form-control" name="concepto" value="{{$cuota['concepto']}}">{!!$error->ErrorFormateado("concepto")!!}
+      <input type="text" class="form-control" name="concepto" value="{{$cuota->concepto}}">
     </div>
     <div class="col-md-3">
       <label for="inputPassword4" class="form-label">Fecha</label>
-      <input type="text" class="form-control" name="nombre" value="{{$cuota['nombre']}}">{!!$error->ErrorFormateado("nombre")!!}
+      <input type="text" class="form-control" name="nombre" value="{{$cuota->nombre}}">
     </div>
     <div class="col-3">
       <label for="inputAddress" class="form-label">Importe</label>
-      <input type="text" class="form-control" placeholder="1234 Main St" name="importe" value="{{$cuota['importe']}}">{!!$error->ErrorFormateado("importe")!!}
+      <input type="text" class="form-control" placeholder="1234 Main St" name="importe" value="{{$cuota->importe}}">
     </div>
     <div class="col-md-3">
         <label for="inputState" class="form-label">Pagada</label>
         <select id="inputState" class="form-select" name="pagada">
-          <option disabled selected>value="{{$cuota['pagada']}}"</option>
+          <option disabled selected>value="{{$cuota->pagada}}"</option>
           <option>Si</option>
           <option>No</option>
         </select>
-        {!!$error->ErrorFormateado("pagada")!!}
       </div>
     <div class="col-md-3">
       <label for="inputCity" class="form-label">Fecha de Pago</label>
-      <input type="text" class="form-control" name="fecha_pago" value="{{$cuota['fecha_pago']}}">{!!$error->ErrorFormateado("fecha_pago")!!}
+      <input type="text" class="form-control" name="fecha_pago" value="{{$cuota->fecha_pago}}">
     </div>
     <div class="col-md-3">
       <label for="inputCity" class="form-label">Nota</label>
-      <input type="text" class="form-control" name="nota" value="{{$cuota['nota']}}">{!!$error->ErrorFormateado("nota")!!}
+      <input type="text" class="form-control" name="nota" value="{{$cuota->nota}}">
     </div>
     <div class="col-md-3">
       <label for="inputCity" class="form-label">Tarea correspondiente</label>
-      <input type="text" class="form-control" name="tasks_id" value="{{$cuota['tasks_id']}}">{!!$error->ErrorFormateado("tasks_id")!!}
+      <input type="text" class="form-control" name="tasks_id" value="{{$cuota->task_id}}">
     </div>
       <div class="col-12">
       <input type="submit" class="btn btn-primary" value="Insert">

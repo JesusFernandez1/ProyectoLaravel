@@ -11,7 +11,7 @@
 @extends('base')
 
 @section('mostrarExtension')
-  <form action="clientes.crearCliente" class="row g-3" method="POST">
+  <form action="clientes.store" class="row g-3" method="POST">
     <div class="col-md-3">
       <label for="inputPassword4" class="form-label">DNI</label>
       <input type="text" class="form-control" name="DNI">

@@ -36,8 +36,8 @@
             <td>{{$cliente->pais}}</td>
             <td>{{$cliente->moneda}}</td>
             <td>{{$cliente->importe_mensual}}</td>
-            <td><a href="index.php?controller=login&action=verOneUsuario&id={{$cliente['id']}}" class="btn btn-outline-primary" role="button">Modificar</a> <a href="index.php?controller=login&action=verBorrarUsuario&id={{$cliente['id']}}" class="btn btn-outline-danger" role="button">Eliminar</a></td>
-         </tr>
+            <td><a href="{{ route('clientes.confirmarBorrarCliente',$cliente)}}" class="btn btn-outline-success" role="button">Si</a> <a href="{{ route('clientes.index')}}" class="btn btn-outline-danger" role="button">No</a>
+            </tr>
          @endforeach
       </tbody>
    </table>
