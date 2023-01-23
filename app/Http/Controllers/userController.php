@@ -70,8 +70,8 @@ class userController extends Controller
      */
     public function edit($id)
     {
-        $usuario = User::find($id);
-        return view('usuarios.usuarios_modificar', compact('usuario'));
+        $usuarios = User::find($id);
+        return view('usuarios.usuarios_modificar', compact('usuarios'));
     }
 
     /**
@@ -93,7 +93,7 @@ class userController extends Controller
             'fecha_alta' =>['required'],
             'tipo' =>['required']
         ]);
-        User::insert($datos);
+        User::where('id', '=', $id)->update($datos);
         $usuarios = User::all();
         return view('usuarios.usuarios_mostrar', compact('usuarios'));
     }
@@ -110,9 +110,8 @@ class userController extends Controller
     }
 
     public function eliminarUsuario($id) {
-        $usuario = User::find($id);
-        
-        return view('usuarios.usuarios_eliminar', compact('usuario'));
+        $usuarios = User::find($id);
+        return view('usuarios.usuarios_eliminar', compact('usuarios'));
          
     }
 
