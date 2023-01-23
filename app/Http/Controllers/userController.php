@@ -36,23 +36,16 @@ class userController extends Controller
      */
     public function store(Request $request)
     {
-        if ($_POST) {
-
-            if ("condicion") {
-                $usuario = new User();
-                $usuario->name = $request->name;
-                $usuario->email = $request->email;
-                $usuario->pass = $request->pass;
-                $usuario->save();
-                $usuarios = User::all();
-                return view('usuarios.usuarios_mostrar', compact('usuarios'));
-            } else {
-                return view('usuarios.usuarios_crear');
-            }
-
-        } else {
-            return view('usuarios.usuarios_crear');
-        }
+        $request->validate([
+            'DNI' =>['required'],
+            'name' =>['required'],
+            'email' =>['email:rfc,dns'],
+            'pass' =>['required'],
+            'telefono' =>['required'],
+            'direccion' =>['required'],
+            'fecha_alta' =>['required'],
+            'tipo' =>['required']
+        ]);
     }
 
     /**
