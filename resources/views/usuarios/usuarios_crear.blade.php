@@ -35,8 +35,8 @@
     </div>
     <div class="col-md-3">
       <label for="inputCity" class="form-label">Pass</label>
-      <input type="text" class="form-control" name="pass" value="{{ old("pass")}}">
-      @error('pass')
+      <input type="text" class="form-control" name="password" value="{{ old("password")}}">
+      @error('password')
           <small style="color: red">{{ $message }}</small>
       @enderror
     </div>
@@ -56,7 +56,7 @@
     </div>
     <div class="col-md-2">
       <label for="inputCity" class="form-label">Fecha de alta</label>
-      <input type="text" class="form-control" name="fecha_alta" value="{{ old("fecha_alta")}}">
+      <input type="date" class="form-control" name="fecha_alta" value="{{ old("fecha_alta")}}">
       @error('fecha_alta')
           <small style="color: red">{{ $message }}</small>
       @enderror

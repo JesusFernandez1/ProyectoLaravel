@@ -36,16 +36,19 @@ class userController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $datos = $request->validate([
             'DNI' =>['regex:/((^[A-Z]{1}[0-9]{7}[A-Z0-9]{1}$|^[T]{1}[A-Z0-9]{8}$)|^[0-9]{8}[A-Z]{1}$)/'],
             'name' =>['regex:/^[a-z]+$/i'],
             'email' =>['email:rfc,dns'],
-            'pass' =>['required'],
-            'telefono' =>['regex:#^\(?\d{2}\)?[\s\.-]?\d{4}[\s\.-]?\d{4}$#'],
+            'password' =>['required'],
+            'telefono' =>['required'],
             'direccion' =>['required'],
             'fecha_alta' =>['required'],
             'tipo' =>['required']
         ]);
+        User::insert($datos);
+        $usuarios = User::all();
+        return view('usuarios.usuarios_mostrar', compact('usuarios'));
     }
 
     /**
@@ -80,19 +83,19 @@ class userController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $usuario = User::find($id);
-        if ($_POST) {
-
-            if ("condition") {
-                $usuarios = User::all();
-                return view('usuarios.usuarios_mostrar', compact('usuarios'));
-            } else {
-                return view('usuarios.usuarios_modificar', compact('usuario'));
-            }
-            
-        } else {
-            return view('usuarios.usuarios_modificar', compact('usuario'));
-        }
+        $datos = $request->validate([
+            'DNI' =>['regex:/((^[A-Z]{1}[0-9]{7}[A-Z0-9]{1}$|^[T]{1}[A-Z0-9]{8}$)|^[0-9]{8}[A-Z]{1}$)/'],
+            'name' =>['regex:/^[a-z]+$/i'],
+            'email' =>['email:rfc,dns'],
+            'password' =>['required'],
+            'telefono' =>['required'],
+            'direccion' =>['required'],
+            'fecha_alta' =>['required'],
+            'tipo' =>['required']
+        ]);
+        User::insert($datos);
+        $usuarios = User::all();
+        return view('usuarios.usuarios_mostrar', compact('usuarios'));
     }
 
     /**
