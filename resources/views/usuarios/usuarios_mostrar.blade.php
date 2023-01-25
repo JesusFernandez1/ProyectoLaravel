@@ -38,6 +38,7 @@
          @endforeach
       </tbody>
    </table>
+   {!! $usuarios->links() !!}
    @endsection
 </body>
 </html>

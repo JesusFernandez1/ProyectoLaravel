@@ -14,7 +14,7 @@ class userController extends Controller
      */
     public function index()
     {
-        $usuarios = User::all();
+        $usuarios = User::paginate(2);
         return view('usuarios.usuarios_mostrar', compact('usuarios'));
     }
 
@@ -47,7 +47,7 @@ class userController extends Controller
             'tipo' =>['required']
         ]);
         User::insert($datos);
-        $usuarios = User::all();
+        $usuarios = User::paginate(2);
         return view('usuarios.usuarios_mostrar', compact('usuarios'));
     }
 
@@ -94,7 +94,7 @@ class userController extends Controller
             'tipo' =>['required']
         ]);
         User::where('id', '=', $id)->update($datos);
-        $usuarios = User::all();
+        $usuarios = User::paginate(2);
         return view('usuarios.usuarios_mostrar', compact('usuarios'));
     }
 
@@ -117,7 +117,8 @@ class userController extends Controller
 
     public function confirmarEliminarUsuario($id) {
         User::find($id)->delete();
-        return view('usuarios.usuarios_eliminada');
+        $usuarios = User::paginate(2);
+        return view('usuarios.usuarios_mostrar', compact('usuarios'));
          
     }
 }
