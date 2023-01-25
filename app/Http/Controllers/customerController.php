@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\customer;
+use App\Models\paises;
 
 class customerController extends Controller
 {
@@ -14,7 +15,7 @@ class customerController extends Controller
      */
     public function index()
     {
-        $clientes = customer::all();
+        $clientes = customer::paginate(2);
         return view('clientes.clientes_mostrar', compact('clientes'));
     }
 
@@ -36,6 +37,7 @@ class customerController extends Controller
      */
     public function store(Request $request)
     {
+        $moneda = paises::select('select iso_moneda from paises where nombre = "Albania"');
         $datos = $request->validate([
             'DNI' =>['regex:/((^[A-Z]{1}[0-9]{7}[A-Z0-9]{1}$|^[T]{1}[A-Z0-9]{8}$)|^[0-9]{8}[A-Z]{1}$)/'],
             'name' =>['regex:/^[a-z]+$/i'],
@@ -43,11 +45,11 @@ class customerController extends Controller
             'correo' =>['email:rfc,dns'],
             'cuenta' =>['required'],
             'pais' =>['required'],
-            'moneda' =>['required'],
+            $moneda =>['required'],
             'tipo' =>['required']
         ]);
         customer::insert($datos);
-        $usuarios = customer::all();
+        $clientes = customer::paginate(2);
         return view('usuarios.usuarios_mostrar', compact('usuarios'));
     }
 
@@ -83,9 +85,19 @@ class customerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $cliente = customer::find($id);
-        //haces cosas
-        $clientes = customer::all();
+        $moneda = paises::select('select iso_moneda from paises where nombre = "Albania"');
+        $datos = $request->validate([
+            'DNI' =>['regex:/((^[A-Z]{1}[0-9]{7}[A-Z0-9]{1}$|^[T]{1}[A-Z0-9]{8}$)|^[0-9]{8}[A-Z]{1}$)/'],
+            'name' =>['regex:/^[a-z]+$/i'],
+            'telefono' =>['required'],
+            'correo' =>['email:rfc,dns'],
+            'cuenta' =>['required'],
+            'pais' =>['required'],
+            $moneda =>['required'],
+            'tipo' =>['required']
+        ]);
+        customer::where('id', '=', $id)->update($datos);
+        $clientes = customer::paginate(2);
         return view('clientes.clientes_mostrar', compact('clientes'));
     }
 
@@ -108,8 +120,8 @@ class customerController extends Controller
     }
 
     public function confirmarEliminarCliente($id) {
-        $clientes = customer::all();
-        //borrar cliente
+        customer::find($id)->delete();
+        $cliente = customer::paginate(2);
         return view('clientes.clientes_mostrar', compact('clientes'));
          
     }

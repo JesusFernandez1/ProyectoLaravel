@@ -40,6 +40,7 @@
          @endforeach
       </tbody>
    </table>
+   {!! $clientes->links() !!}
    @endsection
 </body>
 </html>
