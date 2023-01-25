@@ -36,7 +36,7 @@
             <td>{{$cliente->pais}}</td>
             <td>{{$cliente->moneda}}</td>
             <td>{{$cliente->importe_mensual}}</td>
-            <td><a href="{{ route('clientes.confirmarBorrarCliente',$cliente)}}" class="btn btn-outline-success" role="button">Si</a> <a href="{{ route('clientes.index')}}" class="btn btn-outline-danger" role="button">No</a>
+            <td><a href="{{ route('clientes.confirmarEliminarCliente',$cliente)}}" class="btn btn-outline-success" role="button">Si</a> <a href="{{ route('clientes.index')}}" class="btn btn-outline-danger" role="button">No</a>
             </tr>
          @endforeach
       </tbody>
