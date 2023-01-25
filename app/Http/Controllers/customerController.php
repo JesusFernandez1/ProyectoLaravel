@@ -36,13 +36,19 @@ class customerController extends Controller
      */
     public function store(Request $request)
     {
-        $cliente = new customer();
-                $cliente->nombre = $request->nombre;
-                $cliente->apellido = $request->apellido;
-                $cliente->correo = $request->correo;
-                $cliente->save();
-                $clientes = customer::all();
-                return view('clientes.clientes_mostrar', compact('clientes'));
+        $datos = $request->validate([
+            'DNI' =>['regex:/((^[A-Z]{1}[0-9]{7}[A-Z0-9]{1}$|^[T]{1}[A-Z0-9]{8}$)|^[0-9]{8}[A-Z]{1}$)/'],
+            'name' =>['regex:/^[a-z]+$/i'],
+            'telefono' =>['required'],
+            'correo' =>['email:rfc,dns'],
+            'cuenta' =>['required'],
+            'pais' =>['required'],
+            'moneda' =>['required'],
+            'tipo' =>['required']
+        ]);
+        customer::insert($datos);
+        $usuarios = customer::all();
+        return view('usuarios.usuarios_mostrar', compact('usuarios'));
     }
 
     /**

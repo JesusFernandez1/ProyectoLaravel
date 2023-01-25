@@ -70,8 +70,8 @@ class userController extends Controller
      */
     public function edit($id)
     {
-        $usuarios = User::find($id);
-        return view('usuarios.usuarios_modificar', compact('usuarios'));
+        $usuario = User::find($id);
+        return view('usuarios.usuarios_modificar', compact('usuario'));
     }
 
     /**
@@ -86,7 +86,7 @@ class userController extends Controller
         $datos = $request->validate([
             'DNI' =>['regex:/((^[A-Z]{1}[0-9]{7}[A-Z0-9]{1}$|^[T]{1}[A-Z0-9]{8}$)|^[0-9]{8}[A-Z]{1}$)/'],
             'name' =>['regex:/^[a-z]+$/i'],
-            'email' =>['email:rfc,dns'],
+            'email' =>['regex:#^(((([a-z\d][\.\-\+_]?)*)[a-z0-9])+)\@(((([a-z\d][\.\-_]?){0,62})[a-z\d])+)\.([a-z\d]{2,6})$#i'],
             'password' =>['required'],
             'telefono' =>['required'],
             'direccion' =>['required'],
@@ -110,15 +110,14 @@ class userController extends Controller
     }
 
     public function eliminarUsuario($id) {
-        $usuarios = User::find($id);
-        return view('usuarios.usuarios_eliminar', compact('usuarios'));
+        $usuario = User::find($id);
+        return view('usuarios.usuarios_eliminar', compact('usuario'));
          
     }
 
     public function confirmarEliminarUsuario($id) {
-        $usuarios = User::all();
-        $usuario = User::find($id)->delete();
-        return view('usuarios.usuarios_mostrar', compact('usuarios'));
+        User::find($id)->delete();
+        return view('usuarios.usuarios_eliminada');
          
     }
 }

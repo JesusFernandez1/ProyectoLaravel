@@ -25,7 +25,6 @@
          </tr>
       </thead>
       <tbody>
-         @foreach ($usuarios as $usuario)
          <tr>
             <td>{{$usuario->DNI}}</td>
             <td>{{$usuario->name}}</td>
@@ -36,7 +35,6 @@
             <td>{{$usuario->tipo}}</td>
             <td><a href=" {{route('usuarios.confirmarEliminarUsuario',$usuario) }}" class="btn btn-outline-success" role="button">Si</a> <a href="{{ route('usuarios.index') }}" class="btn btn-outline-danger" role="button">No</a>
          </tr>
-         @endforeach
       </tbody>
    </table>
    @endsection

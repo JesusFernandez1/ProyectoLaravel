@@ -24,6 +24,7 @@ Route::resource('cuotas', feeController::class);
  Route::controller(userController::class)->group(function(){
     Route::get('/', 'index');
     Route::get('usuarios/usuarios_eliminar/{id}', 'eliminarUsuario')->name('usuarios.eliminarUsuario');
+    Route::get('usuarios/usuarios_eliminada/{id}', 'confirmarEliminarUsuario')->name('usuarios.confirmarEliminarUsuario');
 });
 
 Route::controller(customerController::class)->group(function(){
@@ -37,7 +38,7 @@ Route::controller(feeController::class)->group(function(){
 Route::controller(taskController::class)->group(function(){
     Route::get('tareas/tareas_eliminar/{id}', 'borrarTarea')->name('tareas.borrarTarea');
     Route::get('tareas/tareas_completar', 'completarTarea')->name('tareas.completarTarea');
-    Route::get('tareas/tareas_mostrar_completa', 'verTareasCompletas')->name('tareas.verTareasCompletas');
+    Route::get('tareas/completas', 'verTareasCompletas')->name('tareas.verTareasCompletas');
     Route::get('tareas/tareas_pendientes', 'verTareasPendientes')->name('tareas.verTareasPendientes');
 });
 

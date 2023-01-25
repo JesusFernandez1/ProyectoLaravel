@@ -11,34 +11,55 @@
 @extends('base')
 
 @section('mostrarExtension')
-  <form action="clientes.store" class="row g-3" method="POST">
+  <form action="{{ route('clientes.store') }}" class="row g-3" method="POST">
     <div class="col-md-3">
       <label for="inputPassword4" class="form-label">DNI</label>
-      <input type="text" class="form-control" name="DNI">
+      <input type="text" class="form-control" name="DNI" value="{{ old("DNI")}}">
+      @error('DNI')
+          <small style="color: red">{{ $message }}</small>
+      @enderror
     </div>
     <div class="col-md-3">
       <label for="inputPassword4" class="form-label">Nombre</label>
-      <input type="text" class="form-control" name="nombre">
+      <input type="text" class="form-control" name="nombre" value="{{ old("nombre")}}">
+      @error('nombre')
+          <small style="color: red">{{ $message }}</small>
+      @enderror
     </div>
     <div class="col-3">
       <label for="inputAddress" class="form-label">Telefono</label>
-      <input type="text" class="form-control" placeholder="1234 Main St" name="telefono">
+      <input type="text" class="form-control" placeholder="1234 Main St" name="telefono" value="{{ old("telefono")}}">
+      @error('telefono')
+          <small style="color: red">{{ $message }}</small>
+      @enderror
     </div>
     <div class="col-md-3">
       <label for="inputCity" class="form-label">Correo</label>
-      <input type="text" class="form-control" name="correo">
+      <input type="text" class="form-control" name="correo" value="{{ old("correo")}}">
+      @error('correo')
+          <small style="color: red">{{ $message }}</small>
+      @enderror
     </div>
     <div class="col-md-3">
       <label for="inputCity" class="form-label">Cuenta</label>
-      <input type="text" class="form-control" name="cuenta">
+      <input type="text" class="form-control" name="cuenta" value="{{ old("cuenta")}}">
+      @error('cuenta')
+          <small style="color: red">{{ $message }}</small>
+      @enderror
     </div>
     <div class="col-md-3">
       <label for="inputCity" class="form-label">Pais</label>
-      <input type="text" class="form-control" name="pais">
+      <input type="text" class="form-control" name="pais" value="{{ old("pais")}}">
+      @error('pais')
+          <small style="color: red">{{ $message }}</small>
+      @enderror
     </div>
     <div class="col-md-3">
       <label for="inputCity" class="form-label">Importe</label>
-      <input type="text" class="form-control" name="importe_mensual">
+      <input type="text" class="form-control" name="importe_mensual" value="{{ old("importe_mensual")}}">
+      @error('importe_mensual')
+          <small style="color: red">{{ $message }}</small>
+      @enderror
     </div>
       <div class="col-12">
       <input type="submit" class="btn btn-primary" value="Insert">

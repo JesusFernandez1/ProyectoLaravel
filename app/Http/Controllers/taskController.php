@@ -5,8 +5,16 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\task;
 
-class taskController extends Controller
+class taskController extends \Illuminate\Routing\Controller
 {
+
+    public function __construct()
+    {
+        //dd('En taskController');
+        // parent::__construct();
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -132,8 +140,10 @@ class taskController extends Controller
     }
 
     public function verTareasCompletas() {
+
+        dd('En tareas completas');
         $tareas = task::all();
-        return view('tareas.tareas_mostrar_completa', compact('tareas'));
+        return view('tareas.completas', compact('tareas'));
     }
 
     public function verTareasPendientes() {
