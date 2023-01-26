@@ -51,7 +51,6 @@ class taskController extends \Illuminate\Routing\Controller
      */
     public function store(Request $request)
     {
-
         $datos = $request->validate([
             'nombre' =>['regex:/^[a-z]+$/i'],
             'apellido' =>['regex:/^[a-z]+$/i'],
@@ -61,13 +60,15 @@ class taskController extends \Illuminate\Routing\Controller
             'direccion' =>['required'],
             'poblacion' =>['required'],
             'codigo_postal' =>['required'],
+            'provincia' =>['required'],
             'estado_tarea' =>['required'],
-            'fecha_creacion' =>['required'],
+            'fecha_creacion' =>['required'], //problema en las fechas
             'fecha_final' =>['required'],
             'anotacion_anterior' =>['required'],
             'anotacion_posterior' =>['required'],
-            'customer_id' =>['required'],
-            'user_id' =>['required']
+            'users_id' =>['required'],
+            'customers_id' =>['required']
+            
         ]);
         task::insert($datos);
         $tareas = task::paginate(2);
