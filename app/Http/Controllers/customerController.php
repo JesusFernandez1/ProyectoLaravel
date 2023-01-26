@@ -26,8 +26,8 @@ class customerController extends Controller
      */
     public function create()
     {
-        $pais = paises::all();
-        return view('clientes.clientes_crear', compact($pais));
+        $paises = paises::all();
+        return view('clientes.clientes_crear', compact('paises'));
     }
 
     /**
@@ -38,8 +38,11 @@ class customerController extends Controller
      */
     public function store(Request $request)
     {
-        $pais = paises::select('iso_moneda')->where('iso3', '=', $request->pais)->first;
-        $moneda = $pais->iso_moneda;
+        if ($request->pais != null) {
+            $pais = paises::select('iso_moneda')->where('iso3', '=', $request->pais)->first();
+            $moneda = $pais->iso_moneda;
+        }
+        
         $datos = $request->validate([
             'DNI' =>['regex:/((^[A-Z]{1}[0-9]{7}[A-Z0-9]{1}$|^[T]{1}[A-Z0-9]{8}$)|^[0-9]{8}[A-Z]{1}$)/'],
             'name' =>['regex:/^[a-z]+$/i'],
@@ -47,8 +50,8 @@ class customerController extends Controller
             'correo' =>['regex:#^(((([a-z\d][\.\-\+_]?)*)[a-z0-9])+)\@(((([a-z\d][\.\-_]?){0,62})[a-z\d])+)\.([a-z\d]{2,6})$#i'],
             'cuenta' =>['required'],
             'pais' =>['required'],
-            $moneda =>['required'],
-            'tipo' =>['required']
+            'moneda' =>['required'],
+            'importe_mensual' =>['required']
         ]);
         customer::insert($datos);
         $clientes = customer::paginate(2);
@@ -74,8 +77,9 @@ class customerController extends Controller
      */
     public function edit($id)
     {
+        $paises = paises::all();
         $cliente = customer::find($id);
-        return view('clientes.clientes_modificar', compact('cliente'));
+        return view('clientes.clientes_modificar', compact('cliente', 'paises'));
     }
 
     /**
@@ -87,7 +91,10 @@ class customerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $moneda = paises::select('select iso_moneda from paises where nombre = " . $request->pais . "');
+        if ($request->pais != null) {
+            $pais = paises::select('iso_moneda')->where('iso3', '=', $request->pais)->first();
+            $moneda = $pais->iso_moneda;
+        }
         $datos = $request->validate([
             'DNI' =>['regex:/((^[A-Z]{1}[0-9]{7}[A-Z0-9]{1}$|^[T]{1}[A-Z0-9]{8}$)|^[0-9]{8}[A-Z]{1}$)/'],
             'name' =>['regex:/^[a-z]+$/i'],
@@ -95,8 +102,8 @@ class customerController extends Controller
             'correo' =>['regex:#^(((([a-z\d][\.\-\+_]?)*)[a-z0-9])+)\@(((([a-z\d][\.\-_]?){0,62})[a-z\d])+)\.([a-z\d]{2,6})$#i'],
             'cuenta' =>['required'],
             'pais' =>['required'],
-            $moneda =>['required'],
-            'tipo' =>['required']
+            'moneda' =>['required'],
+            'importe_mensual' =>['required']
         ]);
         customer::where('id', '=', $id)->update($datos);
         $clientes = customer::paginate(2);

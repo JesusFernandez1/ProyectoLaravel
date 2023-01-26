@@ -11,40 +11,47 @@
 @extends('base')
 
 @section('mostrarExtension')
-  <form action="" class="row g-3" method="POST">
+  <form action="{{ route('clientes.update', $cliente) }}" class="row g-3" method="POST">
     @method('put')
-  @foreach ($clientes as $cliente)
   <div class="col-md-3">
     <label for="inputPassword4" class="form-label">DNI</label>
-    <input type="text" class="form-control" name="DNI" value="{{ old("DNI"), $cliente->DNI }}">
+    <input type="text" class="form-control" name="DNI" value="{{ old("DNI", $cliente->DNI) }}">
+  </div>
     <div class="col-md-3">
       <label for="inputPassword4" class="form-label">Nombre</label>
-      <input type="text" class="form-control" name="nombre" value="{{ old("nombre"), $cliente->nombre }}">
+      <input type="text" class="form-control" name="nombre" value="{{ old("nombre", $cliente->nombre) }}">
     </div>
     <div class="col-3">
       <label for="inputAddress" class="form-label">Telefono</label>
-      <input type="text" class="form-control" placeholder="1234 Main St" name="telefono" value="{{ old("telefono"), $cliente->telefono }}">
+      <input type="text" class="form-control" placeholder="1234 Main St" name="telefono" value="{{ old("telefono", $cliente->telefono) }}">
     </div>
     <div class="col-md-3">
       <label for="inputCity" class="form-label">Correo</label>
-      <input type="text" class="form-control" name="correo" value="{{ old("correo"), $cliente->correo }}">
+      <input type="text" class="form-control" name="correo" value="{{ old("correo", $cliente->correo) }}">
     </div>
     <div class="col-2">
       <label for="inputAddress2" class="form-label">Cuenta</label>
-      <input type="text" class="form-control" placeholder="Apartment, studio, or floor" name="cuenta" value="{{ old("cuenta"), $cliente->cuenta }}">
+      <input type="text" class="form-control" placeholder="Apartment, studio, or floor" name="cuenta" value="{{ old("cuenta", $cliente->cuenta) }}">
     </div>
-    <div class="col-md-1">
-      <label for="inputZip" class="form-label">Pais</label>
-      <input readonly type="date" class="form-control" id="inputZip" name="pais" value="{{ old("pais"), $cliente->pais }}">
+    <div class="col-md-3">
+      <label for="inputState" class="form-label">Pais</label>
+      <select id="inputState" class="form-select" name="pais">
+        <option selected>{{ old("pais", $cliente->pais)}}</option>
+        @foreach ($paises as $pais)
+        <option>{{$pais->iso3}}</option>
+        @endforeach
+      </select>
+      @error('pais')
+          <small style="color: red">{{ $message }}</small>
+      @enderror
     </div>
     <div class="col-md-1">
       <label for="inputZip" class="form-label">Importe</label>
-      <input readonly type="date" class="form-control" id="inputZip" name="importe_mensual" value="{{ old("importe_mensual"), $cliente->importe_mensual }}">
+      <input type="number" class="form-control" id="inputZip" name="importe_mensual" value="{{ old("importe_mensual", $cliente->importe_mensual) }}">
     </div>
     <div class="col-12">
       <input type="submit" class="btn btn-primary" value="Insert">
     </div>
-    @endforeach
   </form>
   @endsection
 </body>

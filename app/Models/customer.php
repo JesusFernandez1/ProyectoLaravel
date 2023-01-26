@@ -16,5 +16,6 @@ class customer extends Model
         'cuenta',
         'pais',
         'moneda',
+        'importe_mensual',
     ];
 }
