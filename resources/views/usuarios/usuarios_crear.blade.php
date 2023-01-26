@@ -64,7 +64,7 @@
     <div class="col-md-1">
       <label for="inputState" class="form-label">Tipo</label>
       <select id="inputState" class="form-select" name="tipo">
-        <option disabled selected>{{ old("tipo") }}</option>
+        <option selected>{{ old("tipo") }}</option>
         <option>Admin</option>
         <option>Operario</option>
       </select>

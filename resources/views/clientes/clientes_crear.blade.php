@@ -50,7 +50,7 @@
     <div class="col-md-3">
       <label for="inputState" class="form-label">Pais</label>
       <select id="inputState" class="form-select" name="pais">
-        <option disabled selected hidden>{{ old("pais") }}</option>
+        <option selected>{{ old("pais") }}</option>
         @foreach ($paises as $pais)
         <option>{{$pais->iso3}}</option>
         @endforeach
