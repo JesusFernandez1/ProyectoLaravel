@@ -20,7 +20,7 @@
       @enderror
     </div>
     <div class="col-md-3">
-      <label for="inputPassword4" class="form-label">Nombre</label>
+      <label for="inputCity" class="form-label">Nombre</label>
       <input type="text" class="form-control" name="nombre" value="{{ old("nombre") }}">
       @error('nombre')
           <small style="color: red">{{ $message }}</small>
