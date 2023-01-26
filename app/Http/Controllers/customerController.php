@@ -26,7 +26,8 @@ class customerController extends Controller
      */
     public function create()
     {
-        return view('clientes.clientes_crear');
+        $pais = paises::all();
+        return view('clientes.clientes_crear', compact($pais));
     }
 
     /**
@@ -37,11 +38,12 @@ class customerController extends Controller
      */
     public function store(Request $request)
     {
-        $moneda = paises::select('select iso_moneda from paises where nombre = "Albania"');
+        $pais = paises::select('iso_moneda')->where('iso3', '=', $request->pais)->first;
+        $moneda = $pais->iso_moneda;
         $datos = $request->validate([
             'DNI' =>['regex:/((^[A-Z]{1}[0-9]{7}[A-Z0-9]{1}$|^[T]{1}[A-Z0-9]{8}$)|^[0-9]{8}[A-Z]{1}$)/'],
             'name' =>['regex:/^[a-z]+$/i'],
-            'telefono' =>['required'],
+            'telefono' =>['regex:/(\+34|0034|34)?[ -]*(6|7|8|9)[ -]*([0-9][ -]*){8}/'],
             'correo' =>['regex:#^(((([a-z\d][\.\-\+_]?)*)[a-z0-9])+)\@(((([a-z\d][\.\-_]?){0,62})[a-z\d])+)\.([a-z\d]{2,6})$#i'],
             'cuenta' =>['required'],
             'pais' =>['required'],
@@ -85,11 +87,11 @@ class customerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $moneda = paises::select('select iso_moneda from paises where nombre = "Albania"');
+        $moneda = paises::select('select iso_moneda from paises where nombre = " . $request->pais . "');
         $datos = $request->validate([
             'DNI' =>['regex:/((^[A-Z]{1}[0-9]{7}[A-Z0-9]{1}$|^[T]{1}[A-Z0-9]{8}$)|^[0-9]{8}[A-Z]{1}$)/'],
             'name' =>['regex:/^[a-z]+$/i'],
-            'telefono' =>['required'],
+            'telefono' =>['regex:/(\+34|0034|34)?[ -]*(6|7|8|9)[ -]*([0-9][ -]*){8}/'],
             'correo' =>['regex:#^(((([a-z\d][\.\-\+_]?)*)[a-z0-9])+)\@(((([a-z\d][\.\-_]?){0,62})[a-z\d])+)\.([a-z\d]{2,6})$#i'],
             'cuenta' =>['required'],
             'pais' =>['required'],

@@ -41,6 +41,7 @@
          @endforeach
       </tbody>
    </table>
+   {!! $tareas->links() !!}
    @endsection
 </body>
 </html>

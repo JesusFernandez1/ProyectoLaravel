@@ -16,7 +16,7 @@
   @foreach ($clientes as $cliente)
   <div class="col-md-3">
     <label for="inputPassword4" class="form-label">DNI</label>
-    <input type="text" class="form-control" name="DNI" value="{{ old("DNI"), $cliente->DNI}}">
+    <input type="text" class="form-control" name="DNI" value="{{ old("DNI"), $cliente->DNI }}">
     <div class="col-md-3">
       <label for="inputPassword4" class="form-label">Nombre</label>
       <input type="text" class="form-control" name="nombre" value="{{ old("nombre"), $cliente->nombre }}">

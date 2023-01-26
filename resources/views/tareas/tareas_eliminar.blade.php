@@ -37,7 +37,7 @@
             <td>{{$tarea->creacion}}</td>
             <td>{{$tarea->telefono}}</td>
             <td>{{$tarea->estado_tarea}}</td>
-            <td><a href="{{ route('tareas.borrarTarea',$tarea)}}" class="btn btn-outline-success" role="button">Si</a> <a href="{{ route('tareas.index')}}" class="btn btn-outline-danger" role="button">No</a>
+            <td><a href="{{ route('tareas.confirmarBorrarTarea',$tarea)}}" class="btn btn-outline-success" role="button">Si</a> <a href="{{ route('tareas.index')}}" class="btn btn-outline-danger" role="button">No</a>
          </tr>
          @endforeach
       </tbody>

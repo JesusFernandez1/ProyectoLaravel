@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\fees;
+use App\Models\fee;
 
-class feesController extends Controller
+class feeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class feesController extends Controller
      */
     public function index()
     {
-        $cuotas = fees::all();
+        $cuotas = fee::all();
         return view('cuotas.cuotas_mostrar', compact('cuotas'));
     }
 
@@ -36,7 +36,7 @@ class feesController extends Controller
      */
     public function store(Request $request)
     {
-                $cuota = new fees();
+                $cuota = new fee();
                 $cuota->concepto = $request->concepto;
                 $cuota->fecha_emision = $request->fecha_emision;
                 $cuota->importe = $request->importe;
@@ -64,7 +64,7 @@ class feesController extends Controller
      */
     public function edit($id)
     {
-        $cuota = fees::find($id);
+        $cuota = fee::find($id);
         return view('cuotas.cuotas_corregir', compact('cuota'));
     }
 
@@ -77,12 +77,12 @@ class feesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $cuota = fees::find($id);
+        $cuota = fee::find($id);
                 $cuota->concepto = $request->concepto;
                 $cuota->fecha_emision = $request->fecha_emision;
                 $cuota->importe = $request->importe;
                 $cuota->save();
-                $cuotas = fees::all();
+                $cuotas = fee::all();
                 return view('cuotas.cuotas_mostrar', compact('cuotas'));
     }
 
@@ -98,16 +98,16 @@ class feesController extends Controller
     }
 
     public function eliminarCuota($id) {
-        $cuota = fees::find($id);
+        $cuota = fee::find($id);
         
         return view('cuotas.cuotas_eliminar', compact('cuota'));
          
     }
 
     public function confirmarEliminarCuota($id) {
-        $cuota = fees::find($id)->delete();
+        $cuota = fee::find($id)->delete();
         $cuota->save();
-        $cuotas = fees::all();
+        $cuotas = fee::all();
         return view('cuotas.cuotas_mostrar', compact('cuotas'));
          
     }

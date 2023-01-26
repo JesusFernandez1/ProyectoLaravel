@@ -48,8 +48,13 @@
       @enderror
     </div>
     <div class="col-md-3">
-      <label for="inputCity" class="form-label">Pais</label>
-      <input type="text" class="form-control" name="pais" value="{{ old("pais")}}">
+      <label for="inputState" class="form-label">Pais</label>
+      <select id="inputState" class="form-select" name="pais">
+        <option disabled selected hidden>{{ old("pais")}}</option>
+        @foreach ($paises as $pais)
+        <option>{{$pais->iso3}}</option>
+        @endforeach
+      </select>
       @error('pais')
           <small style="color: red">{{ $message }}</small>
       @enderror

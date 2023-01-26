@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\task;
+use App\Models\User;
+use App\Models\customer;
+use App\Models\provincias;
+
 
 class taskController extends \Illuminate\Routing\Controller
 {
@@ -22,7 +26,7 @@ class taskController extends \Illuminate\Routing\Controller
      */
     public function index()
     {
-        $tareas = task::all();
+        $tareas = task::paginate(2);
         return view('tareas.tareas_mostrar', compact('tareas'));
     }
 
@@ -33,7 +37,10 @@ class taskController extends \Illuminate\Routing\Controller
      */
     public function create()
     {
-        return view('tareas.tareas_crear');
+        $provincias = provincias::all();
+        $empleados = User::all();
+        $clientes = customer::all();
+        return view('tareas.tareas_crear', compact('provincias', 'empleados', 'clientes'));
     }
 
     /**
@@ -44,17 +51,27 @@ class taskController extends \Illuminate\Routing\Controller
      */
     public function store(Request $request)
     {
-            if ("condition") {
-                $tarea = new task();
-                $tarea->nombre = $request->nombre;
-                $tarea->apellido = $request->apellido;
-                $tarea->correo = $request->correo;
-                $tarea->save();
-                $tareas = task::all();
-                return view('tareas.tareas_mostrar', compact('tareas'));
-            } else {
-                return view('tareas.tareas_crear');
-            }
+
+        $datos = $request->validate([
+            'nombre' =>['regex:/^[a-z]+$/i'],
+            'apellido' =>['regex:/^[a-z]+$/i'],
+            'telefono' =>['regex:/(\+34|0034|34)?[ -]*(6|7|8|9)[ -]*([0-9][ -]*){8}/'],
+            'descripcion' =>['required'],
+            'correo' =>['regex:#^(((([a-z\d][\.\-\+_]?)*)[a-z0-9])+)\@(((([a-z\d][\.\-_]?){0,62})[a-z\d])+)\.([a-z\d]{2,6})$#i'],
+            'direccion' =>['required'],
+            'poblacion' =>['required'],
+            'codigo_postal' =>['required'],
+            'estado_tarea' =>['required'],
+            'fecha_creacion' =>['required'],
+            'fecha_final' =>['required'],
+            'anotacion_anterior' =>['required'],
+            'anotacion_posterior' =>['required'],
+            'customer_id' =>['required'],
+            'user_id' =>['required']
+        ]);
+        task::insert($datos);
+        $tareas = task::paginate(2);
+        return view('tareas.tareas_mostrar', compact('tareas'));
     }
 
     /**
@@ -77,7 +94,10 @@ class taskController extends \Illuminate\Routing\Controller
     public function edit($id)
     {
         $tarea = task::find($id);
-        return view('tareas.tareas_modificar', compact('tarea'));
+        $provincias = provincias::all();
+        $empleados = User::all();
+        $clientes = customer::all();
+        return view('tareas.tareas_modificar', compact('tarea', 'provincias', 'empleados', 'clientes'));
     }
 
     /**
@@ -89,16 +109,26 @@ class taskController extends \Illuminate\Routing\Controller
      */
     public function update(Request $request, $id)
     {
-        $tarea = task::find($id);
-        if ("condition") {
-                $tarea->nombre = $request->nombre;
-                $tarea->apellido = $request->apellido;
-                $tarea->correo = $request->correo; //todos los datos
-                $tarea->save();
-                return view('tareas.tareas_mostrar', compact('tareas'));
-            } else {
-                return view('tareas.tareas_modificar', compact('tarea'));
-            }
+        $datos = $request->validate([
+            'nombre' =>['regex:/^[a-z]+$/i'],
+            'apellido' =>['regex:/^[a-z]+$/i'],
+            'telefono' =>['regex:/(\+34|0034|34)?[ -]*(6|7|8|9)[ -]*([0-9][ -]*){8}/'],
+            'descripcion' =>['required'],
+            'correo' =>['regex:#^(((([a-z\d][\.\-\+_]?)*)[a-z0-9])+)\@(((([a-z\d][\.\-_]?){0,62})[a-z\d])+)\.([a-z\d]{2,6})$#i'],
+            'direccion' =>['required'],
+            'poblacion' =>['required'],
+            'codigo_postal' =>['required'],
+            'estado_tarea' =>['required'],
+            'fecha_creacion' =>['required'],
+            'fecha_final' =>['required'],
+            'anotacion_anterior' =>['required'],
+            'anotacion_posterior' =>['required'],
+            'customer_id' =>['required'],
+            'user_id' =>['required']
+        ]);
+        task::where('id', '=', $id)->update($datos);
+        $tareas = task::paginate(2);
+        return view('tareas.tareas_mostrar', compact('tareas'));
     }
 
     /**
@@ -119,35 +149,25 @@ class taskController extends \Illuminate\Routing\Controller
         return view('tareas.tareas_eliminar', compact('tarea'));
     }
 
-    public function confirmarEliminarTarea($id) {
+    public function confirmarBorrarTarea($id) {
         $tarea = task::find($id)->delete();
-        $tarea->save();
-        $tareas = task::all();
+        $tareas = task::paginate(2);
         return view('tareas.tareas_mostrar', compact('tareas'));
          
     }
 
     public function completarTarea(Request $request, $id) {
-        $tareas = task::all();
-        $tarea = task::find($id);
-        if ($_POST) {
-            $tarea->estado_tarea = $request->estado_tarea;
-            $tarea->save();
-            return view('tareas.tareas_mostrar', compact('tareas'));
-        } else {
-            return view('tareas.tareas_modificar', compact('tarea'));
-        }
+        
     }
 
-    public function verTareasCompletas() {
+    public function verInformacionDetallada() {
 
-        dd('En tareas completas');
-        $tareas = task::all();
-        return view('tareas.completas', compact('tareas'));
+        $tareas = task::paginate(2);
+        return view('tareas.tareas_verInformacionDetallada', compact('tareas'));
     }
 
     public function verTareasPendientes() {
         $tareas = task::where('estado_tarea', 'P')->get();
-        return view('tareas.tareas_mostrar_pendientes', compact('tareas'));
+        return view('tareas.tareas_pendientes', compact('tareas'));
     }
 }

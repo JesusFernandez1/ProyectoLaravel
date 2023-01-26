@@ -21,7 +21,7 @@
 
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
           <li><a href="{{ route('tareas.index') }}" class="nav-link px-2 text-white">Ver tareas</a></li>
-          <li><a href="{{ route('tareas.verTareasCompletas') }}" class="nav-link px-2 text-white">Ver tareas completas</a></li>
+          <li><a href="{{ route('tareas.verInformacionDetallada') }}" class="nav-link px-2 text-white">Ver tareas completas</a></li>
           <li><a href="{{ route('tareas.verTareasPendientes') }}" class="nav-link px-2 text-white">Ver tareas pendientes</a></li>
           <li><a href="{{ route('tareas.create') }}" class="nav-link px-2 text-white">Añadir tarea</a></li>
           <li><a href="{{ route('clientes.index') }}" class="nav-link px-2 text-white">Ver clientes</a></li>
