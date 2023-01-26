@@ -60,10 +60,6 @@
           <small style="color: red">{{ $message }}</small>
       @enderror
     </div>
-    <div hidden class="col-md-3">
-      <label for="inputCity" class="form-label">moneda</label>
-      <input type="text" class="form-control" name="moneda" value="Prueba">
-    </div>
     <div class="col-md-1">
       <label for="inputZip" class="form-label">Importe</label>
       <input type="number" class="form-control" id="inputZip" name="importe_mensual" value="{{ old("importe_mensual", $cliente->importe_mensual) }}">
