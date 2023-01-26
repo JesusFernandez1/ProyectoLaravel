@@ -26,4 +26,5 @@ class task extends Model
         'customers_id',
         'users_id',
     ];
+    public $timestamps = false;
 }

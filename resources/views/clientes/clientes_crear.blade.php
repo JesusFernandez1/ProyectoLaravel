@@ -59,9 +59,13 @@
           <small style="color: red">{{ $message }}</small>
       @enderror
     </div>
+    <div hidden class="col-md-3">
+      <label for="inputCity" class="form-label">moneda</label>
+      <input type="text" class="form-control" name="moneda" value="Prueba">
+    </div>
     <div class="col-md-3">
       <label for="inputCity" class="form-label">Importe</label>
-      <input type="text" class="form-control" name="importe_mensual" value="{{ old("importe_mensual") }}">
+      <input type="number" class="form-control" name="importe_mensual" value="{{ old("importe_mensual") }}">
       @error('importe_mensual')
           <small style="color: red">{{ $message }}</small>
       @enderror

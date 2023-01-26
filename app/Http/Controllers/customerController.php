@@ -38,10 +38,13 @@ class customerController extends Controller
      */
     public function store(Request $request)
     {
+        
         if ($request->pais != null) {
             $pais = paises::select('iso_moneda')->where('iso3', '=', $request->pais)->first();
             $moneda = $pais->iso_moneda;
+            $request->moneda = $moneda;   
         }
+        
         $datos = $request->validate([
             'DNI' =>['regex:/((^[A-Z]{1}[0-9]{7}[A-Z0-9]{1}$|^[T]{1}[A-Z0-9]{8}$)|^[0-9]{8}[A-Z]{1}$)/'],
             'nombre' =>['regex:/^[a-z]+$/i'],
@@ -54,7 +57,7 @@ class customerController extends Controller
         ]);
         customer::insert($datos);
         $clientes = customer::paginate(2);
-        return view('usuarios.usuarios_mostrar', compact('usuarios'));
+        return view('clientes.clientes_mostrar', compact('clientes'));
     }
 
     /**
@@ -90,13 +93,12 @@ class customerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if ($request->pais != null) {
-            $pais = paises::select('iso_moneda')->where('iso3', '=', $request->pais)->first();
-            $moneda = $pais->iso_moneda;
-        }
+        $pais = paises::select('iso_moneda')->where('iso3', '=', $request->pais)->first();
+        $moneda = $pais->iso_moneda;
+        $request->moneda = $moneda;
         $datos = $request->validate([
             'DNI' =>['regex:/((^[A-Z]{1}[0-9]{7}[A-Z0-9]{1}$|^[T]{1}[A-Z0-9]{8}$)|^[0-9]{8}[A-Z]{1}$)/'],
-            'name' =>['regex:/^[a-z]+$/i'],
+            'nombre' =>['regex:/^[a-z]+$/i'],
             'telefono' =>['regex:/(\+34|0034|34)?[ -]*(6|7|8|9)[ -]*([0-9][ -]*){8}/'],
             'correo' =>['regex:#^(((([a-z\d][\.\-\+_]?)*)[a-z0-9])+)\@(((([a-z\d][\.\-_]?){0,62})[a-z\d])+)\.([a-z\d]{2,6})$#i'],
             'cuenta' =>['required'],

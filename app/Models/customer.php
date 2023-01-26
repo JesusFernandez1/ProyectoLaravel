@@ -18,4 +18,5 @@ class customer extends Model
         'moneda',
         'importe_mensual',
     ];
+    public $timestamps = false;
 }

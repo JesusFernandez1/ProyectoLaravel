@@ -17,4 +17,5 @@ class fee extends Model
         'notas',
         'customers_id',
     ];
+    public $timestamps = false;
 }

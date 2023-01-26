@@ -16,22 +16,37 @@
   <div class="col-md-3">
     <label for="inputPassword4" class="form-label">DNI</label>
     <input type="text" class="form-control" name="DNI" value="{{ old("DNI", $cliente->DNI) }}">
+    @error('DNI')
+          <small style="color: red">{{ $message }}</small>
+      @enderror
   </div>
     <div class="col-md-3">
       <label for="inputPassword4" class="form-label">Nombre</label>
       <input type="text" class="form-control" name="nombre" value="{{ old("nombre", $cliente->nombre) }}">
+      @error('nombre')
+          <small style="color: red">{{ $message }}</small>
+      @enderror
     </div>
     <div class="col-3">
       <label for="inputAddress" class="form-label">Telefono</label>
       <input type="text" class="form-control" placeholder="1234 Main St" name="telefono" value="{{ old("telefono", $cliente->telefono) }}">
+      @error('telefono')
+          <small style="color: red">{{ $message }}</small>
+      @enderror
     </div>
     <div class="col-md-3">
       <label for="inputCity" class="form-label">Correo</label>
       <input type="text" class="form-control" name="correo" value="{{ old("correo", $cliente->correo) }}">
+      @error('correo')
+          <small style="color: red">{{ $message }}</small>
+      @enderror
     </div>
     <div class="col-2">
       <label for="inputAddress2" class="form-label">Cuenta</label>
       <input type="text" class="form-control" placeholder="Apartment, studio, or floor" name="cuenta" value="{{ old("cuenta", $cliente->cuenta) }}">
+      @error('cuenta')
+          <small style="color: red">{{ $message }}</small>
+      @enderror
     </div>
     <div class="col-md-3">
       <label for="inputState" class="form-label">Pais</label>
@@ -45,9 +60,16 @@
           <small style="color: red">{{ $message }}</small>
       @enderror
     </div>
+    <div hidden class="col-md-3">
+      <label for="inputCity" class="form-label">moneda</label>
+      <input type="text" class="form-control" name="moneda" value="Prueba">
+    </div>
     <div class="col-md-1">
       <label for="inputZip" class="form-label">Importe</label>
       <input type="number" class="form-control" id="inputZip" name="importe_mensual" value="{{ old("importe_mensual", $cliente->importe_mensual) }}">
+      @error('importe_mensual')
+          <small style="color: red">{{ $message }}</small>
+      @enderror
     </div>
     <div class="col-12">
       <input type="submit" class="btn btn-primary" value="Insert">
