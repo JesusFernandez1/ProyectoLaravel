@@ -41,8 +41,7 @@ class customerController extends Controller
         
         if ($request->pais != null) {
             $pais = paises::select('iso_moneda')->where('iso3', '=', $request->pais)->first();
-            $moneda = $pais->iso_moneda;
-            $request->moneda = $moneda;   
+            $moneda = $pais->iso_moneda;  
         }
         
         $datos = $request->validate([
@@ -95,7 +94,6 @@ class customerController extends Controller
     {
         $pais = paises::select('iso_moneda')->where('iso3', '=', $request->pais)->first();
         $moneda = $pais->iso_moneda;
-        $request->moneda = $moneda;
         $datos = $request->validate([
             'DNI' =>['regex:/((^[A-Z]{1}[0-9]{7}[A-Z0-9]{1}$|^[T]{1}[A-Z0-9]{8}$)|^[0-9]{8}[A-Z]{1}$)/'],
             'nombre' =>['regex:/^[a-z]+$/i'],
