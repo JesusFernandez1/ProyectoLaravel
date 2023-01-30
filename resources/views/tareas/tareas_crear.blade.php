@@ -95,7 +95,7 @@
     </div>
     <div class="col-md-1">
       <label for="inputZip" class="form-label">Fecha de creacion</label>
-      <input type="datetime-local" class="form-control" id="inputZip" name="fecha_inicio" value="<?php echo date("Y-m-d H:i:s") ?>">
+      <input type="datetime-local" class="form-control" id="inputZip" name="fecha_inicio" value="<?php echo date("Y-m-d:TH:i") ?>">
       @error('inicio')
           <small style="color: red">{{ $message }}</small>
       @enderror

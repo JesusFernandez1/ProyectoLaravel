@@ -34,7 +34,7 @@
             <td>{{$tarea->creacion}}</td>
             <td>{{$tarea->telefono}}</td>
             <td>{{$tarea->estado_tarea}}</td>
-            <td><a href="{{ route('tareas.edit',$tarea) }}" class="btn btn-outline-primary" role="button">Modificar</a> <a href="{{ route('tareas.borrarTarea',$tarea) }}" class="btn btn-outline-danger" role="button">Eliminar</a>
+            <td><a href="{{ route('tareas.edit',$tarea) }}" class="btn btn-outline-primary" role="button">Modificar</a> <a href="{{ route('tareas.show',$tarea) }}" class="btn btn-outline-danger" role="button">Eliminar</a>
                <a href="{{ route('tareas.completarTarea',$tarea) }}" class="btn btn-outline-success" role="button">Completar</a>
             </td>
          </tr>

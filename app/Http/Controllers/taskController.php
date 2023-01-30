@@ -12,13 +12,6 @@ use App\Models\provincias;
 class taskController extends \Illuminate\Routing\Controller
 {
 
-    public function __construct()
-    {
-        //dd('En taskController');
-        // parent::__construct();
-    }
-
-
     /**
      * Display a listing of the resource.
      *
@@ -51,6 +44,8 @@ class taskController extends \Illuminate\Routing\Controller
      */
     public function store(Request $request)
     {
+        $fecha_creacion = $request->fecha_creacion;
+        $fecha_actual = date('Y-m-d:TH:i');
         $datos = $request->validate([
             'nombre' =>['regex:/^[a-z]+$/i'],
             'apellido' =>['regex:/^[a-z]+$/i'],
@@ -62,8 +57,20 @@ class taskController extends \Illuminate\Routing\Controller
             'codigo_postal' =>['required'],
             'provincia' =>['required'],
             'estado_tarea' =>['required'],
-            'fecha_creacion' =>['required'], //problema en las fechas
-            'fecha_final' =>['required'],
+            'fecha_creacion' =>['required', 'date_format: Y-m-d\TH:i',
+            function ($atribute, $value, $fail) use ($fecha_actual) {
+                if ($value != $fecha_actual) {
+                    $fail("La fecha de creacion no se puede modificar");
+                }
+            }
+        ],
+            'fecha_final' =>['nullable', 'date_format: Y-m-d\TH:i',
+            function ($atribute, $value, $fail) use ($fecha_creacion){
+                if ($value <= $fecha_creacion) {
+                    $fail("La fecha de finalizacion no puede ser menor que la de creacion");
+                }
+            }
+        ],
             'anotacion_anterior' =>['required'],
             'anotacion_posterior' =>['required'],
             'users_id' =>['required'],
@@ -83,7 +90,8 @@ class taskController extends \Illuminate\Routing\Controller
      */
     public function show($id)
     {
-        //
+        $tarea = task::find($id);
+        return view('tareas.tareas_eliminar', compact('tarea'));
     }
 
     /**
@@ -120,8 +128,18 @@ class taskController extends \Illuminate\Routing\Controller
             'poblacion' =>['required'],
             'codigo_postal' =>['required'],
             'estado_tarea' =>['required'],
-            'fecha_creacion' =>['required'],
-            'fecha_final' =>['required'],
+            'fecha_creacion' =>['required', 'date_format: Y-m-d\TH:i'],
+            function (){
+                if ("fecha actual != request") {
+                    //error
+                }
+            },
+            'fecha_final' =>['required', 'date_format: Y-m-d\TH:i'],
+            function (){
+                if ("fecha final <= fecha actual") {
+                    //error
+                }
+            },
             'anotacion_anterior' =>['required'],
             'anotacion_posterior' =>['required'],
             'customer_id' =>['required'],
@@ -141,13 +159,6 @@ class taskController extends \Illuminate\Routing\Controller
     public function destroy($id)
     {
         //
-    }
-
-    public function borrarTarea($id) {
-        
-        $tarea = task::find($id);
-        
-        return view('tareas.tareas_eliminar', compact('tarea'));
     }
 
     public function confirmarBorrarTarea($id) {

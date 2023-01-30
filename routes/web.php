@@ -17,10 +17,6 @@ use App\Http\Controllers\feeController;
 |
 */
 
-
-
-
-
  Route::controller(userController::class)->group(function(){
     Route::get('/', 'index');
     Route::get('usuarios/usuarios_eliminar/{id}', 'eliminarUsuario')->name('usuarios.eliminarUsuario');

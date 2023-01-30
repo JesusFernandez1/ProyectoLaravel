@@ -51,9 +51,9 @@ class customerController extends Controller
             'correo' =>['regex:#^(((([a-z\d][\.\-\+_]?)*)[a-z0-9])+)\@(((([a-z\d][\.\-_]?){0,62})[a-z\d])+)\.([a-z\d]{2,6})$#i'],
             'cuenta' =>['required'],
             'pais' =>['required'],
-            'moneda' =>['required'],
             'importe_mensual' =>['required']
         ]);
+        $datos['moneda'] = $moneda;
         customer::insert($datos);
         $clientes = customer::paginate(2);
         return view('clientes.clientes_mostrar', compact('clientes'));
@@ -67,7 +67,8 @@ class customerController extends Controller
      */
     public function show($id)
     {
-        //
+        $cliente = customer::find($id);
+        return view('clientes.clientes_eliminar', compact('cliente'));
     }
 
     /**
@@ -101,9 +102,9 @@ class customerController extends Controller
             'correo' =>['regex:#^(((([a-z\d][\.\-\+_]?)*)[a-z0-9])+)\@(((([a-z\d][\.\-_]?){0,62})[a-z\d])+)\.([a-z\d]{2,6})$#i'],
             'cuenta' =>['required'],
             'pais' =>['required'],
-            'moneda' =>['required'],
             'importe_mensual' =>['required']
         ]);
+        $datos['moneda'] = $moneda;
         customer::where('id', '=', $id)->update($datos);
         $clientes = customer::paginate(2);
         return view('clientes.clientes_mostrar', compact('clientes'));
@@ -118,13 +119,6 @@ class customerController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    public function eliminarCliente($id) {
-        $cliente = customer::find($id);
-        
-        return view('clientes.clientes_eliminar', compact('cliente'));
-         
     }
 
     public function confirmarEliminarCliente($id) {
