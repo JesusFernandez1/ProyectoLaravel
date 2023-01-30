@@ -57,14 +57,14 @@ class taskController extends \Illuminate\Routing\Controller
             'codigo_postal' =>['required'],
             'provincia' =>['required'],
             'estado_tarea' =>['required'],
-            'fecha_creacion' =>['required', 'date_format: Y-m-d\TH:i',
+            'fecha_creacion' =>['required', 'date_format: Y-m-d H:i:s',
             function ($atribute, $value, $fail) use ($fecha_actual) {
                 if ($value != $fecha_actual) {
                     $fail("La fecha de creacion no se puede modificar");
                 }
             }
         ],
-            'fecha_final' =>['nullable', 'date_format: Y-m-d\TH:i',
+            'fecha_final' =>['nullable', 'date_format: Y-m-d H:i:s',
             function ($atribute, $value, $fail) use ($fecha_creacion){
                 if ($value <= $fecha_creacion) {
                     $fail("La fecha de finalizacion no puede ser menor que la de creacion");

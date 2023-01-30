@@ -56,7 +56,7 @@
     </div>
     <div class="col-md-2">
       <label for="inputCity" class="form-label">Fecha de alta</label>
-      <input type="datetime-local" class="form-control" name="fecha_alta" value="{{ old("fecha_alta") }}">
+      <input type="datetime-local" class="form-control" name="fecha_alta" value="<?php echo date("Y-m-d H:i:s") ?>">
       @error('fecha_alta')
           <small style="color: red">{{ $message }}</small>
       @enderror
