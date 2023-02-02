@@ -16,35 +16,43 @@
     @foreach ($cuotas as $cuota)
     <div class="col-md-3">
       <label for="inputPassword4" class="form-label">Concepto</label>
-      <input type="text" class="form-control" name="concepto" value="{{$cuota->concepto}}">
+      <input type="text" class="form-control" name="concepto" value="{{ old("concepto", $cuota->concepto) }}">
     </div>
     <div class="col-md-3">
       <label for="inputPassword4" class="form-label">Fecha</label>
-      <input type="text" class="form-control" name="nombre" value="{{$cuota->nombre}}">
+      <input type="text" class="form-control" name="nombre" value="{{ old("nombre", $cuota->nombre) }}">
     </div>
     <div class="col-3">
       <label for="inputAddress" class="form-label">Importe</label>
-      <input type="text" class="form-control" placeholder="1234 Main St" name="importe" value="{{$cuota->importe}}">
+      <input type="text" class="form-control" placeholder="1234 Main St" name="importe" value="{{ old("importe", $cuota->importe) }}">
     </div>
     <div class="col-md-3">
         <label for="inputState" class="form-label">Pagada</label>
         <select id="inputState" class="form-select" name="pagada">
-          <option disabled selected>value="{{$cuota->pagada}}"</option>
+          <option disabled selected>value="{{ old("pagada", $cuota->pagada) }}"</option>
           <option>Si</option>
           <option>No</option>
         </select>
       </div>
     <div class="col-md-3">
       <label for="inputCity" class="form-label">Fecha de Pago</label>
-      <input type="text" class="form-control" name="fecha_pago" value="{{$cuota->fecha_pago}}">
+      <input type="text" class="form-control" name="fecha_pago" value="{{ old("fecha_pago", $cuota->fecha_pago) }}">
     </div>
     <div class="col-md-3">
       <label for="inputCity" class="form-label">Nota</label>
-      <input type="text" class="form-control" name="nota" value="{{$cuota->nota}}">
+      <input type="text" class="form-control" name="nota" value="{{ old("nota", $cuota->nota) }}">
     </div>
     <div class="col-md-3">
-      <label for="inputCity" class="form-label">Tarea correspondiente</label>
-      <input type="text" class="form-control" name="tasks_id" value="{{$cuota->task_id}}">
+      <label for="inputState" class="form-label">Tarea correspondiente</label>
+      <select id="inputState" class="form-select" name="task_id">
+        <option selected>{{ old("task_id", $cuota->task_id) }}</option>
+        @foreach ($tareas as $tarea)
+        <option>{{$tarea->task_id}}</option>
+        @endforeach
+      </select>
+      @error('task_id')
+          <small style="color: red">{{ $message }}</small>
+      @enderror
     </div>
       <div class="col-12">
       <input type="submit" class="btn btn-primary" value="Insert">

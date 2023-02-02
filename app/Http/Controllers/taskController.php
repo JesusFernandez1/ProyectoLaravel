@@ -45,7 +45,7 @@ class taskController extends \Illuminate\Routing\Controller
     public function store(Request $request)
     {
         $fecha_creacion = $request->fecha_creacion;
-        $fecha_actual = date('Y-m-d:TH:i');
+        $fecha_actual = date('Y-m-d\TH:i');
         $datos = $request->validate([
             'nombre' =>['regex:/^[a-z]+$/i'],
             'apellido' =>['regex:/^[a-z]+$/i'],
@@ -57,22 +57,22 @@ class taskController extends \Illuminate\Routing\Controller
             'codigo_postal' =>['required'],
             'provincia' =>['required'],
             'estado_tarea' =>['required'],
-            'fecha_creacion' =>['required', 'date_format: Y-m-d H:i:s',
+            'fecha_creacion' =>['required', 'date_format: Y-m-d\TH:i',
             function ($atribute, $value, $fail) use ($fecha_actual) {
                 if ($value != $fecha_actual) {
                     $fail("La fecha de creacion no se puede modificar");
                 }
             }
         ],
-            'fecha_final' =>['nullable', 'date_format: Y-m-d H:i:s',
+            'fecha_final' =>['nullable', 'date_format: Y-m-d\TH:i',
             function ($atribute, $value, $fail) use ($fecha_creacion){
                 if ($value <= $fecha_creacion) {
                     $fail("La fecha de finalizacion no puede ser menor que la de creacion");
                 }
             }
         ],
-            'anotacion_anterior' =>['required'],
-            'anotacion_posterior' =>['required'],
+            'anotacion_anterior' =>['nullable'],
+            'anotacion_posterior' =>['nullable'],
             'users_id' =>['required'],
             'customers_id' =>['required']
             
@@ -118,6 +118,8 @@ class taskController extends \Illuminate\Routing\Controller
      */
     public function update(Request $request, $id)
     {
+        $fecha_creacion = $request->fecha_creacion;
+        $fecha_actual = date('Y-m-d\TH:i');
         $datos = $request->validate([
             'nombre' =>['regex:/^[a-z]+$/i'],
             'apellido' =>['regex:/^[a-z]+$/i'],
@@ -127,23 +129,27 @@ class taskController extends \Illuminate\Routing\Controller
             'direccion' =>['required'],
             'poblacion' =>['required'],
             'codigo_postal' =>['required'],
+            'provincia' =>['required'],
             'estado_tarea' =>['required'],
-            'fecha_creacion' =>['required', 'date_format: Y-m-d\TH:i'],
-            function (){
-                if ("fecha actual != request") {
-                    //error
+            'fecha_creacion' =>['required', 'date_format: Y-m-d\TH:i',
+            function ($atribute, $value, $fail) use ($fecha_actual) {
+                if ($value != $fecha_actual) {
+                    $fail("La fecha de creacion no se puede modificar");
                 }
-            },
-            'fecha_final' =>['required', 'date_format: Y-m-d\TH:i'],
-            function (){
-                if ("fecha final <= fecha actual") {
-                    //error
+            }
+        ],
+            'fecha_final' =>['nullable', 'date_format: Y-m-d\TH:i',
+            function ($atribute, $value, $fail) use ($fecha_creacion){
+                if ($value <= $fecha_creacion) {
+                    $fail("La fecha de finalizacion no puede ser menor que la de creacion");
                 }
-            },
-            'anotacion_anterior' =>['required'],
-            'anotacion_posterior' =>['required'],
-            'customer_id' =>['required'],
-            'user_id' =>['required']
+            }
+        ],
+            'anotacion_anterior' =>['nullable'],
+            'anotacion_posterior' =>['nullable'],
+            'users_id' =>['required'],
+            'customers_id' =>['required']
+            
         ]);
         task::where('id', '=', $id)->update($datos);
         $tareas = task::paginate(2);

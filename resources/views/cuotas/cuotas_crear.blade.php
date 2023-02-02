@@ -14,35 +14,43 @@
   <form action="{{ route(cuotas.store)}}" class="row g-3" method="POST">
     <div class="col-md-3">
       <label for="inputPassword4" class="form-label">Concepto</label>
-      <input type="text" class="form-control" name="concepto">
+      <input type="text" class="form-control" name="concepto" value="{{ old("concepto") }}">
     </div>
     <div class="col-md-3">
       <label for="inputPassword4" class="form-label">Fecha</label>
-      <input type="text" class="form-control" name="nombre">
+      <input type="text" class="form-control" name="nombre" value="{{ old("nombre") }}">
     </div>
     <div class="col-3">
       <label for="inputAddress" class="form-label">Importe</label>
-      <input type="text" class="form-control" placeholder="1234 Main St" name="importe">
+      <input type="number" class="form-control" placeholder="1234 Main St" name="importe" value="{{ old("importe") }}>
     </div>
     <div class="col-md-3">
         <label for="inputState" class="form-label">Pagada</label>
         <select id="inputState" class="form-select" name="pagada">
-          <option disabled selected></option>
+          <option selected>{{ old("pagada") }}</option>
           <option>Si</option>
           <option>No</option>
         </select>
       </div>
     <div class="col-md-3">
       <label for="inputCity" class="form-label">Fecha de Pago</label>
-      <input type="text" class="form-control" name="fecha_pago">
+      <input type="datetime-local" class="form-control" name="fecha_pago" value="{{ old("fecha_pago") }}">
     </div>
     <div class="col-md-3">
       <label for="inputCity" class="form-label">Nota</label>
-      <input type="text" class="form-control" name="nota">
+      <input type="text" class="form-control" name="nota" value="{{ old("nota") }}">
     </div>
     <div class="col-md-3">
-      <label for="inputCity" class="form-label">Tarea correspondiente</label>
-      <input type="text" class="form-control" name="tasks_id">
+      <label for="inputState" class="form-label">Tarea correspondiente</label>
+      <select id="inputState" class="form-select" name="task_id">
+        <option selected>{{ old("task_id") }}</option>
+        @foreach ($tareas as $tarea)
+        <option>{{$tarea->task_id}}</option>
+        @endforeach
+      </select>
+      @error('task_id')
+          <small style="color: red">{{ $message }}</small>
+      @enderror
     </div>
       <div class="col-12">
       <input type="submit" class="btn btn-primary" value="Insert">

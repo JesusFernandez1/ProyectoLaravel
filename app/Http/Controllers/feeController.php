@@ -53,7 +53,8 @@ class feeController extends Controller
      */
     public function show($id)
     {
-        //
+        $cuota = fee::find($id);
+        return view('cuotas.cuotas_eliminar', compact('cuota'));
     }
 
     /**
@@ -95,13 +96,6 @@ class feeController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    public function eliminarCuota($id) {
-        $cuota = fee::find($id);
-        
-        return view('cuotas.cuotas_eliminar', compact('cuota'));
-         
     }
 
     public function confirmarEliminarCuota($id) {
