@@ -35,7 +35,9 @@
             <td>{{$cliente->pais}}</td>
             <td>{{$cliente->moneda}}</td>
             <td>{{$cliente->importe_mensual}}</td>
-            <td><a href="{{ route('clientes.edit',$cliente)}}" class="btn btn-outline-primary" role="button">Modificar</a> <a href="{{ route('clientes.show',$cliente)}}" class="btn btn-outline-danger" role="button">Eliminar</a></td>
+            <td><a href="{{ route('cuotas.show',$cliente) }}" class="btn btn-outline-success" role="button">Ver cuotas</a> 
+               <a href="{{ route('clientes.edit',$cliente)}}" class="btn btn-outline-primary" role="button">Modificar</a> 
+               <a href="{{ route('clientes.show',$cliente)}}" class="btn btn-outline-danger" role="button">Eliminar</a></td>
          </tr>
          @endforeach
       </tbody>

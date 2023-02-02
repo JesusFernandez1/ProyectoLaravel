@@ -10,8 +10,6 @@
 
    @section('mostrarExtension')
 
-   <h1>¿Estas seguro de eliminar el cuota?</h1>
-
    <table class="table">
       <thead class="thead-dark">
          <tr>
@@ -34,7 +32,8 @@
             <td>{{$cuota->fecha_pago}}</td>
             <td>{{$cuota->nota}}</td>
             <td>{{$cuota->tasks_id}}</td>
-            <td><a href="{{ route('cuotas.edit',$cuota)}}" class="btn btn-outline-primary" role="button">Modificar</a> <a href="{{ route('cuotas.show',$cuota)}}" class="btn btn-outline-danger" role="button">Eliminar</a></td>
+            <td><a href="{{ route('cuotas.edit',$cuota) }}" class="btn btn-outline-primary" role="button">Modificar</a> 
+               <a href="{{ route('cuotas.show',$cuota) }}" class="btn btn-outline-danger" role="button">Eliminar</a></td>
          </tr>
          @endforeach
       </tbody>
