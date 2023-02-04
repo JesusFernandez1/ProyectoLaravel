@@ -36,7 +36,6 @@ class userController extends Controller
      */
     public function store(Request $request)
     {
-        $fecha_actual = date('Y-m-d\TH:i');
         $datos = $request->validate([
             'DNI' =>['regex:/((^[A-Z]{1}[0-9]{7}[A-Z0-9]{1}$|^[T]{1}[A-Z0-9]{8}$)|^[0-9]{8}[A-Z]{1}$)/'],
             'name' =>['regex:/^[a-z]+$/i'],
@@ -45,9 +44,9 @@ class userController extends Controller
             'telefono' =>['regex:/(\+34|0034|34)?[ -]*(6|7|8|9)[ -]*([0-9][ -]*){8}/'],
             'direccion' =>['required'],
             'fecha_alta' =>['required', 'date_format:Y-m-d\TH:i',
-            function ($atribute, $value, $fail) use ($fecha_actual) {
-                if ($value != $fecha_actual) {
-                    $fail("La fecha de creacion no se puede modificar");
+            function ($atribute, $value, $fail) {
+                if (date("Y-m-d\TH", strtotime($value)) != date("Y-m-d\TH")) {
+                    $fail('La fecha de creación no se puede modificar.');
                 }
             }
         ],
@@ -90,7 +89,6 @@ class userController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $fecha_actual = date('Y-m-d\TH:i');
         $datos = $request->validate([
             'DNI' =>['regex:/((^[A-Z]{1}[0-9]{7}[A-Z0-9]{1}$|^[T]{1}[A-Z0-9]{8}$)|^[0-9]{8}[A-Z]{1}$)/'],
             'name' =>['regex:/^[a-z]+$/i'],
@@ -99,9 +97,9 @@ class userController extends Controller
             'telefono' =>['regex:/(\+34|0034|34)?[ -]*(6|7|8|9)[ -]*([0-9][ -]*){8}/'],
             'direccion' =>['required'],
             'fecha_alta' =>['required', 'date_format:Y-m-d\TH:i',
-            function ($atribute, $value, $fail) use ($fecha_actual) {
-                if ($value != $fecha_actual) {
-                    $fail("La fecha de creacion no se puede modificar");
+            function ($atribute, $value, $fail) {
+                if (date("Y-m-d\TH", strtotime($value)) != date("Y-m-d\TH")) {
+                    $fail('La fecha de creación no se puede modificar.');
                 }
             }
         ],
