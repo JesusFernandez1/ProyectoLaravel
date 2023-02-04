@@ -10,7 +10,7 @@ class task extends Model
     use HasFactory;
     protected $fillable = [
         'nombre',
-        'apellidos',
+        'apellido',
         'telefono',
         'descripcion',
         'correo',
@@ -19,12 +19,12 @@ class task extends Model
         'codigo_postal',
         'provincia',
         'estado_tarea',
-        'fecha_inicio',
+        'fecha_creacion',
         'fecha_final',
         'anotacion_anterior',
         'anotacion_posterior',
-        'customers_id',
         'users_id',
+        'customers_id',
     ];
     public $timestamps = false;
 }

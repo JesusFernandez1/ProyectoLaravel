@@ -65,8 +65,8 @@ class taskController extends \Illuminate\Routing\Controller
         ],
             'fecha_final' =>['nullable', 'date_format: Y-m-d\TH:i',
             function ($atribute, $value, $fail) use ($fecha_creacion){
-                if ($value <= $fecha_creacion) {
-                    $fail("La fecha de finalizacion no puede ser menor que la de creacion");
+                if (date("Y-m-d\TH", strtotime($value)) <= date("Y-m-d\TH", strtotime($fecha_creacion))) {
+                    $fail('La fecha de creación no se puede modificar.');
                 }
             }
         ],
