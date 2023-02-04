@@ -65,7 +65,8 @@ class userController extends Controller
      */
     public function show($id)
     {
-        //
+        $usuario = User::find($id);
+        return view('usuarios.usuarios_eliminar', compact('usuario'));
     }
 
     /**
@@ -119,12 +120,6 @@ class userController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    public function eliminarUsuario($id) {
-        $usuario = User::find($id);
-        return view('usuarios.usuarios_eliminar', compact('usuario'));
-         
     }
 
     public function confirmarEliminarUsuario($id) {
