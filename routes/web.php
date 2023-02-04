@@ -29,6 +29,7 @@ Route::controller(customerController::class)->group(function(){
 Route::resource('clientes', customerController::class);
 
 Route::controller(feeController::class)->group(function(){
+    Route::get('cuotas/cuotas_crear/{id}', 'agregar')->name('cuotas.agregar');
     Route::get('cuotas/cuotas_eliminada/{id}', 'confirmarEliminarCuota')->name('cuotas.confirmarEliminarCuota');
 });
 Route::resource('cuotas', feeController::class);

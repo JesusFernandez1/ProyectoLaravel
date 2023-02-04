@@ -36,7 +36,7 @@
             <td>{{$cliente->moneda}}</td>
             <td>{{$cliente->importe_mensual}}</td>
             <td><a href="{{ route('cuotas.show',$cliente) }}" class="btn btn-outline-info" role="button">Ver cuotas</a> 
-               <a href="{{ route('cuotas.create',$cliente) }}" class="btn btn-outline-success" role="button">Añadir cuota</a><br>
+               <a href="{{ route('cuotas.agregar',$cliente) }}" class="btn btn-outline-success" role="button">Añadir cuota</a><br>
                <a style="margin-top: 2%" href="{{ route('clientes.edit',$cliente) }}" class="btn btn-outline-primary" role="button">Modificar</a> 
                <a style="margin-top: 2%" href="{{ route('clientes.show',$cliente) }}" class="btn btn-outline-danger" role="button">Eliminar</a></td>
          </tr>

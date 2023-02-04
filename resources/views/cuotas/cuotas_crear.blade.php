@@ -11,7 +11,10 @@
 @extends('base')
 
 @section('mostrarExtension')
-  <form action="{{ route(cuotas.store)}}" class="row g-3" method="POST">
+
+<h3>Cliente al se añade la cuota: {{$cliente->nombre}}</h3>
+
+  <form action="{{ route('cuotas.store') }}" class="row g-3" method="POST">
     <div class="col-md-3">
       <label for="inputPassword4" class="form-label">Concepto</label>
       <input type="text" class="form-control" name="concepto" value="{{ old("concepto") }}">
@@ -22,7 +25,7 @@
     </div>
     <div class="col-3">
       <label for="inputAddress" class="form-label">Importe</label>
-      <input type="number" class="form-control" placeholder="1234 Main St" name="importe" value="{{ old("importe") }}>
+      <input type="number" class="form-control" placeholder="1234 Main St" name="importe" value="{{ old("importe") }}">
     </div>
     <div class="col-md-3">
         <label for="inputState" class="form-label">Pagada</label>

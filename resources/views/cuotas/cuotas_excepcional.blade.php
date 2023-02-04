@@ -11,7 +11,7 @@
 @extends('base')
 
 @section('mostrarExtension')
-  <form action=" {{ route(cuotas.store)}}" class="row g-3" method="POST">
+  <form action=" {{ route('cuotas.store') }}" class="row g-3" method="POST">
     <div class="col-md-3">
       <label for="inputPassword4" class="form-label">Concepto</label>
       <input type="text" class="form-control" name="concepto">

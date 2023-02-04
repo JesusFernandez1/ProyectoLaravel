@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\fee;
 use App\Models\customer;
+use App\Models\task;
 
 class feeController extends Controller
 {
@@ -19,10 +20,9 @@ class feeController extends Controller
     }
 
     public function agregar($id){
-        $cliente = customer::where('id', '=', $id);
-        $nombre = $cliente->nombre;
-        $cuotas = fee::where('customers_id', '=', $id);
-        return view('cuotas.cuotas_mostrar', compact('cuotas', 'nombre'));
+        $cliente = customer::select('nombre')->where('id', '=', $id)->first();
+        $tareas = task::all();
+        return view('cuotas.cuotas_crear', compact('cliente', 'tareas'));
     }
 
     /**
@@ -44,13 +44,12 @@ class feeController extends Controller
     public function store(Request $request)
     {
         $fecha_creacion = $request->fecha_creacion;
-        $fecha_actual = date('Y-m-d\TH:i');
         $datos = $request->validate([
             'concepto' =>['required'],
             'fecha_emision' =>['required', 'date_format: Y-m-d\TH:i',
-            function ($atribute, $value, $fail) use ($fecha_actual) {
-                if ($value != $fecha_actual) {
-                    $fail("La fecha de creacion no se puede modificar");
+            function ($atribute, $value, $fail) {
+                if (date("Y-m-d\TH", strtotime($value)) != date("Y-m-d\TH")) {
+                    $fail('La fecha de emision no se puede modificar.');
                 }
             }
         ],
@@ -105,13 +104,12 @@ class feeController extends Controller
     public function update(Request $request, $id)
     {
         $fecha_creacion = $request->fecha_creacion;
-        $fecha_actual = date('Y-m-d\TH:i');
         $datos = $request->validate([
             'concepto' =>['required'],
             'fecha_emision' =>['required', 'date_format: Y-m-d\TH:i',
-            function ($atribute, $value, $fail) use ($fecha_actual) {
-                if ($value != $fecha_actual) {
-                    $fail("La fecha de creacion no se puede modificar");
+            function ($atribute, $value, $fail) {
+                if (date("Y-m-d\TH", strtotime($value)) != date("Y-m-d\TH")) {
+                    $fail('La fecha de emision no se puede modificar.');
                 }
             }
         ],

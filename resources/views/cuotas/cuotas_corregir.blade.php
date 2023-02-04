@@ -11,7 +11,7 @@
 @extends('base')
 
 @section('mostrarExtension')
-  <form action="" class="row g-3" method="POST">
+  <form action="{{ route('cuotas.update') }}" class="row g-3" method="POST">
     @method('put')
     @foreach ($cuotas as $cuota)
     <div class="col-md-3">
