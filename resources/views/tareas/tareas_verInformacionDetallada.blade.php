@@ -48,8 +48,8 @@
             <td>{{$tarea->estado_tarea}}</td>
             <td>{{$tarea->fecha_creacion}}</td>
             <td>{{$tarea->fecha_final}}</td>
-            <td>{{$tarea->anotacion_inicio}}</td>
-            <td>{{$tarea->anotacion_final}}</td>
+            <td>{{$tarea->anotacion_anterior}}</td>
+            <td>{{$tarea->anotacion_posterior}}</td>
             <td>{{$tarea->customers_id}}</td>
             <td>{{$tarea->users_id}}</td>
             
