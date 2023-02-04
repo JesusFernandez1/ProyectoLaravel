@@ -19,26 +19,23 @@ use App\Http\Controllers\feeController;
 
  Route::controller(userController::class)->group(function(){
     Route::get('/', 'index');
-    Route::get('usuarios/usuarios_eliminar/{id}', 'eliminarUsuario')->name('usuarios.eliminarUsuario');
     Route::get('usuarios/usuarios_eliminada/{id}', 'confirmarEliminarUsuario')->name('usuarios.confirmarEliminarUsuario');
 });
 Route::resource('usuarios', userController::class);
 
 Route::controller(customerController::class)->group(function(){
-    Route::get('clientes/clientes_eliminar/{id}', 'eliminarCliente')->name('clientes.eliminarCliente');
     Route::get('clientes/clientes_eliminado/{id}', 'confirmarEliminarCliente')->name('clientes.confirmarEliminarCliente');
 });
 Route::resource('clientes', customerController::class);
 
 Route::controller(feeController::class)->group(function(){
-    Route::get('cuotas/cuotas_eliminar/{id}', 'confirmarEliminarCuota')->name('cuotas.confirmarEliminarCuota');
+    Route::get('cuotas/cuotas_eliminada/{id}', 'confirmarEliminarCuota')->name('cuotas.confirmarEliminarCuota');
 });
 Route::resource('cuotas', feeController::class);
 
 Route::controller(taskController::class)->group(function(){
     Route::get('tareas/tareas_verInformacionDetallada', 'verInformacionDetallada')->name('tareas.verInformacionDetallada');
     Route::get('tareas/tareas_pendientes', 'verTareasPendientes')->name('tareas.verTareasPendientes');
-    Route::get('tareas/tareas_eliminar/{id}', 'borrarTarea')->name('tareas.borrarTarea');
     Route::get('tareas/tareas_eliminada/{id}', 'confirmarBorrarTarea')->name('tareas.confirmarBorrarTarea');
     Route::get('tareas/tareas_completar/{id}', 'completarTarea')->name('tareas.completarTarea');
 });

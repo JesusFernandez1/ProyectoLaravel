@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\fee;
+use App\Models\customer;
 
 class feeController extends Controller
 {
@@ -14,8 +15,14 @@ class feeController extends Controller
      */
     public function index()
     {
-        $cuotas = fee::all();
-        return view('cuotas.cuotas_mostrar', compact('cuotas'));
+
+    }
+
+    public function agregar($id){
+        $cliente = customer::where('id', '=', $id);
+        $nombre = $cliente->nombre;
+        $cuotas = fee::where('customers_id', '=', $id);
+        return view('cuotas.cuotas_mostrar', compact('cuotas', 'nombre'));
     }
 
     /**
@@ -25,7 +32,7 @@ class feeController extends Controller
      */
     public function create()
     {
-        return view('cuotas.cuotas_crear');
+        
     }
 
     /**
@@ -36,13 +43,32 @@ class feeController extends Controller
      */
     public function store(Request $request)
     {
-                $cuota = new fee();
-                $cuota->concepto = $request->concepto;
-                $cuota->fecha_emision = $request->fecha_emision;
-                $cuota->importe = $request->importe;
-                $cuota->save();
-
-                return view('cuotas.cuotas_mostrar', compact('cuotas'));
+        $fecha_creacion = $request->fecha_creacion;
+        $fecha_actual = date('Y-m-d\TH:i');
+        $datos = $request->validate([
+            'concepto' =>['required'],
+            'fecha_emision' =>['required', 'date_format: Y-m-d\TH:i',
+            function ($atribute, $value, $fail) use ($fecha_actual) {
+                if ($value != $fecha_actual) {
+                    $fail("La fecha de creacion no se puede modificar");
+                }
+            }
+        ],
+            'importe' =>['required'],
+            'pagada' =>['required'],
+            'fecha_pago' =>['nullable', 'date_format: Y-m-d\TH:i',
+            function ($atribute, $value, $fail) use ($fecha_creacion){
+                if ($value <= $fecha_creacion) {
+                    $fail("La fecha de finalizacion no puede ser menor que la de creacion");
+                }
+            }
+        ],
+            'nota' =>['required'],
+            'tasks_id' =>['required']
+        ]);
+        fee::insert($datos);
+        $cuotas = fee::paginate(2);
+        return view('cuotas.cuotas_mostrar', compact('cuotas'));
     }
 
     /**
@@ -78,13 +104,32 @@ class feeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $cuota = fee::find($id);
-                $cuota->concepto = $request->concepto;
-                $cuota->fecha_emision = $request->fecha_emision;
-                $cuota->importe = $request->importe;
-                $cuota->save();
-                $cuotas = fee::all();
-                return view('cuotas.cuotas_mostrar', compact('cuotas'));
+        $fecha_creacion = $request->fecha_creacion;
+        $fecha_actual = date('Y-m-d\TH:i');
+        $datos = $request->validate([
+            'concepto' =>['required'],
+            'fecha_emision' =>['required', 'date_format: Y-m-d\TH:i',
+            function ($atribute, $value, $fail) use ($fecha_actual) {
+                if ($value != $fecha_actual) {
+                    $fail("La fecha de creacion no se puede modificar");
+                }
+            }
+        ],
+            'importe' =>['required'],
+            'pagada' =>['required'],
+            'fecha_pago' =>['nullable', 'date_format: Y-m-d\TH:i',
+            function ($atribute, $value, $fail) use ($fecha_creacion){
+                if ($value <= $fecha_creacion) {
+                    $fail("La fecha de finalizacion no puede ser menor que la de creacion");
+                }
+            }
+        ],
+            'nota' =>['required'],
+            'tasks_id' =>['required']
+        ]);
+        customer::insert($datos);
+        $clientes = customer::paginate(2);
+        return view('cuotas.cuotas_mostrar', compact('cuotas'));
     }
 
     /**
