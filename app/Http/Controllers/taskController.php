@@ -45,7 +45,6 @@ class taskController extends \Illuminate\Routing\Controller
     public function store(Request $request)
     {
         $fecha_creacion = $request->fecha_creacion;
-        $fecha_actual = date('Y-m-d\TH:i');
         $datos = $request->validate([
             'nombre' =>['regex:/^[a-z]+$/i'],
             'apellido' =>['regex:/^[a-z]+$/i'],
@@ -58,9 +57,9 @@ class taskController extends \Illuminate\Routing\Controller
             'provincia' =>['required'],
             'estado_tarea' =>['required'],
             'fecha_creacion' =>['required', 'date_format: Y-m-d\TH:i',
-            function ($atribute, $value, $fail) use ($fecha_actual) {
-                if ($value != $fecha_actual) {
-                    $fail("La fecha de creacion no se puede modificar");
+            function ($atribute, $value, $fail) {
+                if (date("Y-m-d\TH", strtotime($value)) != date("Y-m-d\TH")) {
+                    $fail('La fecha de creación no se puede modificar.');
                 }
             }
         ],
@@ -119,7 +118,6 @@ class taskController extends \Illuminate\Routing\Controller
     public function update(Request $request, $id)
     {
         $fecha_creacion = $request->fecha_creacion;
-        $fecha_actual = date('Y-m-d\TH:i');
         $datos = $request->validate([
             'nombre' =>['regex:/^[a-z]+$/i'],
             'apellido' =>['regex:/^[a-z]+$/i'],
@@ -132,9 +130,9 @@ class taskController extends \Illuminate\Routing\Controller
             'provincia' =>['required'],
             'estado_tarea' =>['required'],
             'fecha_creacion' =>['required', 'date_format: Y-m-d\TH:i',
-            function ($atribute, $value, $fail) use ($fecha_actual) {
-                if ($value != $fecha_actual) {
-                    $fail("La fecha de creacion no se puede modificar");
+            function ($atribute, $value, $fail) {
+                if (date("Y-m-d\TH", strtotime($value)) != date("Y-m-d\TH")) {
+                    $fail('La fecha de creación no se puede modificar.');
                 }
             }
         ],
