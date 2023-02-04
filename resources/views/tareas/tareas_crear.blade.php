@@ -94,15 +94,15 @@
       @enderror
     </div>
     <div class="col-md-1">
-      <label for="inputZip" class="form-label">Fecha de creacion</label>
-      <input type="datetime-local" class="form-control" id="inputZip" name="fecha_creacion" value="<?php echo date("Y-m-d\TH:i") ?>">
+      <label for="inputCity" class="form-label">Fecha de creacion</label>
+      <input type="datetime-local" class="form-control" name="fecha_creacion" value="<?php echo date("Y-m-d\TH:i") ?>">
       @error('fecha_creacion')
           <small style="color: red">{{ $message }}</small>
       @enderror
     </div>
     <div class="col-md-1">
       <label for="inputCity" class="form-label">Fecha de finalizacion</label>
-      <input type="datetime-local" class="form-control" id="inputCity" name="fecha_final" value="{{ old('fecha_final') }}">
+      <input type="datetime-local" class="form-control" name="fecha_final" value="{{ old('fecha_final') }}">
       @error('fecha_final')
           <small style="color: red">{{ $message }}</small>
       @enderror
@@ -123,7 +123,7 @@
         <option>{{$cliente->nombre}}</option>
         @endforeach
       </select>
-      @error('customer_id')
+      @error('customers_id')
           <small style="color: red">{{ $message }}</small>
       @enderror
     </div>
@@ -135,7 +135,7 @@
         <option>{{$empleado->name}}</option>
         @endforeach
       </select>
-      @error('user_id')
+      @error('users_id')
           <small style="color: red">{{ $message }}</small>
       @enderror
     </div>

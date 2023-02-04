@@ -44,6 +44,15 @@ class taskController extends \Illuminate\Routing\Controller
      */
     public function store(Request $request)
     {
+        if ($request->users_id != null) {
+            $users_id = User::select('id')->where('name', '=', $request->users_id)->first();
+            $users = $users_id->id;
+        }
+
+        if ($request->customers_id != null) {
+            $customers_id = customer::select('id')->where('nombre', '=', $request->customers_id)->first();
+            $customers = $customers_id->id;
+        }
         $fecha_creacion = $request->fecha_creacion;
         $datos = $request->validate([
             'nombre' =>['regex:/^[a-z]+$/i'],
@@ -56,14 +65,14 @@ class taskController extends \Illuminate\Routing\Controller
             'codigo_postal' =>['required'],
             'provincia' =>['required'],
             'estado_tarea' =>['required'],
-            'fecha_creacion' =>['required', 'date_format: Y-m-d\TH:i',
+            'fecha_creacion' =>['required', 'date_format:Y-m-d\TH:i',
             function ($atribute, $value, $fail) {
                 if (date("Y-m-d\TH", strtotime($value)) != date("Y-m-d\TH")) {
                     $fail('La fecha de creación no se puede modificar.');
                 }
             }
         ],
-            'fecha_final' =>['nullable', 'date_format: Y-m-d\TH:i',
+            'fecha_final' =>['nullable', 'date_format:Y-m-d\TH:i',
             function ($atribute, $value, $fail) use ($fecha_creacion){
                 if (date("Y-m-d\TH", strtotime($value)) <= date("Y-m-d\TH", strtotime($fecha_creacion))) {
                     $fail('La fecha de creación no se puede modificar.');
@@ -76,6 +85,8 @@ class taskController extends \Illuminate\Routing\Controller
             'customers_id' =>['required']
             
         ]);
+        $datos['users_id'] = $users;
+        $datos['customers_id'] = $customers;
         task::insert($datos);
         $tareas = task::paginate(2);
         return view('tareas.tareas_mostrar', compact('tareas'));
