@@ -11,7 +11,6 @@
 @extends('base')
 
 @section('mostrarExtension')
-@foreach ($tareas as $tarea)
   <form action="{{ route('tareas.update',$tarea) }}" class="row g-3" method="POST">
     @method('put')
     <div class="col-md-3">
@@ -84,7 +83,7 @@
     <div class="col-md-2">
       <label for="inputState" class="form-label">Cliente</label>
       <select id="inputState" class="form-select" name="cliente">
-        <option selected>{{ old("customer_id"), $tarea->customer_id}}</option>
+        <option selected>{{ old("customer_id"), $customer}}</option>
         @foreach ($clientes as $cliente)
         <option>{{$cliente->nombre}}</option>
         @endforeach
@@ -93,7 +92,7 @@
     <div class="col-md-2">
       <label for="inputState" class="form-label">Empleado</label>
       <select id="inputState" class="form-select" name="empleado">
-        <option selected>{{ old("users_id"), $tarea->users_id}}</option>
+        <option selected>{{ old("users_id"), $user}}</option>
         @foreach ($empleados as $empleado)
         <option>{{$empleado->name}}</option>
         @endforeach
@@ -102,7 +101,6 @@
     <div class="col-12">
       <input type="submit" class="btn btn-primary" value="Insert">
     </div>
-    @endforeach
   </form>
   @endsection
 </body>
