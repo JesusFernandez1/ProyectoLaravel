@@ -33,7 +33,7 @@
             <td>{{$usuario->direccion}}</td>
             <td>{{$usuario->fecha_alta}}</td>
             <td>{{$usuario->tipo}}</td>
-            <td><a href=" {{route('usuarios.confirmarEliminarUsuario',$usuario) }}" class="btn btn-outline-success" role="button">Si</a> <a href="{{ route('usuarios.index') }}" class="btn btn-outline-danger" role="button">No</a>
+            <td><a href=" {{route('usuarios.confirmarEliminarUsuario',$usuario) }}" class="btn btn-outline-danger" role="button">Si</a> <a href="{{ route('usuarios.index') }}" class="btn btn-outline-success" role="button">No</a>
          </tr>
       </tbody>
    </table>
