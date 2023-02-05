@@ -24,6 +24,8 @@ use App\Http\Controllers\feeController;
 Route::resource('usuarios', userController::class);
 
 Route::controller(customerController::class)->group(function(){
+    Route::get('clientes/clientes_crearIncidencia', 'nuevaIncidencia')->name('clientes.nuevaIncidencia');
+    Route::get('clientes/clientes_incidenciaCreada', 'crearIncidencia')->name('clientes.crearIncidencia');
     Route::get('clientes/clientes_eliminado/{id}', 'confirmarEliminarCliente')->name('clientes.confirmarEliminarCliente');
 });
 Route::resource('clientes', customerController::class);
