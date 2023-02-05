@@ -74,7 +74,7 @@
       <select id="inputState" class="form-select" name="provincia">
         <option selected>{{ old("provincia", $tarea->provincia)}}</option>
         @foreach ($provincias as $provincia)
-        <option>{{$tarea->provincia}}</option>
+        <option>{{$provincia->nombre}}</option>
         @endforeach
       </select>
       @error('provincia')
