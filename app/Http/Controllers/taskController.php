@@ -140,6 +140,7 @@ class taskController extends \Illuminate\Routing\Controller
         $users = $users_id->id;
         $customers_id = customer::select('id')->where('nombre', '=', $request->customers_id)->first();
         $customers = $customers_id->id;
+        $fecha = task::select('fecha_creacion')->where('id', '=', $id)->first();
 
         $fecha_creacion = $request->fecha_creacion;
         $datos = $request->validate([
@@ -155,8 +156,8 @@ class taskController extends \Illuminate\Routing\Controller
             'estado_tarea' => ['required'],
             'fecha_creacion' => [
                 'required', 'date_format:Y-m-d\TH:i',
-                function ($atribute, $value, $fail) {
-                    if (date("Y-m-d\TH", strtotime($value)) != date("Y-m-d\TH")) {
+                function ($atribute, $value, $fail) use ($fecha) {
+                    if (date("Y-m-d\TH", strtotime($value)) != date("Y-m-d\TH", strtotime($fecha->fecha_creacion))) {
                         $fail('La fecha de creación no se puede modificar.');
                     }
                 }
