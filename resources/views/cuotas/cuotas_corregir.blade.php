@@ -43,14 +43,14 @@
       <input type="text" class="form-control" name="nota" value="{{ old("nota", $cuota->nota) }}">
     </div>
     <div class="col-md-3">
-      <label for="inputState" class="form-label">Tarea correspondiente</label>
-      <select id="inputState" class="form-select" name="task_id">
-        <option selected>{{ old("task_id", $cuota->task_id) }}</option>
-        @foreach ($tareas as $tarea)
-        <option>{{$tarea->task_id}}</option>
+      <label for="inputState" class="form-label">Cliente correspondiente</label>
+      <select id="inputState" class="form-select" name="customers_id">
+        <option selected>{{ old("customers_id", $cuota->customers_id) }}</option>
+        @foreach ($customers as $customer)
+        <option>{{$customer->customers_id}}</option>
         @endforeach
       </select>
-      @error('task_id')
+      @error('customers_id')
           <small style="color: red">{{ $message }}</small>
       @enderror
     </div>
