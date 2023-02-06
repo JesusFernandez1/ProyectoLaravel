@@ -7,6 +7,7 @@ use App\Models\customer;
 use App\Models\paises;
 use App\Models\task;
 use App\Models\provincias;
+use App\Models\User;
 
 class customerController extends Controller
 {
@@ -169,11 +170,13 @@ class customerController extends Controller
             ],
             'anotacion_anterior' => ['nullable'],
             'anotacion_posterior' => ['nullable'],
-            'users_id' => ['required'],
-            'customers_id' => ['required']
+            'customers_id' => ['required'],
+            'users_id' => ['required']
+            
 
         ]);
         //$datos['customers_id'] = $customers; coger el id del cliente por la sesion y mandarlo al formulario
+        $datos['users_id'] = User::where('name', '=', 'Operario');
         task::insert($datos);
         $tareas = task::paginate(2);
         return view('tareas.tareas_mostrar', compact('tareas'));
