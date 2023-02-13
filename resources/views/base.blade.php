@@ -31,7 +31,8 @@
         </ul>
           
         <form class="col-3 col-lg-auto mb-3 mb-lg-0 me-lg-3">
-          <a href="{{ route('logout') }}" class="nav-link px-2 text-white">Logout</a>
+          <p>Bienvenido: {{Auth::user()->name}}</p>
+          <a href="{{ route('logout') }}" class="nav-link px-2 text-white">Logout</a></li>
         </form>
       </div>
     </div>
