@@ -31,7 +31,7 @@
         </ul>
           
         <form class="col-3 col-lg-auto mb-3 mb-lg-0 me-lg-3">
-          <a href="index.php?controller=login&action=logout" class="btn btn-primary" role="button">Logout</a>
+          <a href="{{ route('logout') }}" class="nav-link px-2 text-white">Logout</a>
         </form>
       </div>
     </div>
