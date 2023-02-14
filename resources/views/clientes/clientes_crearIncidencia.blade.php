@@ -115,27 +115,6 @@
       <label for="inputCity" class="form-label">Anotacion final</label>
       <textarea type="text" class="form-control" id="inputCity" name="anotacion_posterior" value="{{ old('anotacion_posterior') }}"></textarea>
     </div>
-    <div class="col-md-2">
-      <label for="inputState" class="form-label">Cliente</label>
-      <select id="inputState" class="form-select" name="customers_id">
-        <option selected>{{ old('customers_id') }}</option>
-        @foreach ($clientes as $cliente)
-        <option>{{$cliente->nombre}}</option>
-        @endforeach
-      </select>
-      @error('customers_id')
-          <small style="color: red">{{ $message }}</small>
-      @enderror
-    </div>
-    <div class="col-md-2">
-      <label for="inputState" class="form-label">Empleado</label>
-      <select id="inputState" class="form-select" name="users_id">
-        <option selected>Operario</option>
-      </select>
-      @error('users_id')
-          <small style="color: red">{{ $message }}</small>
-      @enderror
-    </div>
     <div class="col-12">
       <input type="submit" class="btn btn-primary" value="Insert">
     </div>

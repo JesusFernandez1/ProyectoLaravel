@@ -8,6 +8,7 @@ use App\Models\paises;
 use App\Models\task;
 use App\Models\provincias;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class customerController extends Controller
 {
@@ -134,8 +135,7 @@ class customerController extends Controller
     public function nuevaIncidencia()
     {
         $provincias = provincias::all();
-        $clientes = customer::all(); //coger el id del cliente por la sesion y mandarlo al formulario
-        return view('tareas.tareas_crear', compact('provincias', 'clientes'));
+        return view('tareas.tareas_crear', compact('provincias'));
     }
 
     public function crearIncidencia(Request $request)
@@ -169,14 +169,10 @@ class customerController extends Controller
                 }
             ],
             'anotacion_anterior' => ['nullable'],
-            'anotacion_posterior' => ['nullable'],
-            'customers_id' => ['required'],
-            'users_id' => ['required']
-            
-
+            'anotacion_posterior' => ['nullable']
         ]);
-        //$datos['customers_id'] = $customers; coger el id del cliente por la sesion y mandarlo al formulario
-        $datos['users_id'] = User::where('name', '=', 'Operario');
+        $datos['customers_id'] = Auth::user()->id;
+        $datos['users_id'] = null;
         task::insert($datos);
         $tareas = task::paginate(2);
         return view('tareas.tareas_mostrar', compact('tareas'));
