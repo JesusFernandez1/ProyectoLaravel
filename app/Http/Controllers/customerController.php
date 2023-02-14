@@ -135,7 +135,7 @@ class customerController extends Controller
     public function nuevaIncidencia()
     {
         $provincias = provincias::all();
-        return view('tareas.tareas_crear', compact('provincias'));
+        return view('clientes.clientes_crearIncidencia', compact('provincias'));
     }
 
     public function crearIncidencia(Request $request)
@@ -145,7 +145,7 @@ class customerController extends Controller
 
         if (!(customer::where('telefono', $request->telefono)) || !(customer::where('DNI', $request->DNI))) {
             $provincias = provincias::all();
-            return view('tareas.tareas_crear', compact('provincias'));
+            return view('clientes.clientes_crearIncidencia', compact('provincias'));
         }
 
         $fecha_creacion = $request->fecha_creacion;

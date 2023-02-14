@@ -34,7 +34,7 @@ Route::resource('usuarios', userController::class);
 
 Route::controller(customerController::class)->group(function(){
     Route::get('clientes/clientes_crearIncidencia', 'nuevaIncidencia')->middleware('auth')->middleware('admin')->name('clientes.nuevaIncidencia');
-    Route::get('clientes/clientes_incidenciaCreada', 'crearIncidencia')->middleware('auth')->name('clientes.crearIncidencia');
+    Route::post('clientes/clientes_incidenciaCreada', 'crearIncidencia')->middleware('auth')->name('clientes.crearIncidencia');
     Route::get('clientes/clientes_eliminado/{id}', 'confirmarEliminarCliente')->middleware('auth')->name('clientes.confirmarEliminarCliente');
 });
 Route::resource('clientes', customerController::class);
