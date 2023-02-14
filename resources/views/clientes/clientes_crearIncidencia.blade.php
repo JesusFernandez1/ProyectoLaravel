@@ -13,6 +13,14 @@
 @section('mostrarExtension')
   <form action="{{ route('tareas.crarIncidencia') }}" class="row g-3" method="POST">
     <div class="col-md-3">
+      <label for="inputPassword4" class="form-label">Su DNI</label>
+      <input type="text" class="form-control" name="DNI" value="{{ old('DNI') }}">
+    </div>
+    <div class="col-md-3">
+      <label for="inputPassword4" class="form-label">Su telefono</label>
+      <input type="text" class="form-control" name="telefono" value="{{ old('telefono') }}">
+    </div>
+    <div class="col-md-3">
       <label for="inputPassword4" class="form-label">Nombre</label>
       <input type="text" class="form-control" name="nombre" value="{{ old('nombre') }}">
       @error('nombre')

@@ -140,6 +140,14 @@ class customerController extends Controller
 
     public function crearIncidencia(Request $request)
     {
+
+        $telefono = customer::where('telefono', $request->telefono);
+
+        if (!(customer::where('telefono', $request->telefono)) || !(customer::where('DNI', $request->DNI))) {
+            $provincias = provincias::all();
+            return view('tareas.tareas_crear', compact('provincias'));
+        }
+
         $fecha_creacion = $request->fecha_creacion;
         $datos = $request->validate([
             'nombre' => ['regex:/^[a-z]+$/i'],
