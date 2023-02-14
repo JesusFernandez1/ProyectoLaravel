@@ -18,7 +18,7 @@ class AdminMiddleware
     public function handle(Request $request, Closure $next)
     {
 
-        if(auth()->user()->tipo == true){
+        if(auth()->user()->tipo == 'Admin'){
             return $next($request);
         } else {
             return redirect()->action([AuthenticatedSessionController::class, 'destroy']);
