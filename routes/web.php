@@ -25,7 +25,7 @@ use App\Http\Controllers\feeController;
 
 Route::get('/', function () {
     return view('base');
-})->middleware(['auth', 'verified'])->name('blade');
+})->middleware(['auth', 'verified'])->name('base');
 
 Route::controller(userController::class)->group(function(){
     Route::get('usuarios/usuarios_eliminada/{id}', 'confirmarEliminarUsuario')->middleware('auth')->name('usuarios.confirmarEliminarUsuario');
