@@ -200,8 +200,17 @@ class taskController extends \Illuminate\Routing\Controller
         return view('tareas.tareas_mostrar', compact('tareas'));
     }
 
+    public function cambiarEstadoTarea(Request $request, $id)
+    {
+        $tarea = task::find($id);
+        return view('tareas.tareas_completar', compact('tarea'));
+    }
+
     public function completarTarea(Request $request, $id)
     {
+        task::where('id', '=', $id)->update(['estado_tarea' =>  $request->estado_tarea]);
+        $tareas = task::paginate(2);
+        return view('tareas.tareas_mostrar', compact('tareas'));
     }
 
     public function verInformacionDetallada()
@@ -213,7 +222,29 @@ class taskController extends \Illuminate\Routing\Controller
 
     public function verTareasPendientes()
     {
-        $tareas = task::where('estado_tarea', 'P')->get();
+        $tareas = task::where('estado_tarea', 'P')->paginate(2);
         return view('tareas.tareas_pendientes', compact('tareas'));
+    }
+
+    public function verTareasNoAsignadas()
+    {
+        $tareas = task::where('users_id', null)->paginate(2);
+        return view('tareas.tareas_mostrarNoAsignadas', compact('tareas'));
+    }
+
+    public function asignarOperario($id)
+    {
+        $tarea = task::find($id);
+
+        $provincias = provincias::where('nombre', '!=', $tarea->provincia)->get();
+        $empleados = User::where('id', '!=', $tarea->users_id)->get();
+        return view('tareas.tareas_modificar', compact('tarea', 'provincias', 'empleados'));
+    }
+
+    public function operarioAsignado(Request $request, $id)
+    {
+        task::where('id', '=', $id)->update(['users_id' =>  $request->users_id]);
+        $tareas = task::paginate(2);
+        return view('tareas.tareas_mostrar', compact('tareas'));
     }
 }

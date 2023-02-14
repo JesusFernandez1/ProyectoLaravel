@@ -55,9 +55,6 @@
       <label for="inputState" class="form-label">Estado</label>
       <select id="inputState" class="form-select" name="estado">
         <option selected>R</option>
-        <option>P</option>
-        <option>C</option>
-        <option>B</option>
       </select>
     </div>
     <div class="col-md-1">

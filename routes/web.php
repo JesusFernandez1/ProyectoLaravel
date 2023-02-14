@@ -48,10 +48,13 @@ Route::resource('cuotas', feeController::class);
 Route::controller(taskController::class)->group(function(){
     Route::get('tareas/tareas_verInformacionDetallada', 'verInformacionDetallada')->middleware('auth')->name('tareas.verInformacionDetallada');
     Route::get('tareas/tareas_pendientes', 'verTareasPendientes')->middleware('auth')->middleware('admin')->name('tareas.verTareasPendientes');
-    Route::get('tareas/tareas_noAsignadas', 'verTareasNoAsignadas')->middleware('auth')->name('tareas.verTareasNoAsignadas');
-    Route::get('tareas/tareas_asignada', 'verTareasNoAsignadas')->middleware('auth')->name('tareas.verTareasNoAsignadas');
+    Route::get('tareas/tareas_mostrarNoAsignadas', 'verTareasNoAsignadas')->middleware('auth')->name('tareas.verTareasNoAsignadas');
+    Route::get('tareas/tareas_asignarOperario/{id}', 'asignarOperario')->middleware('auth')->name('tareas.asignarOperario');
+    Route::get('tareas/tareas_asignada/{id}', 'operarioAsignado')->middleware('auth')->name('tareas.operarioAsignado');
     Route::get('tareas/tareas_eliminada/{id}', 'confirmarBorrarTarea')->middleware('auth')->name('tareas.confirmarBorrarTarea');
-    Route::get('tareas/tareas_completar/{id}', 'completarTarea')->middleware('auth')->name('tareas.completarTarea');
+    Route::get('tareas/tareas_completar/{id}', 'cambiarEstadoTarea')->middleware('auth')->name('tareas.cambiarEstadoTarea');
+    Route::get('tareas/tareas_completada/{id}', 'completarTarea')->middleware('auth')->name('tareas.completarTarea');
+    
 });
 Route::resource('tareas', taskController::class);
 
