@@ -46,7 +46,6 @@
         {{-- if({{Auth::user()->tipo == 'Admin'}}) --}}
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
           <li><a href="{{ route('tareas.index') }}" class="nav-link px-2 text-white">Ver tareas</a></li>
-          @if(Auth::user()->tipo == 'Admin')
           <li><a href="{{ route('tareas.verInformacionDetallada') }}" class="nav-link px-2 text-white">Ver tareas completas</a></li>
           <li><a href="{{ route('tareas.verTareasPendientes') }}" class="nav-link px-2 text-white">Ver tareas pendientes</a></li>
           <li><a href="{{ route('tareas.create') }}" class="nav-link px-2 text-white">Añadir tarea</a></li>
@@ -54,7 +53,6 @@
           <li><a href="{{ route('usuarios.index') }}" class="nav-link px-2 text-white">Ver empleados</a></li>
           <li><a href="{{ route('clientes.create') }}" class="nav-link px-2 text-white">Añadir cliente</a></li>
           <li><a href="{{ route('usuarios.create') }}" class="nav-link px-2 text-white">Añadir empleado</a></li>
-          @endif
         </ul>
           
         <form style="justify-content:right" class="col-3 col-lg-auto mb-3 mb-lg-0 me-lg-3">

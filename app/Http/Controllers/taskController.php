@@ -24,7 +24,9 @@ class taskController extends \Illuminate\Routing\Controller
             $tareas = task::paginate(2);
             return view('tareas.tareas_mostrar', compact('tareas'));
         } else {
-            return view('base');
+            $operario = User::where('id', Auth::user()->tipo)->first();
+            $tareas = task::where('users_id', $operario)->paginate(2);
+            return view('tareas.tareas_mostrar', compact('tareas'));
         }
     }
 
@@ -217,7 +219,7 @@ class taskController extends \Illuminate\Routing\Controller
         return view('tareas.tareas_mostrar', compact('tareas'));
     }
 
-    public function cambiarEstadoTarea(Request $request, $id)
+    public function cambiarEstadoTarea($id)
     {
         $tarea = task::find($id);
         return view('tareas.tareas_completar', compact('tarea'));
@@ -225,25 +227,34 @@ class taskController extends \Illuminate\Routing\Controller
 
     public function completarTarea(Request $request, $id)
     {
-        if (Auth::user()->tipo == 'Operario') {
-            task::where('id', '=', $id)->update(['estado_tarea' =>  $request->estado_tarea]);
-            $tareas = task::paginate(2);
-            return view('tareas.tareas_mostrar', compact('tareas'));
-        } else {
-            return view('base');
-        }
+        task::where('id', '=', $id)->update(['estado_tarea' =>  $request->estado_tarea]);
+        $operario = User::where('id', Auth::user()->tipo)->first();
+        $tareas = task::where('users_id', $operario)->paginate(2);
+        return view('tareas.tareas_mostrar', compact('tareas'));
     }
 
     public function verInformacionDetallada()
     {
-        $tareas = task::paginate(2);
-        return view('tareas.tareas_verInformacionDetallada', compact('tareas'));
+        if (Auth::user()->tipo == 'Admin') {
+            $tareas = task::paginate(2);
+            return view('tareas.tareas_verInformacionDetallada', compact('tareas'));
+        } else {
+            $operario = User::where('id', Auth::user()->tipo)->first();
+            $tareas = task::where('users_id', $operario)->paginate(2);
+            return view('tareas.tareas_verInformacionDetallada', compact('tareas'));
+        }
     }
 
     public function verTareasPendientes()
     {
-        $tareas = task::where('estado_tarea', 'P')->paginate(2);
-        return view('tareas.tareas_pendientes', compact('tareas'));
+        if (Auth::user()->tipo == 'Admin') {
+            $tareas = task::where('estado_tarea', 'P')->paginate(2);
+            return view('tareas.tareas_pendientes', compact('tareas'));
+        } else {
+            $operario = User::where('id', Auth::user()->tipo)->first();
+            $tareas = task::where('estado_tarea', 'P')->where('users_id', $operario)->paginate(2);
+            return view('tareas.tareas_verInformacionDetallada', compact('tareas'));
+        }
     }
 
     public function verTareasNoAsignadas()
