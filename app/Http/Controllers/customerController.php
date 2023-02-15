@@ -141,16 +141,24 @@ class customerController extends Controller
     public function crearIncidencia(Request $request)
     {
 
+        $storedDNI = User::find($request->DNI)->dni;
+        $storedTelefono = User::find($request->telefono)->telefono;
         $fecha_creacion = $request->fecha_creacion;
         $datos = $request->validate([
             'DNI' => ['regex:/((^[A-Z]{1}[0-9]{7}[A-Z0-9]{1}$|^[T]{1}[A-Z0-9]{8}$)|^[0-9]{8}[A-Z]{1}$)/',
-                function ($atribute, $value, $fail) {
-                    if (date("Y-m-d\TH", strtotime($value)) != date("Y-m-d\TH")) {
-                        $fail('La fecha de creación no se puede modificar.');
+                function ($atribute, $value, $fail) use ($storedDNI){
+                    if ($storedDNI != $value) {
+                        $fail('El DNI introducido no coincide con ningun usuario.');
                     }
                 }
             ],
-            'telefono' => ['regex:/(\+34|0034|34)?[ -]*(6|7|8|9)[ -]*([0-9][ -]*){8}/'],
+            'telefono' => ['regex:/(\+34|0034|34)?[ -]*(6|7|8|9)[ -]*([0-9][ -]*){8}/',
+                function ($atribute, $value, $fail) use ($storedTelefono){
+                    if ($storedTelefono != $value) {
+                        $fail('El telefono introducido no coincide con ningun usuario.');
+                    }
+                }
+            ],
             'nombre' => ['regex:/^[a-z]+$/i'],
             'apellido' => ['regex:/^[a-z]+$/i'],
             'telefono' => ['regex:/(\+34|0034|34)?[ -]*(6|7|8|9)[ -]*([0-9][ -]*){8}/'],
@@ -180,7 +188,7 @@ class customerController extends Controller
             'anotacion_anterior' => ['nullable'],
             'anotacion_posterior' => ['nullable']
         ]);
-        $datos['customers_id'] = Auth::user()->id;
+        $datos['customers_id'] = customer::where('dni', $storedDNI)->first();
         $datos['users_id'] = null;
         task::insert($datos);
         $tareas = task::paginate(2);
