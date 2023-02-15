@@ -30,33 +30,33 @@ Route::get('/', function () {
 Route::controller(userController::class)->group(function(){
     Route::get('usuarios/usuarios_eliminada/{id}', 'confirmarEliminarUsuario')->middleware('auth')->name('usuarios.confirmarEliminarUsuario');
 });
-Route::resource('usuarios', userController::class);
+Route::resource('usuarios', userController::class)->middleware('auth');
 
 Route::controller(customerController::class)->group(function(){
-    Route::get('clientes/clientes_crearIncidencia', 'nuevaIncidencia')->middleware('auth')->middleware('admin')->name('clientes.nuevaIncidencia');
-    Route::post('clientes/clientes_incidenciaCreada', 'crearIncidencia')->middleware('auth')->name('clientes.crearIncidencia');
-    Route::get('clientes/clientes_eliminado/{id}', 'confirmarEliminarCliente')->middleware('auth')->name('clientes.confirmarEliminarCliente');
+    Route::get('clientes/clientes_crearIncidencia', 'nuevaIncidencia')->name('clientes.nuevaIncidencia');
+    Route::post('clientes/clientes_incidenciaCreada', 'crearIncidencia')->name('clientes.crearIncidencia');
+    Route::get('clientes/clientes_eliminado/{id}', 'confirmarEliminarCliente')->middleware('auth')->middleware('admin')->name('clientes.confirmarEliminarCliente');
 });
-Route::resource('clientes', customerController::class);
+Route::resource('clientes', customerController::class)->middleware('auth');
 
 Route::controller(feeController::class)->group(function(){
     Route::get('cuotas/cuotas_crear/{id}', 'agregar')->middleware('auth')->middleware('admin')->name('cuotas.agregar');
     Route::get('cuotas/cuotas_eliminada/{id}', 'confirmarEliminarCuota')->middleware('auth')->middleware('admin')->name('cuotas.confirmarEliminarCuota');
 });
-Route::resource('cuotas', feeController::class);
+Route::resource('cuotas', feeController::class)->middleware('auth');
 
 Route::controller(taskController::class)->group(function(){
     Route::get('tareas/tareas_verInformacionDetallada', 'verInformacionDetallada')->middleware('auth')->name('tareas.verInformacionDetallada');
     Route::get('tareas/tareas_pendientes', 'verTareasPendientes')->middleware('auth')->name('tareas.verTareasPendientes');
-    Route::get('tareas/tareas_mostrarNoAsignadas', 'verTareasNoAsignadas')->middleware('auth')->name('tareas.verTareasNoAsignadas');
-    Route::get('tareas/tareas_asignarOperario/{id}', 'asignarOperario')->middleware('auth')->name('tareas.asignarOperario');
-    Route::get('tareas/tareas_asignada/{id}', 'operarioAsignado')->middleware('auth')->name('tareas.operarioAsignado');
-    Route::get('tareas/tareas_eliminada/{id}', 'confirmarBorrarTarea')->middleware('auth')->name('tareas.confirmarBorrarTarea');
-    Route::get('tareas/tareas_completar/{id}', 'cambiarEstadoTarea')->middleware('auth')->name('tareas.cambiarEstadoTarea');
-    Route::get('tareas/tareas_completada/{id}', 'completarTarea')->middleware('auth')->name('tareas.completarTarea');
+    Route::get('tareas/tareas_mostrarNoAsignadas', 'verTareasNoAsignadas')->middleware('auth')->middleware('admin')->name('tareas.verTareasNoAsignadas');
+    Route::get('tareas/tareas_asignarOperario/{id}', 'asignarOperario')->middleware('auth')->middleware('admin')->name('tareas.asignarOperario');
+    Route::get('tareas/tareas_asignada/{id}', 'operarioAsignado')->middleware('auth')->middleware('admin')->name('tareas.operarioAsignado');
+    Route::get('tareas/tareas_eliminada/{id}', 'confirmarBorrarTarea')->middleware('auth')->middleware('admin')->name('tareas.confirmarBorrarTarea');
+    Route::get('tareas/tareas_completar/{id}', 'cambiarEstadoTarea')->middleware('auth')->middleware('operario')->name('tareas.cambiarEstadoTarea');
+    Route::post('tareas/tareas_completada/{id}', 'completarTarea')->middleware('auth')->middleware('operario')->name('tareas.completarTarea');
     
 });
-Route::resource('tareas', taskController::class);
+Route::resource('tareas', taskController::class)->middleware('auth');
 
 // Route::middleware('auth')->group(function () {
 //     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

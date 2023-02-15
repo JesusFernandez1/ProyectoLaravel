@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class userController extends Controller
 {
@@ -14,8 +15,12 @@ class userController extends Controller
      */
     public function index()
     {
-        $usuarios = User::paginate(2);
-        return view('usuarios.usuarios_mostrar', compact('usuarios'));
+        if (Auth::user()->tipo == 'Admin') {
+            $usuarios = User::paginate(2);
+            return view('usuarios.usuarios_mostrar', compact('usuarios'));
+        } else {
+            return view('base');
+        }
     }
 
     /**
@@ -25,7 +30,11 @@ class userController extends Controller
      */
     public function create(Request $request)
     {
-        return view('usuarios.usuarios_crear');
+        if (Auth::user()->tipo == 'Admin') {
+            return view('usuarios.usuarios_crear');
+        } else {
+            return view('base');
+        }
     }
 
     /**
@@ -37,20 +46,21 @@ class userController extends Controller
     public function store(Request $request)
     {
         $datos = $request->validate([
-            'DNI' =>['regex:/((^[A-Z]{1}[0-9]{7}[A-Z0-9]{1}$|^[T]{1}[A-Z0-9]{8}$)|^[0-9]{8}[A-Z]{1}$)/'],
-            'name' =>['regex:/^[a-z]+$/i'],
-            'email' =>['regex:#^(((([a-z\d][\.\-\+_]?)*)[a-z0-9])+)\@(((([a-z\d][\.\-_]?){0,62})[a-z\d])+)\.([a-z\d]{2,6})$#i'],
-            'password' =>['required'],
-            'telefono' =>['regex:/(\+34|0034|34)?[ -]*(6|7|8|9)[ -]*([0-9][ -]*){8}/'],
-            'direccion' =>['required'],
-            'fecha_alta' =>['required', 'date_format:Y-m-d\TH:i',
-            function ($atribute, $value, $fail) {
-                if (date("Y-m-d\TH", strtotime($value)) != date("Y-m-d\TH")) {
-                    $fail('La fecha de creación no se puede modificar.');
+            'DNI' => ['regex:/((^[A-Z]{1}[0-9]{7}[A-Z0-9]{1}$|^[T]{1}[A-Z0-9]{8}$)|^[0-9]{8}[A-Z]{1}$)/'],
+            'name' => ['regex:/^[a-z]+$/i'],
+            'email' => ['regex:#^(((([a-z\d][\.\-\+_]?)*)[a-z0-9])+)\@(((([a-z\d][\.\-_]?){0,62})[a-z\d])+)\.([a-z\d]{2,6})$#i'],
+            'password' => ['required'],
+            'telefono' => ['regex:/(\+34|0034|34)?[ -]*(6|7|8|9)[ -]*([0-9][ -]*){8}/'],
+            'direccion' => ['required'],
+            'fecha_alta' => [
+                'required', 'date_format:Y-m-d\TH:i',
+                function ($atribute, $value, $fail) {
+                    if (date("Y-m-d\TH", strtotime($value)) != date("Y-m-d\TH")) {
+                        $fail('La fecha de creación no se puede modificar.');
+                    }
                 }
-            }
-        ],
-            'tipo' =>['required']
+            ],
+            'tipo' => ['required']
         ]);
         User::insert($datos);
         $usuarios = User::paginate(2);
@@ -65,8 +75,12 @@ class userController extends Controller
      */
     public function show($id)
     {
-        $usuario = User::find($id);
-        return view('usuarios.usuarios_eliminar', compact('usuario'));
+        if (Auth::user()->tipo == 'Admin') {
+            $usuario = User::find($id);
+            return view('usuarios.usuarios_eliminar', compact('usuario'));
+        } else {
+            return view('base');
+        }
     }
 
     /**
@@ -91,20 +105,21 @@ class userController extends Controller
     public function update(Request $request, $id)
     {
         $datos = $request->validate([
-            'DNI' =>['regex:/((^[A-Z]{1}[0-9]{7}[A-Z0-9]{1}$|^[T]{1}[A-Z0-9]{8}$)|^[0-9]{8}[A-Z]{1}$)/'],
-            'name' =>['regex:/^[a-z]+$/i'],
-            'email' =>['regex:#^(((([a-z\d][\.\-\+_]?)*)[a-z0-9])+)\@(((([a-z\d][\.\-_]?){0,62})[a-z\d])+)\.([a-z\d]{2,6})$#i'],
-            'password' =>['required'],
-            'telefono' =>['regex:/(\+34|0034|34)?[ -]*(6|7|8|9)[ -]*([0-9][ -]*){8}/'],
-            'direccion' =>['required'],
-            'fecha_alta' =>['required', 'date_format:Y-m-d\TH:i',
-            function ($atribute, $value, $fail) {
-                if (date("Y-m-d\TH", strtotime($value)) != date("Y-m-d\TH")) {
-                    $fail('La fecha de creación no se puede modificar.');
+            'DNI' => ['regex:/((^[A-Z]{1}[0-9]{7}[A-Z0-9]{1}$|^[T]{1}[A-Z0-9]{8}$)|^[0-9]{8}[A-Z]{1}$)/'],
+            'name' => ['regex:/^[a-z]+$/i'],
+            'email' => ['regex:#^(((([a-z\d][\.\-\+_]?)*)[a-z0-9])+)\@(((([a-z\d][\.\-_]?){0,62})[a-z\d])+)\.([a-z\d]{2,6})$#i'],
+            'password' => ['required'],
+            'telefono' => ['regex:/(\+34|0034|34)?[ -]*(6|7|8|9)[ -]*([0-9][ -]*){8}/'],
+            'direccion' => ['required'],
+            'fecha_alta' => [
+                'required', 'date_format:Y-m-d\TH:i',
+                function ($atribute, $value, $fail) {
+                    if (date("Y-m-d\TH", strtotime($value)) != date("Y-m-d\TH")) {
+                        $fail('La fecha de creación no se puede modificar.');
+                    }
                 }
-            }
-        ],
-            'tipo' =>['required']
+            ],
+            'tipo' => ['required']
         ]);
         User::where('id', '=', $id)->update($datos);
         $usuarios = User::paginate(2);
@@ -122,10 +137,10 @@ class userController extends Controller
         //
     }
 
-    public function confirmarEliminarUsuario($id) {
+    public function confirmarEliminarUsuario($id)
+    {
         User::find($id)->delete();
         $usuarios = User::paginate(2);
         return view('usuarios.usuarios_mostrar', compact('usuarios'));
-         
     }
 }

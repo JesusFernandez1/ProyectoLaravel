@@ -122,7 +122,7 @@ class taskController extends \Illuminate\Routing\Controller
         $provincias = provincias::where('nombre', '!=', $tarea->provincia)->get();
         $empleados = User::where('id', '!=', $tarea->users_id)->get();
         $clientes = customer::where('id', '!=', $tarea->customers_id)->get();
-        return view('tareas.tareas_modificar', compact('tarea', 'provincias', 'empleados', 'clientes','nombreEmpleado','nombreCliente'));
+        return view('tareas.tareas_modificar', compact('tarea', 'provincias', 'empleados', 'clientes', 'nombreEmpleado', 'nombreCliente'));
     }
 
     /**
