@@ -141,15 +141,16 @@ class customerController extends Controller
     public function crearIncidencia(Request $request)
     {
 
-        $telefono = customer::where('telefono', $request->telefono);
-
-        if (!(customer::where('telefono', $request->telefono)) || !(customer::where('DNI', $request->DNI))) {
-            $provincias = provincias::all();
-            return view('clientes.clientes_crearIncidencia', compact('provincias'));
-        }
-
         $fecha_creacion = $request->fecha_creacion;
         $datos = $request->validate([
+            'DNI' => ['regex:/((^[A-Z]{1}[0-9]{7}[A-Z0-9]{1}$|^[T]{1}[A-Z0-9]{8}$)|^[0-9]{8}[A-Z]{1}$)/',
+                function ($atribute, $value, $fail) {
+                    if (date("Y-m-d\TH", strtotime($value)) != date("Y-m-d\TH")) {
+                        $fail('La fecha de creación no se puede modificar.');
+                    }
+                }
+            ],
+            'telefono' => ['regex:/(\+34|0034|34)?[ -]*(6|7|8|9)[ -]*([0-9][ -]*){8}/'],
             'nombre' => ['regex:/^[a-z]+$/i'],
             'apellido' => ['regex:/^[a-z]+$/i'],
             'telefono' => ['regex:/(\+34|0034|34)?[ -]*(6|7|8|9)[ -]*([0-9][ -]*){8}/'],

@@ -44,4 +44,7 @@
             </x-primary-button>
         </div>
     </form>
+    <x-primary-button class="ml-3">
+        <a href="{{ route('clientes.nuevaIncidencia') }}" class="nav-link px-2 text-white">Crear incidencia</a>
+    </x-primary-button>
 </x-guest-layout>

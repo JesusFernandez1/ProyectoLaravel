@@ -40,14 +40,14 @@ Route::controller(customerController::class)->group(function(){
 Route::resource('clientes', customerController::class);
 
 Route::controller(feeController::class)->group(function(){
-    Route::get('cuotas/cuotas_crear/{id}', 'agregar')->middleware('auth')->name('cuotas.agregar');
-    Route::get('cuotas/cuotas_eliminada/{id}', 'confirmarEliminarCuota')->middleware('auth')->name('cuotas.confirmarEliminarCuota');
+    Route::get('cuotas/cuotas_crear/{id}', 'agregar')->middleware('auth')->middleware('admin')->name('cuotas.agregar');
+    Route::get('cuotas/cuotas_eliminada/{id}', 'confirmarEliminarCuota')->middleware('auth')->middleware('admin')->name('cuotas.confirmarEliminarCuota');
 });
 Route::resource('cuotas', feeController::class);
 
 Route::controller(taskController::class)->group(function(){
     Route::get('tareas/tareas_verInformacionDetallada', 'verInformacionDetallada')->middleware('auth')->name('tareas.verInformacionDetallada');
-    Route::get('tareas/tareas_pendientes', 'verTareasPendientes')->middleware('auth')->middleware('admin')->name('tareas.verTareasPendientes');
+    Route::get('tareas/tareas_pendientes', 'verTareasPendientes')->middleware('auth')->name('tareas.verTareasPendientes');
     Route::get('tareas/tareas_mostrarNoAsignadas', 'verTareasNoAsignadas')->middleware('auth')->name('tareas.verTareasNoAsignadas');
     Route::get('tareas/tareas_asignarOperario/{id}', 'asignarOperario')->middleware('auth')->name('tareas.asignarOperario');
     Route::get('tareas/tareas_asignada/{id}', 'operarioAsignado')->middleware('auth')->name('tareas.operarioAsignado');
