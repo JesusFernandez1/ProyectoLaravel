@@ -140,9 +140,11 @@ class customerController extends Controller
 
     public function crearIncidencia(Request $request)
     {
+        // $storedDNI = User::find($request->DNI)->dni;
+        // $storedTelefono = User::find($request->telefono)->telefono;
+        $storedDNI = customer::select('dni')->where('DNI', $request->DNI)->first()->dni;
+        $storedTelefono = customer::select('telefono')->where('telefono', $request->telefono)->first()->telefono;
 
-        $storedDNI = User::find($request->DNI)->dni;
-        $storedTelefono = User::find($request->telefono)->telefono;
         $fecha_creacion = $request->fecha_creacion;
         $datos = $request->validate([
             'DNI' => ['regex:/((^[A-Z]{1}[0-9]{7}[A-Z0-9]{1}$|^[T]{1}[A-Z0-9]{8}$)|^[0-9]{8}[A-Z]{1}$)/',
@@ -191,7 +193,6 @@ class customerController extends Controller
         $datos['customers_id'] = customer::where('dni', $storedDNI)->first();
         $datos['users_id'] = null;
         task::insert($datos);
-        $tareas = task::paginate(2);
-        return view('tareas.tareas_mostrar', compact('tareas'));
+        return view('/');
     }
 }

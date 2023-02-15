@@ -44,6 +44,7 @@
           </div>
         </div> --}}
         {{-- if({{Auth::user()->tipo == 'Admin'}}) --}}
+        @if(Auth::user())
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
           <li><a href="{{ route('tareas.index') }}" class="nav-link px-2 text-white">Ver tareas</a></li>
           <li><a href="{{ route('tareas.verInformacionDetallada') }}" class="nav-link px-2 text-white">Ver tareas completas</a></li>
@@ -59,6 +60,7 @@
           <p>Bienvenido: {{Auth::user()->name}}</p>
           <a href="{{ route('logout') }}" class="nav-link px-2 text-white">Logout</a></li>
         </form>
+        @endif
       </div>
     </div>
   </header>
