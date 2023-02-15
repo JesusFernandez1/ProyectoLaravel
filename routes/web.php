@@ -37,13 +37,13 @@ Route::controller(customerController::class)->group(function(){
     Route::post('clientes/clientes_incidenciaCreada', 'crearIncidencia')->name('clientes.crearIncidencia');
     Route::get('clientes/clientes_eliminado/{id}', 'confirmarEliminarCliente')->middleware('auth')->middleware('admin')->name('clientes.confirmarEliminarCliente');
 });
-Route::resource('clientes', customerController::class)->middleware('auth');
+Route::resource('clientes', customerController::class)->middleware('auth')->middleware('admin');
 
 Route::controller(feeController::class)->group(function(){
     Route::get('cuotas/cuotas_crear/{id}', 'agregar')->middleware('auth')->middleware('admin')->name('cuotas.agregar');
     Route::get('cuotas/cuotas_eliminada/{id}', 'confirmarEliminarCuota')->middleware('auth')->middleware('admin')->name('cuotas.confirmarEliminarCuota');
 });
-Route::resource('cuotas', feeController::class)->middleware('auth');
+Route::resource('cuotas', feeController::class)->middleware('auth')->middleware('admin');
 
 Route::controller(taskController::class)->group(function(){
     Route::get('tareas/tareas_verInformacionDetallada', 'verInformacionDetallada')->middleware('auth')->name('tareas.verInformacionDetallada');

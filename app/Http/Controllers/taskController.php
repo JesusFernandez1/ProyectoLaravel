@@ -7,6 +7,7 @@ use App\Models\task;
 use App\Models\User;
 use App\Models\customer;
 use App\Models\provincias;
+use Illuminate\Support\Facades\Auth;
 
 
 class taskController extends \Illuminate\Routing\Controller
@@ -19,8 +20,12 @@ class taskController extends \Illuminate\Routing\Controller
      */
     public function index()
     {
-        $tareas = task::paginate(2);
-        return view('tareas.tareas_mostrar', compact('tareas'));
+        if (Auth::user()->tipo == 'Admin') {
+            $tareas = task::paginate(2);
+            return view('tareas.tareas_mostrar', compact('tareas'));
+        } else {
+            return view('base');
+        }
     }
 
     /**
@@ -30,10 +35,14 @@ class taskController extends \Illuminate\Routing\Controller
      */
     public function create()
     {
-        $provincias = provincias::all();
-        $empleados = User::all();
-        $clientes = customer::all();
-        return view('tareas.tareas_crear', compact('provincias', 'empleados', 'clientes'));
+        if (Auth::user()->tipo == 'Admin') {
+            $provincias = provincias::all();
+            $empleados = User::all();
+            $clientes = customer::all();
+            return view('tareas.tareas_crear', compact('provincias', 'empleados', 'clientes'));
+        } else {
+            return view('base');
+        }
     }
 
     /**
@@ -102,8 +111,12 @@ class taskController extends \Illuminate\Routing\Controller
      */
     public function show($id)
     {
-        $tarea = task::find($id);
-        return view('tareas.tareas_eliminar', compact('tarea'));
+        if (Auth::user()->tipo == 'Admin') {
+            $tarea = task::find($id);
+            return view('tareas.tareas_eliminar', compact('tarea'));
+        } else {
+            return view('base');
+        }
     }
 
     /**
@@ -114,15 +127,19 @@ class taskController extends \Illuminate\Routing\Controller
      */
     public function edit($id)
     {
-        $tarea = task::find($id);
+        if (Auth::user()->tipo == 'Admin') {
+            $tarea = task::find($id);
 
-        $nombreEmpleado = User::select('name')->where('id', '=', $tarea->users_id)->first();
-        $nombreCliente = customer::select('nombre')->where('id', '=', $tarea->customers_id)->first();
+            $nombreEmpleado = User::select('name')->where('id', '=', $tarea->users_id)->first();
+            $nombreCliente = customer::select('nombre')->where('id', '=', $tarea->customers_id)->first();
 
-        $provincias = provincias::where('nombre', '!=', $tarea->provincia)->get();
-        $empleados = User::where('id', '!=', $tarea->users_id)->get();
-        $clientes = customer::where('id', '!=', $tarea->customers_id)->get();
-        return view('tareas.tareas_modificar', compact('tarea', 'provincias', 'empleados', 'clientes', 'nombreEmpleado', 'nombreCliente'));
+            $provincias = provincias::where('nombre', '!=', $tarea->provincia)->get();
+            $empleados = User::where('id', '!=', $tarea->users_id)->get();
+            $clientes = customer::where('id', '!=', $tarea->customers_id)->get();
+            return view('tareas.tareas_modificar', compact('tarea', 'provincias', 'empleados', 'clientes', 'nombreEmpleado', 'nombreCliente'));
+        } else {
+            return view('base');
+        }
     }
 
     /**
@@ -208,14 +225,17 @@ class taskController extends \Illuminate\Routing\Controller
 
     public function completarTarea(Request $request, $id)
     {
-        task::where('id', '=', $id)->update(['estado_tarea' =>  $request->estado_tarea]);
-        $tareas = task::paginate(2);
-        return view('tareas.tareas_mostrar', compact('tareas'));
+        if (Auth::user()->tipo == 'Operario') {
+            task::where('id', '=', $id)->update(['estado_tarea' =>  $request->estado_tarea]);
+            $tareas = task::paginate(2);
+            return view('tareas.tareas_mostrar', compact('tareas'));
+        } else {
+            return view('base');
+        }
     }
 
     public function verInformacionDetallada()
     {
-
         $tareas = task::paginate(2);
         return view('tareas.tareas_verInformacionDetallada', compact('tareas'));
     }
