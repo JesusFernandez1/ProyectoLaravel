@@ -142,25 +142,23 @@ class customerController extends Controller
     {
         // $storedDNI = User::find($request->DNI)->dni;
         // $storedTelefono = User::find($request->telefono)->telefono;
-        $storedDNI = customer::select('dni')->where('DNI', $request->DNI)->first()->dni;
-        $storedTelefono = customer::select('telefono')->where('telefono', $request->telefono)->first()->telefono;
 
+        $storedDNI = $request->DNI;
+        $storedTelefono = $request->telefonoUser;
         $fecha_creacion = $request->fecha_creacion;
-        $datos = $request->validate([
+
+        $request->validate([
             'DNI' => ['regex:/((^[A-Z]{1}[0-9]{7}[A-Z0-9]{1}$|^[T]{1}[A-Z0-9]{8}$)|^[0-9]{8}[A-Z]{1}$)/',
-                function ($atribute, $value, $fail) use ($storedDNI){
-                    if ($storedDNI != $value) {
-                        $fail('El DNI introducido no coincide con ningun usuario.');
-                    }
-                }
-            ],
-            'telefono' => ['regex:/(\+34|0034|34)?[ -]*(6|7|8|9)[ -]*([0-9][ -]*){8}/',
                 function ($atribute, $value, $fail) use ($storedTelefono){
-                    if ($storedTelefono != $value) {
-                        $fail('El telefono introducido no coincide con ningun usuario.');
+                    if (!customer::select('DNI')->where('DNI', $value)->where('telefono', $storedTelefono)->first()) {
+                        
+                        $fail('El DNI o telefono introducido no coincide con ningun usuario.');
                     }
                 }
-            ],
+            ]
+        ]);
+
+        $datos = $request->validate([
             'nombre' => ['regex:/^[a-z]+$/i'],
             'apellido' => ['regex:/^[a-z]+$/i'],
             'telefono' => ['regex:/(\+34|0034|34)?[ -]*(6|7|8|9)[ -]*([0-9][ -]*){8}/'],
@@ -190,9 +188,10 @@ class customerController extends Controller
             'anotacion_anterior' => ['nullable'],
             'anotacion_posterior' => ['nullable']
         ]);
-        $datos['customers_id'] = customer::where('dni', $storedDNI)->first();
+        $idcliente = customer::select('id')->where('DNI', $storedDNI)->first()->id;
+        $datos['customers_id'] = $idcliente;
         $datos['users_id'] = null;
         task::insert($datos);
-        return view('/');
+        return view('base');
     }
 }

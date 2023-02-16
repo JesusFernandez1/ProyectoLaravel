@@ -21,8 +21,8 @@
     </div>
     <div class="col-md-3">
       <label for="inputPassword4" class="form-label">Su telefono</label>
-      <input type="text" class="form-control" name="telefono" value="{{ old('telefono') }}">
-      @error('telefono')
+      <input type="text" class="form-control" name="telefonoUser" value="{{ old('telefonoUser') }}">
+      @error('telefonoUser')
           <small style="color: red">{{ $message }}</small>
       @enderror
     </div>

@@ -21,11 +21,10 @@ class taskController extends \Illuminate\Routing\Controller
     public function index()
     {
         if (Auth::user()->tipo == 'Admin') {
-            $tareas = task::paginate(2);
+            $tareas = task::where('users_id', '!=', null)->paginate(2);
             return view('tareas.tareas_mostrar', compact('tareas'));
         } else {
-            $operario = User::where('id', Auth::user()->tipo)->first();
-            $tareas = task::where('users_id', $operario)->paginate(2);
+            $tareas = task::where('users_id', Auth::user()->id)->paginate(2);
             return view('tareas.tareas_mostrar', compact('tareas'));
         }
     }
@@ -43,7 +42,7 @@ class taskController extends \Illuminate\Routing\Controller
             $clientes = customer::all();
             return view('tareas.tareas_crear', compact('provincias', 'empleados', 'clientes'));
         } else {
-            return view('base');
+            return redirect()->action([AuthenticatedSessionController::class, 'destroy']);
         }
     }
 
@@ -117,7 +116,7 @@ class taskController extends \Illuminate\Routing\Controller
             $tarea = task::find($id);
             return view('tareas.tareas_eliminar', compact('tarea'));
         } else {
-            return view('base');
+            return redirect()->action([AuthenticatedSessionController::class, 'destroy']);
         }
     }
 
@@ -132,15 +131,12 @@ class taskController extends \Illuminate\Routing\Controller
         if (Auth::user()->tipo == 'Admin') {
             $tarea = task::find($id);
 
-            $nombreEmpleado = User::select('name')->where('id', '=', $tarea->users_id)->first();
-            $nombreCliente = customer::select('nombre')->where('id', '=', $tarea->customers_id)->first();
-
-            $provincias = provincias::where('nombre', '!=', $tarea->provincia)->get();
-            $empleados = User::where('id', '!=', $tarea->users_id)->get();
-            $clientes = customer::where('id', '!=', $tarea->customers_id)->get();
-            return view('tareas.tareas_modificar', compact('tarea', 'provincias', 'empleados', 'clientes', 'nombreEmpleado', 'nombreCliente'));
+            $provincias = provincias::all();
+            $empleados = User::all();
+            $clientes = customer::all();
+            return view('tareas.tareas_modificar', compact('tarea', 'provincias', 'empleados', 'clientes'));
         } else {
-            return view('base');
+            return redirect()->action([AuthenticatedSessionController::class, 'destroy']);
         }
     }
 
@@ -154,11 +150,7 @@ class taskController extends \Illuminate\Routing\Controller
     public function update(Request $request, $id)
     {
 
-        $users_id = User::select('id')->where('name', '=', $request->users_id)->first();
-        $users = $users_id->id;
-        $customers_id = customer::select('id')->where('nombre', '=', $request->customers_id)->first();
-        $customers = $customers_id->id;
-        $fecha = task::select('fecha_creacion')->where('id', '=', $id)->first();
+        $fecha = task::select('fecha_creacion')->where('id', $id)->first();
 
         $fecha_creacion = $request->fecha_creacion;
         $datos = $request->validate([
@@ -194,8 +186,6 @@ class taskController extends \Illuminate\Routing\Controller
             'customers_id' => ['required']
 
         ]);
-        $datos['users_id'] = $users;
-        $datos['customers_id'] = $customers;
         task::where('id', '=', $id)->update($datos);
         $tareas = task::paginate(2);
         return view('tareas.tareas_mostrar', compact('tareas'));
@@ -236,7 +226,7 @@ class taskController extends \Illuminate\Routing\Controller
     public function verInformacionDetallada()
     {
         if (Auth::user()->tipo == 'Admin') {
-            $tareas = task::paginate(2);
+            $tareas = task::where('users_id', '!=', null)->paginate(2);
             return view('tareas.tareas_verInformacionDetallada', compact('tareas'));
         } else {
             $operario = User::where('id', Auth::user()->tipo)->first();
@@ -248,7 +238,7 @@ class taskController extends \Illuminate\Routing\Controller
     public function verTareasPendientes()
     {
         if (Auth::user()->tipo == 'Admin') {
-            $tareas = task::where('estado_tarea', 'P')->paginate(2);
+            $tareas = task::where('users_id', '!=', null)->where('estado_tarea', 'P')->paginate(2);
             return view('tareas.tareas_pendientes', compact('tareas'));
         } else {
             $operario = User::where('id', Auth::user()->tipo)->first();
@@ -275,7 +265,7 @@ class taskController extends \Illuminate\Routing\Controller
     public function operarioAsignado(Request $request, $id)
     {
         task::where('id', '=', $id)->update(['users_id' =>  $request->users_id]);
-        $tareas = task::paginate(2);
+        $tareas = task::where('users_id', '!=', null)->paginate(2);
         return view('tareas.tareas_mostrar', compact('tareas'));
     }
 }

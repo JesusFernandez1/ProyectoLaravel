@@ -72,9 +72,8 @@
     <div class="col-md-2">
       <label for="inputState" class="form-label">Provincia</label>
       <select id="inputState" class="form-select" name="provincia">
-        <option selected>{{ old("provincia", $tarea->provincia)}}</option>
         @foreach ($provincias as $provincia)
-        <option>{{$provincia->nombre}}</option>
+        <option value="{{$provincia->id}}" @selected(old("provincia", $tarea->provincia)==$provincia->id)>{{$provincia->nombre}}</option>
         @endforeach
       </select>
       @error('provincia')
@@ -125,9 +124,8 @@
     <div class="col-md-2">
       <label for="inputState" class="form-label">Cliente</label>
       <select id="inputState" class="form-select" name="customers_id">
-        <option selected>{{ old("customers_id", $nombreCliente->nombre)}}</option>
         @foreach ($clientes as $cliente)
-        <option>{{$cliente->nombre}}</option>
+        <option value="{{$cliente->id}}" @selected(old("customers_id", $tarea->customers_id)==$cliente->id)>{{$cliente->nombre}}</option>
         @endforeach
       </select>
       @error('customers_id')
@@ -137,9 +135,8 @@
     <div class="col-md-2">
       <label for="inputState" class="form-label">Empleado</label>
       <select id="inputState" class="form-select" name="users_id">
-        <option selected>{{ old("users_id", $nombreEmpleado->name)}}</option>
         @foreach ($empleados as $empleado)
-        <option>{{$empleado->name}}</option>
+        <option value="{{$empleado->id}}" @selected(old("users_id", $tarea->users_id)==$empleado->id)>{{$empleado->name}}</option>
         @endforeach
       </select>
       @error('users_id')
