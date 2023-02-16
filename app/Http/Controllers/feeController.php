@@ -63,12 +63,13 @@ class feeController extends Controller
                     }
                 }
             ],
-            'notas' => ['required']
+            'notas' => ['required'],
+            'customers_id' => ['required']
         ]);
-        $datos['customers_id'] = $request->customers_id;
         fee::insert($datos);
-        $cuotas = fee::where('id', $request->customers_id);
-        return view('cuotas.cuotas_mostrar', compact('cuotas'));
+        $cliente = customer::where('id', $request->customers_id)->first()->nombre;
+        $cuotas = fee::where('customers_id', $request->customers_id)->paginate(2);
+        return view('cuotas.cuotas_mostrar', compact('cuotas','cliente'));
     }
 
     /**
