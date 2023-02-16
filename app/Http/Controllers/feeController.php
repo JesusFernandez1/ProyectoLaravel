@@ -67,7 +67,7 @@ class feeController extends Controller
         ]);
         $datos['customers_id'] = $request->customers_id;
         fee::insert($datos);
-        $cuotas = fee::paginate(2);
+        $cuotas = fee::where('id', $request->customers_id);
         return view('cuotas.cuotas_mostrar', compact('cuotas'));
     }
 
@@ -79,9 +79,8 @@ class feeController extends Controller
      */
     public function show($id)
     {
-        $cuotas = fee::where('id', $id);
-        $customers = customer::all();
-        return view('cuotas.cuotas_mostrar', compact('cuotas','customers'));
+        $cuotas = fee::where('customers_id', $id)->get();
+        return view('cuotas.cuotas_mostrar', compact('cuotas'));
     }
 
     /**
@@ -93,7 +92,8 @@ class feeController extends Controller
     public function edit($id)
     {
         $cuota = fee::find($id);
-        return view('cuotas.cuotas_corregir', compact('cuota'));
+        $clientes = customer::all();
+        return view('cuotas.cuotas_corregir', compact('cuota', 'clientes'));
     }
 
     /**
