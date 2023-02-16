@@ -13,7 +13,6 @@
 @section('mostrarExtension')
   <form action="{{ route('cuotas.update') }}" class="row g-3" method="POST">
     @method('put')
-    @foreach ($cuotas as $cuota)
     <div class="col-md-3">
       <label for="inputPassword4" class="form-label">Concepto</label>
       <input type="text" class="form-control" name="concepto" value="{{ old("concepto", $cuota->concepto) }}">
@@ -57,7 +56,6 @@
       <div class="col-12">
       <input type="submit" class="btn btn-primary" value="Insert">
     </div>
-    @endforeach
   </form>
   @endsection
 </body>
