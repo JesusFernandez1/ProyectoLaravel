@@ -33,13 +33,13 @@
           <option>No</option>
         </select>
       </div>
-      <div class="col-md-1">
-        <label for="inputCity" class="form-label">Fecha de emision</label>
-        <input type="datetime-local" class="form-control" name="fecha_emision" value="<?php echo date("Y-m-d\TH:i") ?>">
-      </div>
+      <div class="col-md-3">
+      <label for="inputCity" class="form-label">Fecha de Pago</label>
+      <input type="datetime-local" class="form-control" name="fecha_pago" value="{{ old("fecha_pago", $cuota->fecha_pago) }}">
+    </div>
     <div class="col-md-3">
       <label for="inputCity" class="form-label">Nota</label>
-      <input type="text" class="form-control" name="nota" value="{{ old("nota", $cuota->nota)}}">
+      <input type="text" class="form-control" name="notas" value="{{ old("notas", $cuota->notas)}}">
     </div>
     <div class="col-md-2">
       <label for="inputState" class="form-label">Cliente</label>

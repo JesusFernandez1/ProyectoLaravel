@@ -19,7 +19,7 @@
             <th scope="col">Pagada</th>
             <th scope="col">Fecha del pago</th>
             <th scope="col">Nota</th>
-            <th scope="col">Tarea correspondiente</th>
+            <th scope="col">Cliente correspondiente</th>
          </tr>
       </thead>
       <tbody>
@@ -30,10 +30,10 @@
             <td>{{$cuota->importe}}</td>
             <td>{{$cuota->pagada}}</td>
             <td>{{$cuota->fecha_pago}}</td>
-            <td>{{$cuota->nota}}</td>
-            <td>{{$cuota->customers_id}}</td>
+            <td>{{$cuota->notas}}</td>
+            <td>{{$cliente}}</td>
             <td><a href="{{ route('cuotas.edit',$cuota) }}" class="btn btn-outline-primary" role="button">Modificar</a> 
-               <a href="{{ route('cuotas.show',$cuota) }}" class="btn btn-outline-danger" role="button">Eliminar</a></td>
+               <a href="{{ route('cuotas.mostrarEliminar',$cuota) }}" class="btn btn-outline-danger" role="button">Eliminar</a></td>
          </tr>
          @endforeach
       </tbody>

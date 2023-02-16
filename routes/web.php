@@ -41,6 +41,7 @@ Route::resource('clientes', customerController::class)->middleware('auth')->midd
 
 Route::controller(feeController::class)->group(function(){
     Route::get('cuotas/cuotas_excepcional/{id}', 'agregar')->middleware('auth')->middleware('admin')->name('cuotas.agregar');
+    Route::get('cuotas/cuotas_eliminar/{id}', 'mostrarEliminar')->middleware('auth')->middleware('admin')->name('cuotas.mostrarEliminar');
     Route::get('cuotas/cuotas_eliminada/{id}', 'confirmarEliminarCuota')->middleware('auth')->middleware('admin')->name('cuotas.confirmarEliminarCuota');
 });
 Route::resource('cuotas', feeController::class)->middleware('auth')->middleware('admin');
