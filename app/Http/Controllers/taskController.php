@@ -256,10 +256,10 @@ class taskController extends \Illuminate\Routing\Controller
     public function asignarOperario($id)
     {
         $tarea = task::find($id);
-
+        $cliente = customer::where('id', $tarea->customers_id)->first();
         $provincias = provincias::where('nombre', '!=', $tarea->provincia)->get();
         $empleados = User::where('id', '!=', $tarea->users_id)->get();
-        return view('tareas.tareas_asignarOperario', compact('tarea', 'provincias', 'empleados'));
+        return view('tareas.tareas_asignarOperario', compact('tarea', 'provincias', 'empleados', 'cliente'));
     }
 
     public function operarioAsignado(Request $request, $id)

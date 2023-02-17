@@ -111,18 +111,20 @@
           <small style="color: red">{{ $message }}</small>
       @enderror
     </div>
-    <div class="col-md-4">
-        <label for="inputCity" class="form-label">Cliente</label>
-        <textarea readonly type="text" class="form-control" id="inputCity" name="customers_id">{{ old("customers_id", $tarea->customers_id)}}</textarea>
-        @error('customers_id')
-            <small style="color: red">{{ $message }}</small>
-        @enderror
-      </div>
+    <div class="col-md-2">
+      <label for="inputState" class="form-label">Cliente</label>
+      <select disabled id="inputState" class="form-select" name="customers_id">
+        <option value="{{$cliente->id}}" @selected(old("customers_id", $tarea->customers_id)==$cliente->id)>{{$cliente->nombre}}</option>
+      </select>
+      @error('customers_id')
+          <small style="color: red">{{ $message }}</small>
+      @enderror
+    </div>
     <div class="col-md-2">
       <label for="inputState" class="form-label">Empleado</label>
       <select id="inputState" class="form-select" name="users_id">
         @foreach ($empleados as $empleado)
-        <option value="{{$empleado->id}}" @selected(old("users_id", $tarea->)==$users_idempleado->id)>{{$empleado->name}}</option>
+        <option value="{{$empleado->id}}" @selected(old("users_id", $tarea->users_id)==$empleado->id)>{{$empleado->name}}</option>
         @endforeach
       </select>
       @error('users_id')
