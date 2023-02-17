@@ -7,6 +7,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
   <title>Document</title>
+  <link rel="stylesheet" href="../resources/css/styles.css">
+  <script src="../resources/js/script.js" defer></script>
 </head>
 
 <body>
@@ -18,33 +20,61 @@
             <use xlink:href="#bootstrap" />
           </svg>
         </a>
-        {{-- <div class="btn-group">
-          <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Ver - opciones
-          </button>
-          <div class="dropdown-menu">
-            <a class="dropdown-item" href="{{ route('tareas.index') }}">Ver tareas</a>
-            <a class="dropdown-item" href="{{ route('tareas.verInformacionDetallada') }}">Ver tareas completas</a>
-            <a class="dropdown-item" href="{{ route('tareas.verTareasPendientes') }}">Ver tareas pendientes</a>
-            <a class="dropdown-item" href="{{ route('clientes.index') }}">Ver clientes</a>
-            <a class="dropdown-item" href="{{ route('usuarios.index') }}">Ver empleados</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Separated link</a>
-          </div>
 
-          <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Crear - opciones
-          </button>
-          <div class="dropdown-menu">
-            <a class="dropdown-item" href="{{ route('tareas.create') }}">Añadir tarea</a>
-            <a class="dropdown-item" href="{{ route('clientes.create') }}">Añadir cliente</a>
-            <a class="dropdown-item" href="{{ route('usuarios.create') }}">Añadir empleado</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Separated link</a>
+        <div class="header">
+          <div class="dropdown" data-dropdown>
+            <button class="link" data-dropdown-button>Tareas</button>
+            <div class="dropdown-menu information-grid">
+              <div>
+                <div class="dropdown-heading">Opciones</div>
+                <div class="dropdown-links">
+                  <a href="{{ route('tareas.index') }}" class="link">Ver tareas</a>
+                  <a href="{{ route('tareas.verTareasNoAsignadas') }}" class="link">Ver no asignadas</a>
+                  <a href="{{ route('tareas.verInformacionDetallada') }}" class="link">Ver tareas completas</a>
+                  <a href="{{ route('tareas.verTareasPendientes') }}" class="link">Ver tareas pendientes</a>
+                </div>
+              </div>
+            </div>
           </div>
-        </div> --}}
-        {{-- if({{Auth::user()->tipo == 'Admin'}}) --}}
-        @if(Auth::user())
+          <div class="dropdown" data-dropdown>
+            <button class="link" data-dropdown-button>Usuarios</button>
+            <div class="dropdown-menu information-grid">
+              <div>
+                <div class="dropdown-heading">Opciones</div>
+                <div class="dropdown-links">
+                  <a href="{{ route('usuarios.index') }}" class="link">Ver empleados</a>
+                  <a href="{{ route('usuarios.create') }}" class="link">Añadir empleado</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="dropdown" data-dropdown>
+            <button class="link" data-dropdown-button>Clientes</button>
+            <div class="dropdown-menu information-grid">
+              <div>
+                <div class="dropdown-heading">Opciones</div>
+                <div class="dropdown-links">
+                  <a href="{{ route('clientes.index') }}" class="link">Ver clientes</a>
+                  <a href="{{ route('clientes.create') }}" class="link">Añadir cliente</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="dropdown" data-dropdown>
+            <button class="link" data-dropdown-button>Cuotas</button>
+            <div class="dropdown-menu information-grid">
+              <div>
+                <div class="dropdown-heading">Opciones</div>
+                <div class="dropdown-links">
+                  <a href="{{ route('cuotas.verRemesaMensual') }}" class="link">Crear remesa mensual</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+          <a>Bienvenido: {{Auth::user()->name}}</a> <a href="{{ route('logout') }}" class="nav-link px-2 text-white">Logout</a>
+          
+        {{-- @if(Auth::user())
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
           <li><a href="{{ route('tareas.index') }}" class="nav-link px-2 text-white">Ver tareas</a></li>
           <li><a href="{{ route('tareas.verTareasNoAsignadas') }}" class="nav-link px-2 text-white">Ver no asignadas</a></li>
@@ -62,7 +92,7 @@
           <p>Bienvenido: {{Auth::user()->name}}</p>
           <a href="{{ route('logout') }}" class="nav-link px-2 text-white">Logout</a></li>
         </form>
-        @endif
+        @endif --}}
       </div>
     </div>
   </header>
