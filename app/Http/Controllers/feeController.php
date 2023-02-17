@@ -107,13 +107,13 @@ class feeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $fecha_emision = $request->fecha_emision;
+        $fecha_emision = fee::where('id', $id)->first()->fecha_emision;
         $datos = $request->validate([
             'concepto' => ['required'],
             'fecha_emision' => [
                 'required', 'date_format:Y-m-d\TH:i',
-                function ($atribute, $value, $fail) {
-                    if (date("Y-m-d\TH", strtotime($value)) != date("Y-m-d\TH")) {
+                function ($atribute, $value, $fail) use ($fecha_emision) {
+                    if (date("Y-m-d\TH", strtotime($value)) != date("Y-m-d\TH", strtotime($fecha_emision))) {
                         $fail('La fecha de creación no se puede modificar.');
                     }
                 }
@@ -123,7 +123,7 @@ class feeController extends Controller
             'fecha_pago' => [
                 'nullable', 'date_format:Y-m-d\TH:i',
                 function ($atribute, $value, $fail) use ($fecha_emision) {
-                    if ($value <= $fecha_emision) {
+                    if (date("Y-m-d\TH", strtotime($value)) <= date("Y-m-d\TH", strtotime($fecha_emision))) {
                         $fail("La fecha de finalizacion no puede ser menor que la de creacion");
                     }
                 }

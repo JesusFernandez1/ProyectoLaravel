@@ -11,39 +11,39 @@
 @extends('base')
 
 @section('mostrarExtension')
-  <form action="{{ route('tareas.completarTarea') }}" class="row g-3" method="POST">
-  @foreach ($tareas as $tarea)
+  <form action="{{ route('tareas.completarTarea', $tarea) }}" class="row g-3" method="POST">
+    @method('put')
     <div class="col-md-3">
       <label for="inputPassword4" class="form-label">Nombre</label>
-      <input readonly type="text" class="form-control" name="nombre" value="{{$tarea->nombre}}">
+      <input disabled type="text" class="form-control" name="nombre" value="{{$tarea->nombre}}">
     </div>
     <div class="col-3">
       <label for="inputAddress" class="form-label">Apellido</label>
-      <input readonly type="text" class="form-control" placeholder="1234 Main St" name="apellido" value="{{$tarea->apellido}}">
+      <input disabled type="text" class="form-control" placeholder="1234 Main St" name="apellido" value="{{$tarea->apellido}}">
     </div>
     <div class="col-2">
       <label for="inputAddress2" class="form-label">Telefono</label>
-      <input readonly type="text" class="form-control" placeholder="Apartment, studio, or floor" name="telefono" value="{{$tarea->telefono}}">
+      <input disabled type="text" class="form-control" placeholder="Apartment, studio, or floor" name="telefono" value="{{$tarea->telefono}}">
     </div>
     <div class="col-3">
       <label for="inputAddress2" class="form-label">Descripcion</label>
-      <input readonly type="text" class="form-control" placeholder="Apartment, studio, or floor" name="descripcion" value="{{$tarea->descripcion}}">
+      <input disabled type="text" class="form-control" placeholder="Apartment, studio, or floor" name="descripcion" value="{{$tarea->descripcion}}">
     </div>
     <div class="col-md-3">
       <label for="inputCity" class="form-label">Correo</label>
-      <input readonly type="text" class="form-control" name="correo" value="{{$tarea->correo}}">
+      <input disabled type="text" class="form-control" name="correo" value="{{$tarea->correo}}">
     </div>
     <div class="col-md-3">
       <label for="inputCity" class="form-label">Direccion</label>
-      <input readonly type="text" class="form-control" name="direccion" value="{{$tarea->direccion}}">
+      <input disabled type="text" class="form-control" name="direccion" value="{{$tarea->direccion}}">
     </div>
     <div class="col-md-2">
       <label for="inputCity" class="form-label">Poblacion</label>
-      <input readonly type="text" class="form-control" name="poblacion" value="{{$tarea->poblacion}}">
+      <input disabled type="text" class="form-control" name="poblacion" value="{{$tarea->poblacion}}">
     </div>
     <div class="col-md-2">
       <label for="inputCity" class="form-label">Codigo Postal</label>
-      <input readonly type="text" class="form-control" name="codigo_postal" value="{{$tarea->codigo}}">
+      <input disabled type="text" class="form-control" name="codigo_postal" value="{{$tarea->codigo}}">
     </div>
     <div class="col-md-2">
       <label for="inputState" class="form-label">Provincia</label>
@@ -59,36 +59,45 @@
     </div>
     <div class="col-md-1">
       <label for="inputZip" class="form-label">Fecha de creacion</label>
-      <input readonly type="date" class="form-control" id="inputZip" name="inicio" value="{{$tarea->fecha_creacion}}">
+      <input disabled type="datetime-local" class="form-control" id="inputZip" name="inicio" value="{{$tarea->fecha_creacion}}">
     </div>
     <div class="col-md-1">
       <label for="inputCity" class="form-label">Fecha de finalizacion</label>
-      <input type="date" class="form-control" id="inputCity" name="final" value="{{$tarea->fecha_final}}">
+      <input type="datetime-local" class="form-control" id="inputCity" name="final" value="{{ old("fecha_final", $tarea->fecha_final)}}">
     </div>
     <div class="col-md-4">
       <label for="inputCity" class="form-label">Anotacion inicio</label>
-      <textarea type="text" class="form-control" id="inputCity" name="anterior">{{$tarea->anotacion_anterior}}</textarea>
+      <textarea type="text" class="form-control" id="inputCity" name="anterior">{{ old("anotacion_anterior", $tarea->anotacion_anterior)}}</textarea>
     </div>
     <div class="col-md-4">
       <label for="inputCity" class="form-label">Anotacion final</label>
-      <textarea type="text" class="form-control" id="inputCity" name="posterior">{{$tarea->anotacion_posterior}}</textarea>
+      <textarea type="text" class="form-control" id="inputCity" name="posterior">{{ old("anotacion_posterior", $tarea->anotacion_posterior)}}</textarea>
     </div>
     <div class="col-md-2">
       <label for="inputState" class="form-label">Cliente</label>
-      <select disabled id="inputState" class="form-select" name="cliente">
-        <option>{{$tarea->cliente}}</option>
+      <select disabled id="inputState" class="form-select" name="customers_id">
+        @foreach ($clientes as $cliente)
+        <option value="{{$cliente->id}}" @selected(old("customers_id", $tarea->customers_id)==$cliente->id)>{{$cliente->nombre}}</option>
+        @endforeach
       </select>
+      @error('customers_id')
+          <small style="color: red">{{ $message }}</small>
+      @enderror
     </div>
     <div class="col-md-2">
       <label for="inputState" class="form-label">Empleado</label>
-      <select disabled id="inputState" class="form-select" name="empleado">
-        <option>{{$tarea->empleado}}</option>
+      <select disabled id="inputState" class="form-select" name="users_id">
+        @foreach ($empleados as $empleado)
+        <option value="{{$empleado->id}}" @selected(old("users_id", $tarea->users_id)==$empleado->id)>{{$empleado->name}}</option>
+        @endforeach
       </select>
+      @error('users_id')
+          <small style="color: red">{{ $message }}</small>
+      @enderror
     </div>
     <div class="col-12">
       <input type="submit" class="btn btn-primary" value="Insert">
     </div>
-    @endforeach
   </form>
   @endsection
 </body>

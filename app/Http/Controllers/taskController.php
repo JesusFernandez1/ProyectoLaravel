@@ -138,10 +138,7 @@ class taskController extends \Illuminate\Routing\Controller
      */
     public function update(Request $request, $id)
     {
-
-        $fecha = task::select('fecha_creacion')->where('id', $id)->first();
-
-        $fecha_creacion = $request->fecha_creacion;
+        $fecha_creacion = task::where('id', $id)->first()->fecha_creacion;
         $datos = $request->validate([
             'nombre' => ['regex:/^[a-z]+$/i'],
             'apellido' => ['regex:/^[a-z]+$/i'],
@@ -155,8 +152,8 @@ class taskController extends \Illuminate\Routing\Controller
             'estado_tarea' => ['required'],
             'fecha_creacion' => [
                 'required', 'date_format:Y-m-d\TH:i',
-                function ($atribute, $value, $fail) use ($fecha) {
-                    if (date("Y-m-d\TH", strtotime($value)) != date("Y-m-d\TH", strtotime($fecha->fecha_creacion))) {
+                function ($atribute, $value, $fail) use ($fecha_creacion) {
+                    if (date("Y-m-d\TH", strtotime($value)) != date("Y-m-d\TH", strtotime($fecha_creacion))) {
                         $fail('La fecha de creación no se puede modificar.');
                     }
                 }
@@ -165,7 +162,7 @@ class taskController extends \Illuminate\Routing\Controller
                 'nullable', 'date_format:Y-m-d\TH:i',
                 function ($atribute, $value, $fail) use ($fecha_creacion) {
                     if (date("Y-m-d\TH", strtotime($value)) <= date("Y-m-d\TH", strtotime($fecha_creacion))) {
-                        $fail('La fecha de creación no se puede modificar.');
+                        $fail("La fecha de finalizacion no puede ser menor que la de creacion");
                     }
                 }
             ],
@@ -201,12 +198,30 @@ class taskController extends \Illuminate\Routing\Controller
     public function cambiarEstadoTarea($id)
     {
         $tarea = task::find($id);
-        return view('tareas.tareas_completar', compact('tarea'));
+        $empleados = User::all();
+        $clientes = customer::all();
+        return view('tareas.tareas_completar', compact('tarea', 'empleados', 'clientes'));
     }
 
     public function completarTarea(Request $request, $id)
     {
-        task::where('id', '=', $id)->update(['estado_tarea' =>  $request->estado_tarea]);
+
+        $fecha_creacion = task::where('id', $id)->first()->fecha_creacion;
+
+        $request->validate([
+            'fecha_final' => [
+                'required', 'date_format:Y-m-d\TH:i',
+                function ($atribute, $value, $fail) use ($fecha_creacion) {
+                    if (date("Y-m-d\TH", strtotime($value)) <= date("Y-m-d\TH", strtotime($fecha_creacion))) {
+                        $fail("La fecha de finalizacion no puede ser menor que la de creacion");
+                    }
+                }
+            ],
+            'anotacion_anterior' => ['nullable'],
+            'anotacion_posterior' => ['nullable']
+        ]);
+
+        task::where('id', $id)->update(['estado_tarea' =>  $request->estado_tarea]);
         $operario = User::where('id', Auth::user()->tipo)->first();
         $tareas = task::where('users_id', $operario)->paginate(2);
         return view('tareas.tareas_mostrar', compact('tareas'));
