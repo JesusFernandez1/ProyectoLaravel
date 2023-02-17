@@ -71,14 +71,14 @@
     </div>
     <div class="col-md-1">
         <label for="inputZip" class="form-label">Provincia</label>
-        <input readonly type="datetime-local" class="form-control" id="inputZip" name="provincia" value="{{ old("provincia", $tarea->provincia)}}">
+        <input readonly type="text" class="form-control" id="inputZip" name="provincia" value="{{ old("provincia", $tarea->provincia)}}">
         @error('provincia')
             <small style="color: red">{{ $message }}</small>
         @enderror
       </div>
     <div class="col-md-1">
         <label for="inputZip" class="form-label">Estado</label>
-        <input readonly type="datetime-local" class="form-control" id="inputZip" name="estado_tarea" value="{{ old("estado_tarea", $tarea->estado_tarea)}}">
+        <input readonly type="text" class="form-control" id="inputZip" name="estado_tarea" value="{{ old("estado_tarea", $tarea->estado_tarea)}}">
         @error('estado_tarea')
             <small style="color: red">{{ $message }}</small>
         @enderror
@@ -121,9 +121,8 @@
     <div class="col-md-2">
       <label for="inputState" class="form-label">Empleado</label>
       <select id="inputState" class="form-select" name="users_id">
-        <option selected>{{ old("users_id")}}</option>
         @foreach ($empleados as $empleado)
-        <option>{{$empleado->name}}</option>
+        <option value="{{$empleado->id}}" @selected(old("users_id", $tarea->)==$users_idempleado->id)>{{$empleado->name}}</option>
         @endforeach
       </select>
       @error('users_id')

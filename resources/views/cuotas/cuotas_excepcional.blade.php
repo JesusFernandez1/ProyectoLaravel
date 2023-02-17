@@ -18,6 +18,9 @@
     <div class="col-md-3">
       <label for="inputPassword4" class="form-label">Concepto</label>
       <input type="text" class="form-control" name="concepto" value="{{ old("concepto") }}">
+      @error('concepto')
+      <small style="color: red">{{ $message }}</small>
+  @enderror
     </div>
     <div class="col-md-1">
       <label for="inputCity" class="form-label">Fecha de emision</label>
@@ -29,6 +32,9 @@
     <div class="col-3">
       <label for="inputAddress" class="form-label">Importe</label>
       <input type="number" class="form-control" placeholder="1234 Main St" name="importe" value="{{ old("importe") }}">
+      @error('importe')
+      <small style="color: red">{{ $message }}</small>
+  @enderror
     </div>
     <div class="col-md-3">
         <label for="inputState" class="form-label">Pagada</label>
@@ -37,14 +43,23 @@
           <option>Si</option>
           <option>No</option>
         </select>
+        @error('pagada')
+        <small style="color: red">{{ $message }}</small>
+    @enderror
       </div>
     <div class="col-md-3">
       <label for="inputCity" class="form-label">Fecha de Pago</label>
       <input type="datetime-local" class="form-control" name="fecha_pago" value="{{ old("fecha_pago") }}">
+      @error('fecha_pago')
+      <small style="color: red">{{ $message }}</small>
+  @enderror
     </div>
     <div class="col-md-3">
       <label for="inputCity" class="form-label">Nota</label>
       <input type="text" class="form-control" name="notas" value="{{ old("notas") }}">
+      @error('notas')
+      <small style="color: red">{{ $message }}</small>
+  @enderror
     </div>
     <div class="col-md-3" hidden>
       <label for="inputCity" class="form-label">customers_id</label>

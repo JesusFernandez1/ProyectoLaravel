@@ -259,7 +259,7 @@ class taskController extends \Illuminate\Routing\Controller
 
         $provincias = provincias::where('nombre', '!=', $tarea->provincia)->get();
         $empleados = User::where('id', '!=', $tarea->users_id)->get();
-        return view('tareas.tareas_modificar', compact('tarea', 'provincias', 'empleados'));
+        return view('tareas.tareas_asignarOperario', compact('tarea', 'provincias', 'empleados'));
     }
 
     public function operarioAsignado(Request $request, $id)

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\fee;
 use App\Models\customer;
 use App\Models\task;
+use Carbon\Carbon;
 
 class feeController extends Controller
 {
@@ -20,9 +21,8 @@ class feeController extends Controller
 
     public function agregar($id)
     {
-        $cliente = customer::where('id', '=', $id)->first();
-        $tareas = task::where('users_id', '!=', null)->get();
-        return view('cuotas.cuotas_excepcional', compact('cliente', 'tareas'));
+        $cliente = customer::where('id', $id)->first();
+        return view('cuotas.cuotas_excepcional', compact('cliente'));
     }
 
     /**
@@ -69,7 +69,7 @@ class feeController extends Controller
         fee::insert($datos);
         $cliente = customer::where('id', $request->customers_id)->first()->nombre;
         $cuotas = fee::where('customers_id', $request->customers_id)->paginate(2);
-        return view('cuotas.cuotas_mostrar', compact('cuotas','cliente'));
+        return view('cuotas.cuotas_mostrar', compact('cuotas', 'cliente'));
     }
 
     /**
@@ -82,7 +82,7 @@ class feeController extends Controller
     {
         $cliente = customer::where('id', $id)->first()->nombre;
         $cuotas = fee::where('customers_id', $id)->paginate(2);
-        return view('cuotas.cuotas_mostrar', compact('cuotas','cliente'));
+        return view('cuotas.cuotas_mostrar', compact('cuotas', 'cliente'));
     }
 
     /**
@@ -134,7 +134,7 @@ class feeController extends Controller
         fee::where('id', $id)->update($datos);
         $cliente = customer::where('id', $request->customers_id)->first()->nombre;
         $cuotas = fee::where('customers_id', $request->customers_id)->paginate(2);
-        return view('cuotas.cuotas_mostrar', compact('cuotas','cliente'));
+        return view('cuotas.cuotas_mostrar', compact('cuotas', 'cliente'));
     }
 
     /**
@@ -157,6 +157,38 @@ class feeController extends Controller
     public function confirmarEliminarCuota($id)
     {
         $cuota = fee::find($id)->delete();
+        $clientes = customer::paginate(2);
+        return view('clientes.clientes_mostrar', compact('clientes'));
+    }
+
+    public function verRemesaMensual()
+    {
+        $clientes = customer::paginate(2);
+        return view('cuotas.cuotas_remesaMensual', compact('clientes'));
+    }
+
+    public function crearRemesaMensual(Request $request)
+    {
+        $cuota = [];
+        $fecha = Carbon::now()->format("F/Y");
+        $datos = $request->validate([
+            'notas' => ['nullable'],
+        ]);
+        $clientes = customer::all();
+        foreach ($clientes as $cliente) {
+            $datos = [
+            'concepto' => date("Y-m-d"),
+            'fecha_emision' => Carbon::now()->format("Y-m-d\TH:i"),
+            'importe' => $cliente->id,
+            'pagada' =>'No',
+            'fecha_pago' => null,
+            'notas' => $request->notas,
+            'customers_id' => $cliente->id,
+            ];
+            array_push($cuota, $datos);
+        }
+            fee::insert($cuota);
+        
         $clientes = customer::paginate(2);
         return view('clientes.clientes_mostrar', compact('clientes'));
     }

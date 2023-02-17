@@ -18,4 +18,5 @@ class fee extends Model
         'customers_id',
     ];
     public $timestamps = false;
+    protected $dates = ['fecha_emision', 'fecha_pago'];
 }
