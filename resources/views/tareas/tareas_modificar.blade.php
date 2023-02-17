@@ -86,7 +86,6 @@
       <select id="inputState" class="form-select" name="estado_tarea">
         <option selected>{{ old("estado_tarea", $tarea->estado_tarea)}}</option>
         <option>P</option>
-        <option>R</option>
         <option>C</option>
         <option>B</option>
       </select>
