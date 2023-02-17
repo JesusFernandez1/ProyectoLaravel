@@ -72,8 +72,9 @@
     <div class="col-md-2">
       <label for="inputState" class="form-label">Provincia</label>
       <select id="inputState" class="form-select" name="provincia">
+        <option selected>{{ old("provincia", $tarea->provincia)}}</option>
         @foreach ($provincias as $provincia)
-        <option value="{{$provincia->id}}" @selected(old("provincia", $tarea->provincia)==$provincia->id)>{{$provincia->nombre}}</option>
+        <option>{{$provincia->nombre}}</option>
         @endforeach
       </select>
       @error('provincia')

@@ -54,15 +54,6 @@ class taskController extends \Illuminate\Routing\Controller
      */
     public function store(Request $request)
     {
-        if ($request->users_id != null) {
-            $users_id = User::select('id')->where('name', '=', $request->users_id)->first();
-            $users = $users_id->id;
-        }
-
-        if ($request->customers_id != null) {
-            $customers_id = customer::select('id')->where('nombre', '=', $request->customers_id)->first();
-            $customers = $customers_id->id;
-        }
         $fecha_creacion = $request->fecha_creacion;
         $datos = $request->validate([
             'nombre' => ['regex:/^[a-z]+$/i'],
@@ -97,8 +88,6 @@ class taskController extends \Illuminate\Routing\Controller
             'customers_id' => ['required']
 
         ]);
-        $datos['users_id'] = $users;
-        $datos['customers_id'] = $customers;
         task::insert($datos);
         $tareas = task::paginate(2);
         return view('tareas.tareas_mostrar', compact('tareas'));
@@ -186,7 +175,7 @@ class taskController extends \Illuminate\Routing\Controller
             'customers_id' => ['required']
 
         ]);
-        task::where('id', '=', $id)->update($datos);
+        task::where('id', $id)->update($datos);
         $tareas = task::paginate(2);
         return view('tareas.tareas_mostrar', compact('tareas'));
     }
