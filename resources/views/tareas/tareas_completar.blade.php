@@ -53,25 +53,25 @@
     </div>
     <div class="col-md-3">
       <label for="inputState" class="form-label">Estado</label>
-      <select id="inputState" class="form-select" name="estado">
+      <select id="inputState" class="form-select" name="estado_tarea">
         <option selected>R</option>
       </select>
     </div>
     <div class="col-md-1">
       <label for="inputZip" class="form-label">Fecha de creacion</label>
-      <input disabled type="datetime-local" class="form-control" id="inputZip" name="inicio" value="{{$tarea->fecha_creacion}}">
+      <input disabled type="datetime-local" class="form-control" id="inputZip" name="fecha_inicio" value="{{$tarea->fecha_creacion}}">
     </div>
     <div class="col-md-1">
       <label for="inputCity" class="form-label">Fecha de finalizacion</label>
-      <input type="datetime-local" class="form-control" id="inputCity" name="final" value="{{ old("fecha_final", $tarea->fecha_final)}}">
+      <input type="datetime-local" class="form-control" id="inputCity" name="fecha_final" value="{{ old("fecha_final", $tarea->fecha_final)}}">
     </div>
     <div class="col-md-4">
       <label for="inputCity" class="form-label">Anotacion inicio</label>
-      <textarea type="text" class="form-control" id="inputCity" name="anterior">{{ old("anotacion_anterior", $tarea->anotacion_anterior)}}</textarea>
+      <textarea type="text" class="form-control" id="inputCity" name="anotacion_anterior">{{ old("anotacion_anterior", $tarea->anotacion_anterior)}}</textarea>
     </div>
     <div class="col-md-4">
       <label for="inputCity" class="form-label">Anotacion final</label>
-      <textarea type="text" class="form-control" id="inputCity" name="posterior">{{ old("anotacion_posterior", $tarea->anotacion_posterior)}}</textarea>
+      <textarea type="text" class="form-control" id="inputCity" name="anotacion_posterior">{{ old("anotacion_posterior", $tarea->anotacion_posterior)}}</textarea>
     </div>
     <div class="col-md-2">
       <label for="inputState" class="form-label">Cliente</label>

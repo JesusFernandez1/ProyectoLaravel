@@ -57,7 +57,7 @@ Route::controller(taskController::class)->group(function(){
     Route::put('tareas/tareas_asignada/{id}', 'operarioAsignado')->middleware('auth')->middleware('admin')->name('tareas.operarioAsignado');
     Route::get('tareas/tareas_eliminada/{id}', 'confirmarBorrarTarea')->middleware('auth')->middleware('admin')->name('tareas.confirmarBorrarTarea');
     Route::get('tareas/tareas_completar/{id}', 'cambiarEstadoTarea')->middleware('auth')->middleware('operario')->name('tareas.cambiarEstadoTarea');
-    Route::post('tareas/tareas_completada/{id}', 'completarTarea')->middleware('auth')->middleware('operario')->name('tareas.completarTarea');
+    Route::put('tareas/tareas_completada/{id}', 'completarTarea')->middleware('auth')->middleware('operario')->name('tareas.completarTarea');
     
 });
 Route::resource('tareas', taskController::class)->middleware('auth');

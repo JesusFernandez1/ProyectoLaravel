@@ -207,7 +207,6 @@ class taskController extends \Illuminate\Routing\Controller
     {
 
         $fecha_creacion = task::where('id', $id)->first()->fecha_creacion;
-
         $request->validate([
             'fecha_final' => [
                 'required', 'date_format:Y-m-d\TH:i',
@@ -223,6 +222,7 @@ class taskController extends \Illuminate\Routing\Controller
 
         task::where('id', $id)->update(['estado_tarea' =>  $request->estado_tarea]);
         $operario = User::where('id', Auth::user()->tipo)->first();
+        dd($operario);
         $tareas = task::where('users_id', $operario)->paginate(2);
         return view('tareas.tareas_mostrar', compact('tareas'));
     }
