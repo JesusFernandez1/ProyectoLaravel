@@ -34,13 +34,6 @@
           <small style="color: red">{{ $message }}</small>
       @enderror
     </div>
-    <div class="col-md-3">
-      <label for="inputCity" class="form-label">Pass</label>
-      <input type="text" class="form-control" name="password" value="{{ old("password", $usuario->password) }}">
-      @error('password')
-          <small style="color: red">{{ $message }}</small>
-      @enderror
-    </div>
     <div class="col-3">
       <label for="inputAddress" class="form-label">Telefono</label>
       <input type="text" class="form-control" placeholder="1234 Main St" name="telefono" value="{{ old("telefono", $usuario->telefono) }}">
