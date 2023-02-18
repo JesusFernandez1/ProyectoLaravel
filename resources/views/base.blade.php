@@ -7,8 +7,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
   <title>Document</title>
-  <link rel="stylesheet" href="../resources/css/styles.css">
-  <script src="../resources/js/script.js" defer></script>
+  <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
+  <script src="{{ asset('js/script.js') }}"></script>
 </head>
 
 <body>
@@ -32,6 +32,7 @@
                   <a href="{{ route('tareas.verTareasNoAsignadas') }}" class="link">Ver no asignadas</a>
                   <a href="{{ route('tareas.verInformacionDetallada') }}" class="link">Ver tareas completas</a>
                   <a href="{{ route('tareas.verTareasPendientes') }}" class="link">Ver tareas pendientes</a>
+                  <a href="{{ route('tareas.create') }}" class="link">Añadir tarea</a>
                 </div>
               </div>
             </div>
@@ -250,7 +251,5 @@
   </section>
   <!--Section: Live preview-->
   </section>
-  <script src="../resources/js/popper.min.js"></script>
-<script src="../resources/js/bootstrap.min.js"></script>
 </body>
 </html>
