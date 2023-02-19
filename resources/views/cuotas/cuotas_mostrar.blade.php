@@ -38,6 +38,7 @@
          @endforeach
       </tbody>
    </table>
+   {!! $cuotas->links() !!}
    @endsection
 </body>
 </html>
