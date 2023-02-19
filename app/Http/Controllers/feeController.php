@@ -7,6 +7,9 @@ use App\Models\fee;
 use App\Models\customer;
 use App\Models\task;
 use Carbon\Carbon;
+use App\Notifications\CuotaCreadaNotification;
+use Illuminate\Support\Facades\Notification;
+
 
 class feeController extends Controller
 {
@@ -67,6 +70,7 @@ class feeController extends Controller
             'customers_id' => ['required']
         ]);
         fee::insert($datos);
+        event(new CuotaCreadaNotification($datos));
         $cliente = customer::where('id', $request->customers_id)->first()->nombre;
         $cuotas = fee::where('customers_id', $request->customers_id)->paginate(2);
         return view('cuotas.cuotas_mostrar', compact('cuotas', 'cliente'));
