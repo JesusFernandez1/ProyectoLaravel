@@ -7,6 +7,7 @@ use App\Http\Controllers\userController;
 use App\Http\Controllers\taskController;
 use App\Http\Controllers\customerController;
 use App\Http\Controllers\feeController;
+use Laravel\Socialite\Facades\Socialite;
 
 /*
 |--------------------------------------------------------------------------
@@ -67,5 +68,15 @@ Route::resource('tareas', taskController::class)->middleware('auth');
 //     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
 //     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 // });
+
+Route::get('/auth/github/redirect', function () {
+    return Socialite::driver('github')->redirect();
+});
+ 
+Route::get('/auth/github/callback', function () {
+    $user = Socialite::driver('github')->user();
+ 
+    // $user->token
+});
 
 require __DIR__.'/auth.php';
