@@ -9,8 +9,8 @@
 <body>
 Se ha creado una nueva cuota con los siguientes detalles:
 
-- Concepto: {{ $cuota->concepto }}
-- Importe: {{ $cuota->importe }}
+{{-- - Concepto: {{ $cuota->concepto }}
+- Importe: {{ $cuota->importe }} --}}
 
 Gracias por tu confianza.
 

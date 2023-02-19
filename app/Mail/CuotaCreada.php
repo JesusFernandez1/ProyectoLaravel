@@ -13,16 +13,14 @@ class CuotaCreada extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $cuota;
-
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($cuota)
+    public function __construct()
     {
-        $this->cuota = $cuota;
+     
     }
 
     /**
@@ -30,36 +28,36 @@ class CuotaCreada extends Mailable
      *
      * @return \Illuminate\Mail\Mailables\Envelope
      */
-    public function envelope()
-    {
-        return new Envelope(
-            subject: 'Cuota Creada',
-        );
-    }
+    // public function envelope()
+    // {
+    //     return new Envelope(
+    //         subject: 'Cuota Creada',
+    //     );
+    // }
 
-    /**
-     * Get the message content definition.
-     *
-     * @return \Illuminate\Mail\Mailables\Content
-     */
-    public function content()
-    {
-        return new Content(
-            view: 'view.name',
-        );
-    }
+    // /**
+    //  * Get the message content definition.
+    //  *
+    //  * @return \Illuminate\Mail\Mailables\Content
+    //  */
+    // public function content()
+    // {
+    //     return new Content(
+    //         view: 'view.name',
+    //     );
+    // }
 
-    /**
-     * Get the attachments for the message.
-     *
-     * @return array
-     */
-    public function attachments()
-    {
-        return [];
-    }
+    // /**
+    //  * Get the attachments for the message.
+    //  *
+    //  * @return array
+    //  */
+    // public function attachments()
+    // {
+    //     return [];
+    // }
     public function build()
     {
-        return $this->subject('Nueva cuota creada')->markdown('emails.cuota-creada');
+        return $this->view('emails.cuota-creada');
     }
 }
