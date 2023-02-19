@@ -13,16 +13,16 @@ class CuotaCreada extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $subjet = 'Cuota realizada';
+    public $cuota;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($cuota)
     {
-        //
+        $this->cuota = $cuota;
     }
 
     /**
@@ -60,6 +60,6 @@ class CuotaCreada extends Mailable
     }
     public function build()
     {
-        return $this->view('cuotas.crearRemesaMensual');
+        return $this->subject('Nueva cuota creada')->markdown('emails.cuota-creada');
     }
 }

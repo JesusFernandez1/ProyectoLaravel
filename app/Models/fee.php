@@ -26,7 +26,7 @@ class fee extends Model
         parent::boot();
 
         static::created(function ($cuota) {
-            $cuota->user->notify(new CuotaCreadaNotification($cuota));
+            $cuota->cliente->notify(new CuotaCreadaNotification($cuota));
         });
     }
 }

@@ -12,16 +12,16 @@ class CuotaCreadaNotification extends Notification
 {
     use Queueable;
 
-    protected $cuota;
+    protected  $cuota;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($cuota)
     {
-        //$this->cuota = $cuota;
+        $this->cuota = $cuota;
     }
 
     /**
