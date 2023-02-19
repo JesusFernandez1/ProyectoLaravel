@@ -10,6 +10,8 @@ use App\Http\Controllers\feeController;
 use Laravel\Socialite\Facades\Socialite;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use App\Mail\CuotaCreada;
+use Illuminate\Support\Facades\Mail;
 
 /*
 |--------------------------------------------------------------------------

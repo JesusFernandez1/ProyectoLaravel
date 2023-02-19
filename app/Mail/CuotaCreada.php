@@ -13,6 +13,8 @@ class CuotaCreada extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $subjet = 'Cuota realizada';
+
     /**
      * Create a new message instance.
      *
@@ -58,6 +60,6 @@ class CuotaCreada extends Mailable
     }
     public function build()
     {
-        return $this->markdown('emails.cuotaExtraordinaria');
+        return $this->view('cuotas.crearRemesaMensual');
     }
 }
