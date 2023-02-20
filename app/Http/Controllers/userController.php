@@ -20,7 +20,8 @@ class userController extends Controller
             $usuarios = User::paginate(2);
             return view('usuarios.usuarios_mostrar', compact('usuarios'));
         } else {
-            return view('base');
+            $usuarios = User::where('id', Auth::user()->id)->paginate(2);
+            return view('usuarios.usuarios_mostrar', compact('usuarios'));
         }
     }
 

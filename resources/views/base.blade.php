@@ -29,11 +29,11 @@
                 <div class="dropdown-heading">Opciones</div>
                 <div class="dropdown-links">
                   <a href="{{ route('tareas.index') }}" class="link">Ver tareas</a>
-                  @if(Auth::user() == 'Admin') <a href="{{ route('tareas.verTareasNoAsignadas') }}" class="link">Ver no asignadas</a>
+                  @if(Auth::user()->tipo == 'Admin') <a href="{{ route('tareas.verTareasNoAsignadas') }}" class="link">Ver no asignadas</a>
                   <a href="{{ route('tareas.verInformacionDetallada') }}" class="link">Ver tareas completas</a>
                   <a href="{{ route('tareas.verTareasPendientes') }}" class="link">Ver tareas pendientes</a>
                   <a href="{{ route('tareas.create') }}" class="link">Añadir tarea</a>
-                </div>
+                </div> @endif
               </div>
             </div>
           </div>
@@ -44,12 +44,12 @@
                 <div class="dropdown-heading">Opciones</div>
                 <div class="dropdown-links">
                   <a href="{{ route('usuarios.index') }}" class="link">Ver empleados</a>
-                  <a href="{{ route('usuarios.create') }}" class="link">Añadir empleado</a>
+                 @if(Auth::user()->tipo == 'Admin') <a href="{{ route('usuarios.create') }}" class="link">Añadir empleado</a> @endif
                 </div>
               </div>
             </div>
           </div>
-          <div class="dropdown" data-dropdown>
+          @if(Auth::user()->tipo == 'Admin')  <div class="dropdown" data-dropdown>
             <button class="link" data-dropdown-button>Clientes</button>
             <div class="dropdown-menu information-grid">
               <div>
@@ -60,8 +60,8 @@
                 </div>
               </div>
             </div>
-          </div>
-          <div class="dropdown" data-dropdown>
+          </div> @endif
+          @if(Auth::user()->tipo == 'Admin')  <div class="dropdown" data-dropdown>
             <button class="link" data-dropdown-button>Cuotas</button>
             <div class="dropdown-menu information-grid">
               <div>
