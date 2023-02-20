@@ -32,6 +32,11 @@ Route::get('/', function () {
     return view('base');
 })->middleware(['auth', 'verified'])->name('base');
 
+Route::controller(githubController::class)->group(function () {
+    Route::get('/auth/github/redirect', 'redirectGithub')->middleware('auth')->name('github.redirectGithub');
+    Route::get('/auth/github/callback', 'callback')->middleware('auth');
+});
+
 Route::controller(userController::class)->group(function () {
     Route::get('usuarios/usuarios_eliminada/{id}', 'confirmarEliminarUsuario')->middleware('auth')->name('usuarios.confirmarEliminarUsuario');
 });
@@ -70,33 +75,5 @@ Route::resource('tareas', taskController::class)->middleware('auth');
 //     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
 //     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 // });
-
-Route::get('/auth/github/redirect', function () {
-    return Socialite::driver('github')->redirect();
-});
-
-Route::get('/auth/github/callback', function () {
-    $githubuser = Socialite::driver('github')->user();
-
-    $user = User::updateOrcreate(
-        [
-            'provider_id' => $githubuser->getId()
-        ],
-        [
-            'email' => $githubuser->getEmail(),
-            'name' => $githubuser->getName(),
-        ]
-    );
-
-    // $user = User::create([
-    //     'email' => $githubuser->getEmail(),
-    //     'name' => $githubuser->getName(),
-    //     'provider_id' => $githubuser->getId()
-    // ]);
-
-    Auth::login($user);
-
-    return redirect('/base');
-});
 
 require __DIR__ . '/auth.php';
