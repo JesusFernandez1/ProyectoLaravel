@@ -21,7 +21,7 @@
           </svg>
         </a>
 
-        <div class="header">
+        @if(Auth::user()) <div class="header">
           <div class="dropdown" data-dropdown>
             <button class="link" data-dropdown-button>Tareas</button>
             <div class="dropdown-menu information-grid">
@@ -29,7 +29,7 @@
                 <div class="dropdown-heading">Opciones</div>
                 <div class="dropdown-links">
                   <a href="{{ route('tareas.index') }}" class="link">Ver tareas</a>
-                  <a href="{{ route('tareas.verTareasNoAsignadas') }}" class="link">Ver no asignadas</a>
+                  @if(Auth::user() == 'Admin') <a href="{{ route('tareas.verTareasNoAsignadas') }}" class="link">Ver no asignadas</a>
                   <a href="{{ route('tareas.verInformacionDetallada') }}" class="link">Ver tareas completas</a>
                   <a href="{{ route('tareas.verTareasPendientes') }}" class="link">Ver tareas pendientes</a>
                   <a href="{{ route('tareas.create') }}" class="link">Añadir tarea</a>
@@ -71,9 +71,9 @@
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-          <a>Bienvenido: {{Auth::user()->name}}</a> <a href="{{ route('logout') }}" class="nav-link px-2 text-white">Logout</a>
+          </div> @endif
+        </div> @endif
+        @if(Auth::user()) <a>Bienvenido: {{Auth::user()->name}}</a> <a href="{{ route('logout') }}" class="nav-link px-2 text-white">Logout</a> @endif
           
         {{-- @if(Auth::user())
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
