@@ -3,6 +3,8 @@
 use App\Http\Controllers\ProfileController;
 use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\githubController;
+use App\Http\Controllers\googleController;
 use App\Http\Controllers\userController;
 use App\Http\Controllers\taskController;
 use App\Http\Controllers\customerController;
@@ -33,8 +35,13 @@ Route::get('/', function () {
 })->middleware(['auth', 'verified'])->name('base');
 
 Route::controller(githubController::class)->group(function () {
-    Route::get('/auth/github/redirect', 'redirectGithub')->middleware('auth')->name('github.redirectGithub');
-    Route::get('/auth/github/callback', 'callback')->middleware('auth');
+    Route::get('/auth/github/redirect', 'redirectGithub')->name('github.redirectGithub');
+    Route::get('/auth/github/callback', 'callbackGithub');
+});
+
+Route::controller(googleController::class)->group(function () {
+    Route::get('/auth/google/redirect', 'redirectGoogle')->name('github.redirectGoogle');
+    Route::get('/google-callback', 'callbackGoogle');
 });
 
 Route::controller(userController::class)->group(function () {

@@ -14,11 +14,11 @@ class githubController extends Controller
         return Socialite::driver('github')->redirect();
     }
 
-    public function callback()
+    public function callbackGithub()
     {
         $githubuser = Socialite::driver('github')->user();
 
-        $user = User::updateOrcreate(
+        $user = User::firstOrcreate(
             [
                 'provider_id' => $githubuser->getId()
             ],
