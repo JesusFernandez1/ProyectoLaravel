@@ -52,11 +52,6 @@ Route::controller(googleController::class)->group(function () {
     Route::get('/google-callback', 'callbackGoogle');
 });
 
-Route::controller(userController::class)->group(function () {
-    Route::get('usuarios/usuarios_eliminada/{id}', 'confirmarEliminarUsuario')->middleware('auth')->name('usuarios.confirmarEliminarUsuario');
-});
-Route::resource('usuarios', userController::class)->middleware('auth');
-
 Route::controller(customerController::class)->group(function () {
     Route::get('clientes/clientes_crearIncidencia', 'nuevaIncidencia')->name('clientes.nuevaIncidencia');
     Route::post('clientes/clientes_incidenciaCreada', 'crearIncidencia')->name('clientes.crearIncidencia');
@@ -73,6 +68,11 @@ Route::controller(feeController::class)->group(function () {
     Route::get('cuotas/cuotas_remesaCreada', 'crearRemesaMensual')->middleware('auth')->middleware('admin')->name('cuotas.crearRemesaMensual');
 });
 Route::resource('cuotas', feeController::class)->middleware('auth')->middleware('admin');
+
+Route::controller(userController::class)->group(function () {
+    Route::get('usuarios/usuarios_eliminada/{id}', 'confirmarEliminarUsuario')->middleware('auth')->name('usuarios.confirmarEliminarUsuario');
+});
+Route::resource('usuarios', userController::class)->middleware('auth');
 
 Route::controller(taskController::class)->group(function () {
     Route::get('tareas/tareas_verInformacionDetallada', 'verInformacionDetallada')->middleware('auth')->name('tareas.verInformacionDetallada');

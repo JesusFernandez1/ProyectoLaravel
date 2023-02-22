@@ -112,6 +112,8 @@ class customerController extends Controller
             'importe_mensual' => ['required']
         ]);
         $datos['moneda'] = $moneda;
+        $converted = Currency::convert()->from($datos['moneda'])->to('EUR')->amount($request->importe_mensual)->round(2)->get();
+        $datos['importe_mensual'] = $converted;
         customer::where('id', '=', $id)->update($datos);
         return redirect()->route('clientes.index');
     }
@@ -130,8 +132,7 @@ class customerController extends Controller
     public function confirmarEliminarCliente($id)
     {
         customer::find($id)->delete();
-        $clientes = customer::paginate(2);
-        return view('clientes.clientes_mostrar', compact('clientes'));
+        return redirect()->route('clientes.index');
     }
 
     public function nuevaIncidencia()

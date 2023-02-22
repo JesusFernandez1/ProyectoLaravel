@@ -71,7 +71,6 @@ class feeController extends Controller
             'customers_id' => ['required']
         ]);
         fee::insert($datos);
-        //event(new CuotaCreadaNotification($datos));
         Mail::to(customer::where('id', $request->customers_id)->first()->correo)->send(new CuotaCreada());
         $cliente = customer::where('id', $request->customers_id)->first()->nombre;
         $cuotas = fee::where('customers_id', $request->customers_id)->paginate(2);
@@ -162,9 +161,8 @@ class feeController extends Controller
 
     public function confirmarEliminarCuota($id)
     {
-        $cuota = fee::find($id)->delete();
-        $clientes = customer::paginate(2);
-        return view('clientes.clientes_mostrar', compact('clientes'));
+        fee::find($id)->delete();
+        return redirect()->route('clientes.index');
     }
 
     public function verRemesaMensual()
@@ -181,22 +179,20 @@ class feeController extends Controller
             'notas' => ['nullable'],
         ]);
         $clientes = customer::all();
-        foreach ($clientes as $cliente) {
-            $datos = [
-            'concepto' => date("Y-m-d"),
-            'fecha_emision' => Carbon::now()->format("Y-m-d\TH:i"),
-            'importe' => $cliente->id,
-            'pagada' =>'No',
-            'fecha_pago' => null,
-            'notas' => $request->notas,
-            'customers_id' => $cliente->id,
-            ];
-            array_push($cuota, $datos);
-        }
-            fee::insert($cuota);
-        
-        $clientes = customer::paginate(2);
-        return view('clientes.clientes_mostrar', compact('clientes'));
+            foreach ($clientes as $cliente) {
+                $datos = [
+                'concepto' => date("Y-m-d"),
+                'fecha_emision' => Carbon::now()->format("Y-m-d\TH:i"),
+                'importe' => $cliente->id,
+                'pagada' =>'No',
+                'fecha_pago' => null,
+                'notas' => $request->notas,
+                'customers_id' => $cliente->id,
+                ];
+                array_push($cuota, $datos);
+            }
+        fee::insert($cuota);
+        return redirect()->route('clientes.index');
     }
 
     public function pagar()
