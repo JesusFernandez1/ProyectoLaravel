@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\task;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use Illuminate\Support\Facades\Hash;
@@ -142,6 +143,7 @@ class userController extends Controller
 
     public function confirmarEliminarUsuario($id)
     {
+        task::where('users_id', $id)->update(['users_id' =>  null]);
         Schema::disableForeignKeyConstraints();
         User::find($id)->delete();
         Schema::enableForeignKeyConstraints();

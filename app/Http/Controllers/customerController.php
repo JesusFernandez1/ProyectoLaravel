@@ -131,6 +131,7 @@ class customerController extends Controller
 
     public function confirmarEliminarCliente($id)
     {
+        task::where('customers_id', $id)->delete();
         customer::find($id)->delete();
         return redirect()->route('clientes.index');
     }
