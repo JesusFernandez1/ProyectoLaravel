@@ -9,6 +9,7 @@ use App\Models\task;
 use App\Models\provincias;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use AmrShawky\LaravelCurrency\Facade\Currency;
 
 class customerController extends Controller
 {
@@ -58,6 +59,8 @@ class customerController extends Controller
             'importe_mensual' => ['required']
         ]);
         $datos['moneda'] = $moneda;
+        $converted = Currency::convert()->from($datos['moneda'])->to('EUR')->amount($request->importe_mensual)->round(2)->get();
+        $datos['importe_mensual'] = $converted;
         customer::insert($datos);
         $clientes = customer::paginate(2);
         return view('clientes.clientes_mostrar', compact('clientes'));
