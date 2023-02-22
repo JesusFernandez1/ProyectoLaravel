@@ -198,4 +198,9 @@ class feeController extends Controller
         $clientes = customer::paginate(2);
         return view('clientes.clientes_mostrar', compact('clientes'));
     }
+
+    public function pagar()
+    {
+        return view("cuotas.cuotas_pagar");
+    }
 }

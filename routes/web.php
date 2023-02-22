@@ -9,6 +9,7 @@ use App\Http\Controllers\userController;
 use App\Http\Controllers\taskController;
 use App\Http\Controllers\customerController;
 use App\Http\Controllers\feeController;
+use App\Http\Controllers\paypalController;
 use Laravel\Socialite\Facades\Socialite;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -34,6 +35,13 @@ Route::get('/', function () {
     return view('base');
 })->middleware(['auth', 'verified'])->name('base');
 
+// Paypal
+Route::controller(paypalController::class)->group(function(){
+    Route::get('/paypal/pay', 'payWithPaypal')->name('paypal.pay');
+    Route::get('/paypal/status','payPalStatus')->name('paypal.status');
+    Route::get('/pagocorrecto','pagoCorrecto')->name('pagofinalizado');
+});
+
 Route::controller(githubController::class)->group(function () {
     Route::get('/auth/github/redirect', 'redirectGithub')->name('github.redirectGithub');
     Route::get('/auth/github/callback', 'callbackGithub');
@@ -57,6 +65,7 @@ Route::controller(customerController::class)->group(function () {
 Route::resource('clientes', customerController::class)->middleware('auth')->middleware('admin');
 
 Route::controller(feeController::class)->group(function () {
+    Route::get('cuotas/cuotas_pagar', 'pagar')->middleware('auth')->middleware('admin')->name('cuotas.pagar');
     Route::get('cuotas/cuotas_excepcional/{id}', 'agregar')->middleware('auth')->middleware('admin')->name('cuotas.agregar');
     Route::get('cuotas/cuotas_eliminar/{id}', 'mostrarEliminar')->middleware('auth')->middleware('admin')->name('cuotas.mostrarEliminar');
     Route::get('cuotas/cuotas_eliminada/{id}', 'confirmarEliminarCuota')->middleware('auth')->middleware('admin')->name('cuotas.confirmarEliminarCuota');
