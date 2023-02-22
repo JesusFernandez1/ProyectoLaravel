@@ -40,7 +40,7 @@ Route::controller(githubController::class)->group(function () {
 });
 
 Route::controller(googleController::class)->group(function () {
-    Route::get('/auth/google/redirect', 'redirectGoogle')->name('github.redirectGoogle');
+    Route::get('/auth/google/redirect', 'redirectGoogle')->name('google.redirectGoogle');
     Route::get('/google-callback', 'callbackGoogle');
 });
 

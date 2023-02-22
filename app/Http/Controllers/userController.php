@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use Illuminate\Support\Facades\Hash;
 
 class userController extends Controller
@@ -35,7 +36,7 @@ class userController extends Controller
         if (Auth::user()->tipo == 'Admin') {
             return view('usuarios.usuarios_crear');
         } else {
-            return view('base');
+            return redirect()->action([AuthenticatedSessionController::class, 'destroy']);
         }
     }
 
@@ -66,8 +67,7 @@ class userController extends Controller
         ]);
         $datos['password'] = Hash::make($request->password);
         User::insert($datos);
-        $usuarios = User::paginate(2);
-        return view('usuarios.usuarios_mostrar', compact('usuarios'));
+        return redirect()->route('usuarios.index');
     }
 
     /**
@@ -82,7 +82,7 @@ class userController extends Controller
             $usuario = User::find($id);
             return view('usuarios.usuarios_eliminar', compact('usuario'));
         } else {
-            return view('base');
+            return redirect()->action([AuthenticatedSessionController::class, 'destroy']);
         }
     }
 
@@ -125,8 +125,7 @@ class userController extends Controller
             'tipo' => ['required']
         ]);
         User::where('id', $id)->update($datos);
-        $usuarios = User::paginate(2);
-        return view('usuarios.usuarios_mostrar', compact('usuarios'));
+        return redirect()->route('usuarios.index');
     }
 
     /**
@@ -143,7 +142,6 @@ class userController extends Controller
     public function confirmarEliminarUsuario($id)
     {
         User::find($id)->delete();
-        $usuarios = User::paginate(2);
-        return view('usuarios.usuarios_mostrar', compact('usuarios'));
+        return redirect()->route('usuarios.index');
     }
 }

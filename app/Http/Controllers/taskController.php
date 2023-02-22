@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\customer;
 use App\Models\provincias;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
 
 class taskController extends \Illuminate\Routing\Controller
@@ -89,8 +90,7 @@ class taskController extends \Illuminate\Routing\Controller
 
         ]);
         task::insert($datos);
-        $tareas = task::paginate(2);
-        return view('tareas.tareas_mostrar', compact('tareas'));
+        return redirect()->route('tareas.index');
     }
 
     /**
@@ -173,8 +173,7 @@ class taskController extends \Illuminate\Routing\Controller
 
         ]);
         task::where('id', $id)->update($datos);
-        $tareas = task::paginate(2);
-        return view('tareas.tareas_mostrar', compact('tareas'));
+        return redirect()->route('tareas.index');
     }
 
     /**
@@ -191,8 +190,7 @@ class taskController extends \Illuminate\Routing\Controller
     public function confirmarBorrarTarea($id)
     {
         $tarea = task::find($id)->delete();
-        $tareas = task::paginate(2);
-        return view('tareas.tareas_mostrar', compact('tareas'));
+        return redirect()->route('tareas.index');
     }
 
     public function cambiarEstadoTarea($id)

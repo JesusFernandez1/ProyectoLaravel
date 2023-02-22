@@ -27,7 +27,7 @@ class User extends Authenticatable
         'fecha_alta',
         'tipo',
     ];
-
+    protected $dates = ['fecha_alta'];
     /**
      * The attributes that should be hidden for serialization.
      *

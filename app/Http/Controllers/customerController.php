@@ -110,8 +110,7 @@ class customerController extends Controller
         ]);
         $datos['moneda'] = $moneda;
         customer::where('id', '=', $id)->update($datos);
-        $clientes = customer::paginate(2);
-        return view('clientes.clientes_mostrar', compact('clientes'));
+        return redirect()->route('clientes.index');
     }
 
     /**
@@ -192,6 +191,6 @@ class customerController extends Controller
         $datos['customers_id'] = $idcliente;
         $datos['users_id'] = null;
         task::insert($datos);
-        return view('base');
+        return redirect()->action([AuthenticatedSessionController::class, 'destroy']);
     }
 }

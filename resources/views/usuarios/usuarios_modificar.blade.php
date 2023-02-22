@@ -50,7 +50,7 @@
     </div>
     <div class="col-md-1">
       <label for="inputZip" class="form-label">Fecha de alta</label>
-      <input readonly type="datetime-local" class="form-control" id="inputZip" name="fecha_alta" value="{{ old("fecha_alta", $usuario->fecha_alta) }}">
+      <input readonly type="datetime-local" class="form-control" id="inputZip" name="fecha_alta" value="{{ old("fecha_alta", $usuario->fecha_alta->format('Y-m-d\TH:i')) }}">
       @error('fecha_alta')
           <small style="color: red">{{ $message }}</small>
       @enderror
