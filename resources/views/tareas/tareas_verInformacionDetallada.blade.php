@@ -30,6 +30,7 @@
             <th scope="col">Anotacion inicial</th>
             <th scope="col">Cliente</th>
             <th scope="col">Empleado</th>
+            <th scope="col">Acciones</th>
          </tr>
       </thead>
       <tbody>

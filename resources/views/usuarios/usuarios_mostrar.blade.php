@@ -21,6 +21,7 @@
             <th scope="col">Direccion</th>
             <th scope="col">Fecha de alta</th>
             <th scope="col">Tipo</th>
+            <th scope="col">Acciones</th>
          </tr>
       </thead>
       <tbody>

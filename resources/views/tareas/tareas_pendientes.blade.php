@@ -21,6 +21,7 @@
             <th scope="col">Creacion</th>
             <th scope="col">Telefono</th>
             <th scope="col">Estado</th>
+            <th scope="col">Acciones</th>
          </tr>
       </thead>
       <tbody>
