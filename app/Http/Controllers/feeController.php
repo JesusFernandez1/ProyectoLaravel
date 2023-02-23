@@ -25,6 +25,7 @@ class feeController extends Controller
 
     public function agregar($id)
     {
+        dd(url()->current());
         $cliente = customer::where('id', $id)->first();
         return view('cuotas.cuotas_excepcional', compact('cliente'));
     }

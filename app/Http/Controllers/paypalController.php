@@ -100,7 +100,7 @@ class paypalController extends Controller
 
     public function pagoCorrecto()
     {
-        return view('cuotas/cuotas_pagoFinalizado');
+        return redirect()->route('clientes.index');
     }
 
 }

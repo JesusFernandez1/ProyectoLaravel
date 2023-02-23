@@ -72,34 +72,20 @@
               </div>
             </div>
           </div> @endif
-        </div> @endif
-        @if(Auth::user()) <a>Bienvenido: {{Auth::user()->name}}</a> <a href="{{ route('logout') }}" class="nav-link px-2 text-white">Logout</a> @endif
-          
-        {{-- @if(Auth::user())
-        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-          <li><a href="{{ route('tareas.index') }}" class="nav-link px-2 text-white">Ver tareas</a></li>
-          <li><a href="{{ route('tareas.verTareasNoAsignadas') }}" class="nav-link px-2 text-white">Ver no asignadas</a></li>
-          <li><a href="{{ route('tareas.verInformacionDetallada') }}" class="nav-link px-2 text-white">Ver tareas completas</a></li>
-          <li><a href="{{ route('tareas.verTareasPendientes') }}" class="nav-link px-2 text-white">Ver tareas pendientes</a></li>
-          <li><a href="{{ route('cuotas.verRemesaMensual') }}" class="nav-link px-2 text-white">Crear remesa mensual</a></li>
-          <li><a href="{{ route('tareas.create') }}" class="nav-link px-2 text-white">Añadir tarea</a></li>
-          <li><a href="{{ route('clientes.index') }}" class="nav-link px-2 text-white">Ver clientes</a></li>
-          <li><a href="{{ route('usuarios.index') }}" class="nav-link px-2 text-white">Ver empleados</a></li>
-          <li><a href="{{ route('clientes.create') }}" class="nav-link px-2 text-white">Añadir cliente</a></li>
-          <li><a href="{{ route('usuarios.create') }}" class="nav-link px-2 text-white">Añadir empleado</a></li>
-        </ul>
-          
-        <form style="justify-content:right" class="col-3 col-lg-auto mb-3 mb-lg-0 me-lg-3">
-          <p>Bienvenido: {{Auth::user()->name}}</p>
-          <a href="{{ route('logout') }}" class="nav-link px-2 text-white">Logout</a></li>
-        </form>
-        @endif --}}
+        </div> @endif 
+        @if(Auth::user()) 
+        
+        <div class="ms-auto">
+        <a>Bienvenido: {{Auth::user()->name}}</a> 
+        <a href="{{ route('logout') }}" class="nav-link px-2 text-white">Logout</a>
+       </div>
+       @endif
       </div>
     </div>
   </header>
-
-  <!-- base que esta prensente en casi todo nuestro proyecto y muestra las extensiones que hemos creado en otras vistas -->
-
+  @if(Route::currentRouteName() == 'base')
+<h1>𝒲𝑒𝓁𝒸𝑜𝓂𝑒 𝓉𝑜 𝒜𝓈𝒸𝑒𝓃𝓈𝑜𝓇𝑒𝓈 𝒮𝐿</h1>
+@endif
   @yield('mostrarExtension')
 
   <style>
@@ -109,6 +95,13 @@
       width: 100%;
       height: 50px;
     }
+
+    h1 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 
     nav {
       margin-left: 43%;

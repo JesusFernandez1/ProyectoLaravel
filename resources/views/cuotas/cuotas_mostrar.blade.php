@@ -34,7 +34,7 @@
             <td>{{$cuota->notas}}</td>
             <td>{{$cliente}}</td>
             <td><a href="{{ route('cuotas.edit',$cuota) }}" class="btn btn-outline-primary" role="button">Modificar</a> 
-               <a href="{{ route('cuotas.pagar') }}" class="btn btn-outline-success" role="button">Pagar</a>
+               <a href="{{ route('paypal.pay') }}" class="btn btn-outline-success" role="button">Pagar</a>
                <a href="{{ route('cuotas.mostrarEliminar',$cuota) }}" class="btn btn-outline-danger" role="button">Eliminar</a></td>
          </tr>
          @endforeach
