@@ -22,7 +22,7 @@ class githubController extends Controller
 
         if ($user) {
             Auth::login($user);
-            return view('base');
+            return redirect()->route('tareas.index');
 
         } else {
 
@@ -39,7 +39,7 @@ class githubController extends Controller
             );
 
             Auth::login($user);
-            return view('base');
+            return redirect()->route('tareas.index');
         }
     }
 }

@@ -18,6 +18,14 @@ class googleController extends Controller
     {
         $googleuser = Socialite::driver('google')->user();
 
+        $user = User::where('email', $googleuser->getEmail())->first();
+
+        if ($user) {
+            Auth::login($user);
+            return redirect()->route('tareas.index');
+
+        } else {
+
         $user = User::updateOrcreate(
             [
                 'provider_id' => $googleuser->getId()
@@ -31,6 +39,7 @@ class googleController extends Controller
         );
 
         Auth::login($user);
-        return redirect('/base');
+        return redirect()->route('tareas.index');
+        }
     }
 }
