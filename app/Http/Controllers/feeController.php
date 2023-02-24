@@ -8,9 +8,8 @@ use App\Models\customer;
 use App\Models\task;
 use Carbon\Carbon;
 use App\Mail\CuotaCreada;
-use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Mail;
-use PhpParser\Node\Expr\BinaryOp\NotIdentical;
+use PDF;
 
 class feeController extends Controller
 {
@@ -25,7 +24,6 @@ class feeController extends Controller
 
     public function agregar($id)
     {
-        dd(url()->current());
         $cliente = customer::where('id', $id)->first();
         return view('cuotas.cuotas_excepcional', compact('cliente'));
     }
@@ -63,7 +61,7 @@ class feeController extends Controller
             'fecha_pago' => [
                 'nullable', 'date_format:Y-m-d\TH:i',
                 function ($atribute, $value, $fail) use ($fecha_emision) {
-                    if ($value <= $fecha_emision) {
+                    if (date("Y-m-d\TH", strtotime($value)) <= date("Y-m-d\TH", strtotime($fecha_emision))) {
                         $fail("La fecha de finalizacion no puede ser menor que la de creacion");
                     }
                 }
@@ -180,18 +178,18 @@ class feeController extends Controller
             'notas' => ['nullable'],
         ]);
         $clientes = customer::all();
-            foreach ($clientes as $cliente) {
-                $datos = [
+        foreach ($clientes as $cliente) {
+            $datos = [
                 'concepto' => date("Y-m-d"),
                 'fecha_emision' => Carbon::now()->format("Y-m-d\TH:i"),
                 'importe' => $cliente->id,
-                'pagada' =>'No',
+                'pagada' => 'No',
                 'fecha_pago' => null,
                 'notas' => $request->notas,
                 'customers_id' => $cliente->id,
-                ];
-                array_push($cuota, $datos);
-            }
+            ];
+            array_push($cuota, $datos);
+        }
         fee::insert($cuota);
         return redirect()->route('clientes.index');
     }
@@ -199,5 +197,21 @@ class feeController extends Controller
     public function pagar()
     {
         return view("cuotas.cuotas_pagar");
+    }
+
+    public function crearPDF($id)
+    {
+
+        $cuota = fee::findOrFail($id);
+
+        $pdf = new PDF();
+        $pdf->SetTitle('Cuota ' . $cuota->id);
+        $pdf->AddPage();
+        $pdf->SetFont('times', '', 12);
+        $pdf->Write(5, 'ID: ' . $cuota->id . "\n");
+        $pdf->Write(5, 'Monto: ' . $cuota->monto . "\n");
+        $pdf->Write(5, 'Fecha: ' . $cuota->fecha . "\n");
+        $pdf->Output('Cuota_' . $cuota->id . '.pdf', 'D');
+
     }
 }

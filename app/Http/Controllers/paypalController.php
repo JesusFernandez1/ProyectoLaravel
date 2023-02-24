@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use AmrShawky\LaravelCurrency\Facade\Currency;
+use App\Models\customer;
+use App\Models\fee;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Http\Request;
 use PayPal\Auth\OAuthTokenCredential;
@@ -38,20 +41,27 @@ class paypalController extends Controller
 
         $this->apiContext->setConfig($payPalConfig['settings']);
     }
-    public function payWithPayPal()
+    public function payWithPayPal($id)
     {
         $payer = new Payer();
         $payer->setPaymentMethod('paypal');
 
+
+        $cliente = fee::where('id', $id)->first()->customers_id;
+        $moneda_cliente = customer::where('id', $cliente)->first()->moneda;
+        $importe = fee::where('id', $id)->first()->importe;
+        
+        $converted = Currency::convert()->from('EUR')->to($moneda_cliente)->amount($importe)->round(2)->get();
+
         $amount = new Amount();
-        $amount->setTotal('10');
-        $amount->setCurrency('EUR');
+        $amount->setTotal($converted);
+        $amount->setCurrency($moneda_cliente);
 
         $transaction = new Transaction();
         $transaction->setAmount($amount);
         $transaction->setDescription('Pago de cuota mensual');
 
-        $callbackUrl = url('/paypal/status');
+        $callbackUrl = url('/paypal/status/' . $id);
 
         $redirectUrls = new RedirectUrls();
         $redirectUrls->setReturnUrl($callbackUrl)
@@ -70,7 +80,7 @@ class paypalController extends Controller
             echo $ex->getData();
         }
     }
-    public function payPalStatus(Request $request)
+    public function payPalStatus(Request $request, $id)
     {
         $paymentId = $request->input('paymentId');
         $payerId = $request->input('PayerID');
@@ -91,6 +101,7 @@ class paypalController extends Controller
 
         if ($result->getState() === 'approved') {
             $status = 'Gracias! El pago a través de PayPal se ha ralizado correctamente.';
+            fee::where('id', $id)->update(['pagada' =>  'Si', 'fecha_pago' => date('Y-m-d\TH:i')]);
             return redirect(route('pagofinalizado'))->with(compact('status'));
         }
 

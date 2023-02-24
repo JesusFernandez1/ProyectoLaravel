@@ -22,7 +22,7 @@
     </div>
     <div class="col-md-1">
       <label for="inputCity" class="form-label">Fecha de emision</label>
-      <input type="datetime-local" class="form-control" name="fecha_emision" value="<?php echo date("Y-m-d\TH:i") ?>">
+      <input readonly type="datetime-local" class="form-control" name="fecha_emision" value="{{ old("fecha_emision", $cuota->fecha_emision) }}">
       @error('fecha_emision')
           <small style="color: red">{{ $message }}</small>
       @enderror

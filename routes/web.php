@@ -37,8 +37,8 @@ Route::get('/', function () {
 
 // Paypal
 Route::controller(paypalController::class)->group(function(){
-    Route::get('/paypal/pay', 'payWithPaypal')->name('paypal.pay');
-    Route::get('/paypal/status','payPalStatus')->name('paypal.status');
+    Route::get('/paypal/pay/{id}', 'payWithPaypal')->name('paypal.pay');
+    Route::get('/paypal/status/{id}','payPalStatus')->name('paypal.status');
     Route::get('/pagocorrecto','pagoCorrecto')->name('pagofinalizado');
 });
 
@@ -66,6 +66,7 @@ Route::controller(feeController::class)->group(function () {
     Route::get('cuotas/cuotas_eliminada/{id}', 'confirmarEliminarCuota')->middleware('auth')->middleware('admin')->name('cuotas.confirmarEliminarCuota');
     Route::get('cuotas/cuotas_remesaMensual', 'verRemesaMensual')->middleware('auth')->middleware('admin')->name('cuotas.verRemesaMensual');
     Route::get('cuotas/cuotas_remesaCreada', 'crearRemesaMensual')->middleware('auth')->middleware('admin')->name('cuotas.crearRemesaMensual');
+    Route::get('cuotas/{id}/pdf', 'crearPDF')->name('cuotas.pdf');
 });
 Route::resource('cuotas', feeController::class)->middleware('auth')->middleware('admin');
 
