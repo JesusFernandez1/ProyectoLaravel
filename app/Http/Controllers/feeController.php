@@ -202,16 +202,17 @@ class feeController extends Controller
     public function crearPDF($id)
     {
 
-        $cuota = fee::findOrFail($id);
+        $cuota = fee::find($id);
+
+        $vista = view('cuotas\pdf', compact('cuota'))->render();
 
         $pdf = new PDF();
-        $pdf->SetTitle('Cuota ' . $cuota->id);
+        $pdf->SetTitle('Cuota #' . $cuota->id);
+        $pdf->SetMargins(10, 10, 10);
         $pdf->AddPage();
-        $pdf->SetFont('times', '', 12);
-        $pdf->Write(5, 'ID: ' . $cuota->id . "\n");
-        $pdf->Write(5, 'Monto: ' . $cuota->monto . "\n");
-        $pdf->Write(5, 'Fecha: ' . $cuota->fecha . "\n");
-        $pdf->Output('Cuota_' . $cuota->id . '.pdf', 'D');
 
+        // Agrega el contenido de la vista al PDF
+        $pdf->writeHTML($vista, true, false, true, false, '');
+        $pdf->Output('Cuota_' . $cuota->id . '.pdf', 'I');
     }
 }
