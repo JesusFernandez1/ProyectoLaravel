@@ -189,6 +189,7 @@ class feeController extends Controller
                 'customers_id' => $cliente->id,
             ];
             array_push($cuota, $datos);
+            Mail::to(customer::where('id', $datos['customers_id'])->first()->correo)->send(new CuotaCreada());
         }
         fee::insert($cuota);
         return redirect()->route('clientes.index');
