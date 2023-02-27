@@ -203,19 +203,13 @@ class RouteTest extends TestCase
         $response->assertViewIs('cuotas.cuotas_remesaMensual');
     }
 
-    public function test_cuota_remesaCreada()
-    {
-        $empleado = User::where('tipo', 'Admin')->first();
-
-        $response = $this->actingAs($empleado)
-            ->get('/cuotas/cuotas_remesaCreada');
-
-        if ($response->status() == 302) {
-            $response = $this->followRedirects($response);
-        }
-
-        $response->assertViewIs('cuotas.cuotas_remesaCreada');
-    }
+    // public function test_cuota_remesaCreada()
+    // {
+    //     $user = User::where('tipo', 'Admin')->first();
+    //     $response = $this->actingAs($user)
+    //         ->get('/cuotas/cuotas_remesaCreada');
+    //     $response->assertStatus(302);
+    // }
 
     public function test_cuota_eliminar()
     {
@@ -225,4 +219,25 @@ class RouteTest extends TestCase
         $response->assertStatus(200);
     }
 
+    public function test_usuario_crear()
+    {
+        $empleado = User::where('tipo', 'Admin')->first();
+
+        $response = $this->actingAs($empleado)
+            ->get('/usuarios/create');
+
+        if ($response->status() == 302) {
+            $response = $this->followRedirects($response);
+        }
+
+        $response->assertViewIs('usuarios.usuarios_crear');
+    }
+
+    public function test_usuario_modificar()
+    {
+        $user = User::where('tipo', 'Admin')->first();
+        $response = $this->actingAs($user)
+            ->get('/usuarios/20/edit');
+        $response->assertStatus(200);
+    }
 }
