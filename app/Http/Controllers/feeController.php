@@ -214,6 +214,6 @@ class feeController extends Controller
 
         // Agrega el contenido de la vista al PDF
         $pdf->writeHTML($vista, true, false, true, false, '');
-        $pdf->Output('Cuota_' . $cuota->id . '.pdf', 'I');
+        $pdf->Output('Cuota_' . $cuota->id . '.pdf', 'D');
     }
 }
