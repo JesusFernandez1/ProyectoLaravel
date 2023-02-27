@@ -10,6 +10,7 @@ use App\Models\provincias;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use AmrShawky\LaravelCurrency\Facade\Currency;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
 class customerController extends Controller
 {
